@@ -51,11 +51,16 @@ echo "Start downloading. Selected build: $build"
 
 download_mappability(){
     build=$1
-    for k in 36 50
+    if test $build = "T2T"; then
+	label=T2T
+    else
+	label=Ensembl-${build}
+    fi
+    for k in 28 36 50
     do
-	wget https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/mappability/Ensembl-${build}_mappability_Mosaics_${k}mer.tar.bz2
-	tar xvfj Ensembl-${build}_mappability_Mosaics_${k}mer.tar.bz2
-	rm Ensembl-${build}_mappability_Mosaics_${k}mer.tar.bz2
+	wget https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/mappability/${label}_mappability_Mosaics_${k}mer.tar.bz2
+	tar xvfj ${label}_mappability_Mosaics_${k}mer.tar.bz2
+	rm ${label}_mappability_Mosaics_${k}mer.tar.bz2
     done
 }
 

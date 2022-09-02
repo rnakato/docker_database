@@ -77,6 +77,7 @@ if test $build = "GRCh38"; then
     ex "wget --timestamping http://ftp.ensembl.org/pub/release-106/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz"
     ex "wget --timestamping http://ftp.ensembl.org/pub/release-106/fasta/homo_sapiens/ncrna/Homo_sapiens.GRCh38.ncrna.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
+    wget --timestamping https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/RepeatMasker/hg38.txt.gz
 
     chrs="$(seq 1 22) X Y M"
 elif test $build = "GRCh37"; then
@@ -87,8 +88,7 @@ elif test $build = "GRCh37"; then
     ex "wget --timestamping http://ftp.ensembl.org/pub/grch37/release-106/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh37.cdna.all.fa.gz"
     ex "wget --timestamping http://ftp.ensembl.org/pub/grch37/release-106/fasta/homo_sapiens/ncrna/Homo_sapiens.GRCh37.ncrna.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
-    wget https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/mappability/Ensembl-GRCh37_mappability_Mosaics_36mer.tar.bz2
-    wget https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/mappability/Ensembl-GRCh37_mappability_Mosaics_36mer.tar.bz2
+    wget --timestamping https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/RepeatMasker/hg19.txt.gz
     chrs="$(seq 1 22) X Y M"
 elif test $build = "T2T"; then
     # https://genomeinformatics.github.io/CHM13v2/
@@ -116,6 +116,8 @@ elif test $build = "GRCm38"; then
     ex "wget --timestamping http://ftp.ensembl.org/pub/release-102/fasta/mus_musculus/cdna/Mus_musculus.GRCm38.cdna.all.fa.gz"
     ex "wget --timestamping http://ftp.ensembl.org/pub/release-102/fasta/mus_musculus/ncrna/Mus_musculus.GRCm38.ncrna.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
+    wget --timestamping https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/RepeatMasker/mm10.txt.gz
+
     chrs="$(seq 1 19) X Y M"
 elif test $build = "mRatBN7.2"; then
     ex "wget https://hgdownload.soe.ucsc.edu/goldenPath/rn7/bigZips/rn7.2bit -O genome_full.2bit"

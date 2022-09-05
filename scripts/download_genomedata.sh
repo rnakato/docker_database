@@ -34,11 +34,13 @@ ex(){
 
 echo "Start downloading. Selected build: $build"
 
+wget="wget -nv --timestamping"
+
 download_mappability(){
     label=$1
     for k in 28 36 50
     do
-        wget https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/mappability/${label}_mappability_Mosaics_${k}mer.tar.bz2
+        $wget https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/mappability/${label}_mappability_Mosaics_${k}mer.tar.bz2
         tar xvfj ${label}_mappability_Mosaics_${k}mer.tar.bz2
         rm ${label}_mappability_Mosaics_${k}mer.tar.bz2
     done
@@ -46,8 +48,6 @@ download_mappability(){
 
 mkdir -p $outputdir && cd $_
 Ensembl_version=106
-
-wget="wget -nv --timestamping"
 
 if test $build = "GRCh38" -o $build = "hg38"; then
     ex "$wget https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.2bit -O genome_full.2bit"
@@ -210,14 +210,16 @@ else
     ex "splitmultifasta genome.fa --dir chromosomes"
 fi
 
+echo -en "estimate GC contents..."
 for chr in $chrs
 do
     fa=chromosomes/chr$chr.fa
     s="$s $fa"
     for bin in 100 1000 10000 25000 50000 100000 500000 1000000; do
-        ex "GCcount $fa $bin > GCcontents/chr$chr-bs$bin"
+        GCcount $fa $bin > GCcontents/chr$chr-bs$bin
     done
 done
+echo "done."
 
 ex "cat $s > genome.fa"
 ex "makegenometable.pl genome.fa > genometable.txt"
@@ -229,9 +231,9 @@ if test $build != "SPombe" -a $build != "xenLae2" -a $build != "T2T"; then
 fi
 
 if test $build = "T2T"; then
-    ex "mkdir -p genedensity"
+    mkdir -p genedensity
     ex "makegenedensity.pl genometable.txt chm13v2.refFlat 500000"
-    ex "mv chr*-bs500000 genedensity"
+    mv chr*-bs500000 genedensity
 
     ex "mkdir -p gtf_chrUCSC"
     ex "cp chm13v2.gtf gtf_chrUCSC/chr.gtf"
@@ -266,9 +268,9 @@ convert_gtf_to_refFlat(){
         cat $head.transcript.refFlat | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $5, $5, $14} else {print $3, $5, $5, $14} }' | uniq | grep -v chrom > $head.transcript.TES.bed
     done
 
-    ex "mkdir -p $dir/genedensity"
+    mkdir -p $dir/genedensity
     ex "makegenedensity.pl genometable.txt $head.gene.refFlat 500000"
-    ex "mv chr*-bs500000 $dir/genedensity"
+    mv chr*-bs500000 $dir/genedensity
 }
 
 if test $build = "SPombe"; then

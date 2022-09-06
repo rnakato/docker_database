@@ -67,7 +67,7 @@ if test $build = "GRCh38" -o $build = "hg38"; then
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/homo_sapiens/ncrna/Homo_sapiens.GRCh38.ncrna.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
-    $wget https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/RepeatMasker/hg38.txt.gz
+    wget -nv https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/RepeatMasker/hg38.txt.gz -O RepeatMasker.txt.gz
     download_mappability Ensembl-GRCh38
     chrs="$(seq 1 22) X Y M"
 elif test $build = "GRCh37" -o $build = "hg19"; then
@@ -77,7 +77,7 @@ elif test $build = "GRCh37" -o $build = "hg19"; then
     ex "$wget http://ftp.ensembl.org/pub/grch37/release-$Ensembl_version/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh37.cdna.all.fa.gz"
     ex "$wget http://ftp.ensembl.org/pub/grch37/release-$Ensembl_version/fasta/homo_sapiens/ncrna/Homo_sapiens.GRCh37.ncrna.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
-    $wget https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/RepeatMasker/hg19.txt.gz
+    wget -nv https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/RepeatMasker/hg19.txt.gz -O RepeatMasker.txt.gz
     download_mappability Ensembl-GRCh37
     chrs="$(seq 1 22) X Y M"
 elif test $build = "T2T"; then
@@ -106,7 +106,7 @@ elif test $build = "GRCm38" -o $build = "mm10"; then
     ex "$wget http://ftp.ensembl.org/pub/release-102/fasta/mus_musculus/cdna/Mus_musculus.GRCm38.cdna.all.fa.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-102/fasta/mus_musculus/ncrna/Mus_musculus.GRCm38.ncrna.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
-    $wget https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/RepeatMasker/mm10.txt.gz
+    wget -nv https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/RepeatMasker/mm10.txt.gz -O RepeatMasker.txt.gz
     download_mappability Ensembl-GRCm38
     chrs="$(seq 1 19) X Y M"
 elif test $build = "mRatBN7.2" -o $build = "rn7"; then

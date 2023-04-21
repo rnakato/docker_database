@@ -15,6 +15,7 @@ function usage()
     echo "         C. elegans (WBcel235|ce11)" 1>&2
     echo "         S. cerevisiae (R64-1-1|sacCer3)" 1>&2
     echo "         S. pombe (SPombe)" 1>&2
+    echo "         Hydra vulgaris AEP (HVAEP)" 1>&2
     echo "  Example:" 1>&2
     echo "         $cmdname GRCh38 Ensembl-GRCh38" 1>&2
 }
@@ -86,6 +87,7 @@ elif test $build = "T2T"; then
     ex "wget -nv https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/analysis_set/chm13v2.0.fa.gz -O genome.fa.gz"
     ex "$wget https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/annotation/chm13.draft_v2.0.cen_mask.bed"
     ex "unpigz -f genome.fa.gz"
+    zcat /opt/T2Tdata/catLiftOffGenesV1.gtf.gz > catLiftOffGenesV1.gtf
     zcat /opt/T2Tdata/chm13v2.gtf.gz > chm13v2.gtf
     zcat /opt/T2Tdata/chm13v2.refFlat.gz > chm13v2.refFlat
     download_mappability T2T
@@ -192,6 +194,22 @@ elif test $build = "SPombe"; then
     ex "cp /opt/OriDB/S.pombe.Oridb.txt ."
     download_mappability SPombe
     chrs="I II III M"
+elif test $build = "HVAEP"; then
+    ex "wget -nv https://research.nhgri.nih.gov/HydraAEP/download/sequences/hv_aep/HVAEP.genome.fa.gz -O genome_full.fa.gz"
+    ex "wget -nv https://research.nhgri.nih.gov/HydraAEP/download/sequences/hv_aep/HVAEP.genome.hm.fa.gz -O genome_full.hard-masked.fa.gz"
+    ex "wget -nv https://research.nhgri.nih.gov/HydraAEP/download/sequences/hv_aep/HVAEP.genome.sm.fa.gz -O genome_full.soft-masked.fa.gz"
+    ex "unpigz -f genome_full.fa.gz"
+    ex "sed -i -e 's/HVAEP/chr/g' genome_full.fa"
+    ex "makegenometable.pl genome_full.fa > genometable_full.txt"
+    ex "faToTwoBit genome_full.fa genome_full.2bit"
+    ex "$wget https://research.nhgri.nih.gov/HydraAEP/download/coordinates/hv_aep/HVAEP.GeneModels.gff3.gz"
+    ex "$wget https://research.nhgri.nih.gov/HydraAEP/download/sequences/hv_aep/HVAEP.gene.fa.gz"
+    ex "unpigz -f *.gff3.gz"
+    awk -v OFS='\t' '{gsub(/^HVAEP/, "chr", $1); print}' HVAEP.GeneModels.gff3 > HVAEP.GeneModels.gff3.temp
+    mv HVAEP.GeneModels.gff3.temp HVAEP.GeneModels.gff3
+    ex "gffread HVAEP.GeneModels.gff3 -T -o HVAEP.GeneModels.gtf"
+#    download_mappability HVAEP
+    chrs="$(seq 1 15)"
 else
     echo "Specify the correct build."
     usage
@@ -200,7 +218,7 @@ fi
 
 mkdir -p chromosomes GCcontents
 
-if test $build != "T2T"; then
+if test  $build != "T2T"; then
     ex "twoBitToFa genome_full.2bit genome_full.fa"
     ex "splitmultifasta genome_full.fa --dir chromosomes"
     ex "samtools faidx genome_full.fa"
@@ -224,7 +242,7 @@ ex "makegenometable.pl genome.fa > genometable.txt"
 ex "faToTwoBit genome.fa genome.2bit"
 ex "samtools faidx genome.fa"
 
-if test $build != "SPombe" -a $build != "xenLae2" -a $build != "T2T"; then
+if test $build != "SPombe" -a $build != "xenLae2" -a $build != "T2T" -a $build != "HVAEP"; then
     ex "zcat *.cdna.all.fa.gz *.ncrna.fa.gz > rna.fa"
 fi
 
@@ -234,7 +252,8 @@ if test $build = "T2T"; then
     mv chr*-bs500000 genedensity
 
     ex "mkdir -p gtf_chrUCSC"
-    ex "cp chm13v2.gtf gtf_chrUCSC/chr.gtf"
+#    ex "cp chm13v2.gtf gtf_chrUCSC/chr.gtf"
+    ex "cp catLiftOffGenesV1.gtf gtf_chrUCSC/chr.gtf"
     head=gtf_chrUCSC/chr
     gtf2refFlat -g $head.gtf > $head.transcript.refFlat
     gtf2refFlat -u -g $head.gtf > $head.gene.refFlat

@@ -178,12 +178,12 @@ elif test $build = "R64-1-1" -o $build = "sacCer3"; then
     download_mappability Ensembl-R64-1-1
     chrs="I II III IV V VI VII VIII IX X XI XII XIII XIV XV XVI M"
 elif test $build = "SPombe"; then
-    ex "wget -nv https://www.pombase.org/data/genome_sequence_and_features/genome_sequence/Schizosaccharomyces_pombe_all_chromosomes.fa.gz -O genome.fa.gz"
-    ex "unpigz -f genome.fa.gz"
-    ex "sed -i -e 's/>I/>chrI/g' genome.fa"
-    ex "sed -i -e 's/mitochondrial/chrM/g' genome.fa"
-    ex "makegenometable.pl genome.fa > genometable.txt"
-    ex "faToTwoBit genome.fa genome.2bit"
+    ex "wget -nv https://www.pombase.org/data/genome_sequence_and_features/genome_sequence/Schizosaccharomyces_pombe_all_chromosomes.fa.gz -O genome_full.fa.gz"
+    ex "unpigz -f genome_full.fa.gz"
+    ex "sed -i -e 's/>I/>chrI/g' genome_full.fa"
+    ex "sed -i -e 's/mitochondrial/chrM/g' genome_full.fa"
+    ex "makegenometable.pl genome_full.fa > genometable_full.txt"
+    ex "faToTwoBit genome_full.fa genome_full.2bit"
     ex "$wget https://www.pombase.org/data/genome_sequence_and_features/gff3/Schizosaccharomyces_pombe_all_chromosomes.gff3.gz"
     ex "$wget https://www.pombase.org/data/genome_sequence_and_features/feature_sequences/cds.fa.gz"
     ex "unpigz -f *.gff3.gz"
@@ -218,7 +218,7 @@ fi
 
 mkdir -p chromosomes GCcontents
 
-if test $build != "T2T" -a $build != "HVAEP" -a $build != "SPombe"; then
+if test $build != "T2T" -a $build != "HVAEP"; then
     ex "twoBitToFa genome_full.2bit genome_full.fa"
     ex "splitmultifasta genome_full.fa --dir chromosomes"
     ex "samtools faidx genome_full.fa"
@@ -292,6 +292,7 @@ convert_gtf_to_refFlat(){
 
 if test $build = "SPombe"; then
     for dir in gtf_original; do convert_gtf_to_refFlat $dir; done
+    ln -s gtf_original/ gtf_chrUCSC/
 elif test $build = "xenLae2"; then
     echo "build $build does not contain gtf files."
 else

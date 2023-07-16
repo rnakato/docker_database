@@ -291,8 +291,8 @@ convert_gtf_to_refFlat(){
 }
 
 if test $build = "SPombe"; then
+    ex "ln -s gtf_original gtf_chrUCSC"
     for dir in gtf_original; do convert_gtf_to_refFlat $dir; done
-    ln -s gtf_original/ gtf_chrUCSC/
 elif test $build = "xenLae2"; then
     echo "build $build does not contain gtf files."
 else

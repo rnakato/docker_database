@@ -16,7 +16,9 @@ DockerHub:
   - Add fish
   
 - 2022.09
--- Add UCSC build as a argument
+    - Add UCSC build as a argument
+    - Update bedtools from v2.30.0 to v2.31.0
+    - Add LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/compat/:/usr/local/cuda/lib64
 
 - Ensembl106
 - This image is based on Ensembl version 106

@@ -1,5 +1,5 @@
 ## Docker image for download databases
-FROM rnakato/r_python:2023.08 as common
+FROM rnakato/r_python:2023.10 as common
 
 WORKDIR /opt
 USER root

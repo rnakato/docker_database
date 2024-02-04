@@ -1,4 +1,4 @@
-for tag in 2024.01 latest
+for tag in 2024.02 latest
 do
     docker build -t rnakato/database_gpu:$tag --target gpu . #--no-cache
     docker push     rnakato/database_gpu:$tag

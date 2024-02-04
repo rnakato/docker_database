@@ -10,7 +10,7 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
    - cudnn 8
 
 - Perl 5.36.0 (with plenv)
-- Python 3.9 (with Miniconda)
+- Python 3.10 (with Miniconda)
     - MACS2-2.2.9.1
 
 - R 4.x
@@ -33,9 +33,14 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 
 ## Changelog
 
+- 2024.02
+  - Installed `sudo`
+  - Updated Miniconda from Python 3.9 to Python 3.10
+
 - 2024.01
   - Updated SAMtools from 1.17 to 1.19.2
   - Updated SRAtoolkit from 3.0.2 to 3.0.10
+  - Change WORKDIR from /opt to /home/ubuntu
 
 - 2023.12
   - Update ChIPseqTools (ssp v1.3.1 and drompa+ v1.18.1)

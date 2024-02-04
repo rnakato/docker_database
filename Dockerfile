@@ -1,5 +1,5 @@
 ## Docker image for download databases
-FROM rnakato/r_python:2024.01 as common
+FROM rnakato/r_python:2024.02 as common
 
 WORKDIR /opt
 USER root
@@ -43,19 +43,21 @@ RUN tar zxvf gffread-0.12.7.Linux_x86_64.tar.gz \
     && rm -rf gffread-0.12.7.Linux_x86_64.tar.gz gffread-0.12.7.Linux_x86_64
 
 
-FROM rnakato/r_python:2023.11 as normal
+FROM rnakato/r_python:2024.02 as normal
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV PATH ${PATH}:/opt/:/opt/scripts:/opt/UCSCbins:/opt/bin:/opt/ChIPseqTools/bin/:/opt/SSP/bin:/opt/SSP/scripts:/opt/bin/sratoolkit.3.0.0/bin/
 
 COPY --from=common / /
 USER ubuntu
+WORKDIR /home/ubuntu
 CMD ["download_genomedata.sh"]
 
 
-FROM rnakato/r_python_gpu:2023.11 as gpu
+FROM rnakato/r_python_gpu:2024.02 as gpu
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV PATH ${PATH}:/opt/:/opt/scripts:/opt/UCSCbins:/opt/bin:/opt/ChIPseqTools/bin/:/opt/SSP/bin:/opt/SSP/scripts:/opt/bin/sratoolkit.3.0.0/bin/
 
 COPY --from=common / /
 USER ubuntu
+WORKDIR /home/ubuntu
 CMD ["download_genomedata.sh"]

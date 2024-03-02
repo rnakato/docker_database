@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 cmdname=`basename $0`
 pwd=`pwd`
 function usage()
@@ -39,9 +39,10 @@ wget="wget -nv --timestamping"
 
 download_mappability(){
     label=$1
+    url=https://nakatolab.iqb.u-tokyo.ac.jp/Datafolder_for_sharing/DockerDatabase/mappability
     for k in 28 36 50
     do
-        wget -q https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/mappability/${label}_mappability_Mosaics_${k}mer.tar.bz2
+        wget -q $url/${label}_mappability_Mosaics_${k}mer.tar.bz2
         tar xvfj ${label}_mappability_Mosaics_${k}mer.tar.bz2 >& /dev/null
         rm ${label}_mappability_Mosaics_${k}mer.tar.bz2
     done
@@ -156,6 +157,7 @@ elif test $build = "BDGP6" -o $build = "dm6"; then
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/drosophila_melanogaster/ncrna/Drosophila_melanogaster.BDGP6.32.ncrna.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
     download_mappability Ensembl-BDGP6
+    echo "test"
     chrs="2L 2R 3L 3R 4 X Y M"
 elif test $build = "WBcel235" -o $build = "ce11"; then
     download_genome2bit ce11

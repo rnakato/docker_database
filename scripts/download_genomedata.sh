@@ -85,12 +85,16 @@ elif test $build = "GRCh37" -o $build = "hg19"; then
 elif test $build = "T2T"; then
     # https://genomeinformatics.github.io/CHM13v2/
     # https://github.com/marbl/chm13
+    # ? https://t2t.gi.ucsc.edu/chm13/hub/t2t-chm13-v2.0/ https://t2t.gi.ucsc.edu/chm13/hub/t2t-chm13-v1.1/
     ex "wget -nv https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/analysis_set/chm13v2.0.fa.gz -O genome.fa.gz"
     ex "$wget https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/annotation/chm13.draft_v2.0.cen_mask.bed"
     ex "unpigz -f genome.fa.gz"
-    zcat /opt/T2Tdata/catLiftOffGenesV1.gtf.gz > catLiftOffGenesV1.gtf
-    zcat /opt/T2Tdata/chm13v2.gtf.gz > chm13v2.gtf
-    zcat /opt/T2Tdata/chm13v2.refFlat.gz > chm13v2.refFlat
+    ex "$wget https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/annotation/chm13v2.0_RefSeq_Liftoff_v5.1.gff3.gz"
+#    ex "$wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/914/755/GCF_009914755.1_T2T-CHM13v2.0/GCF_009914755.1_T2T-CHM13v2.0_genomic.gtf.gz"
+    ex "unpigz -f chm13v2.0_RefSeq_Liftoff_v5.1.gff3.gz"
+    ex " gffread chm13v2.0_RefSeq_Liftoff_v5.1.gff3 -T -o chm13v2.0_RefSeq_Liftoff_v5.1.gtf"
+    mkdir -p gtf_chrUCSC
+    ex "mv chm13v2.0_RefSeq_Liftoff_v5.1.gtf gtf_chrUCSC/chr.gtf"
     download_mappability T2T
     chrs="$(seq 1 22) X Y M"
 elif test $build = "GRCm39" -o $build = "mm39"; then
@@ -249,13 +253,6 @@ if test $build != "SPombe" -a $build != "xenLae2" -a $build != "T2T" -a $build !
 fi
 
 if test $build = "T2T"; then
-    mkdir -p genedensity
-    ex "makegenedensity.pl genometable.txt chm13v2.refFlat 500000"
-    mv chr*-bs500000 genedensity
-
-    ex "mkdir -p gtf_chrUCSC"
-#    ex "cp chm13v2.gtf gtf_chrUCSC/chr.gtf"
-    ex "cp catLiftOffGenesV1.gtf gtf_chrUCSC/chr.gtf"
     head=gtf_chrUCSC/chr
     gtf2refFlat -g $head.gtf > $head.transcript.refFlat
     gtf2refFlat -u -g $head.gtf > $head.gene.refFlat
@@ -263,6 +260,10 @@ if test $build = "T2T"; then
     cat $head.transcript.refFlat | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $5, $5, $14} else {print $3, $6, $6, $14} }' | uniq | grep -v chrom > $head.transcript.TSS.bed
     cat $head.gene.refFlat       | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $6, $6, $1}  else {print $3, $5, $5, $1} }'  | uniq | grep -v chrom > $head.gene.TES.bed
     cat $head.transcript.refFlat | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $5, $5, $14} else {print $3, $5, $5, $14} }' | uniq | grep -v chrom > $head.transcript.TES.bed
+
+    mkdir -p genedensity
+    ex "makegenedensity.pl genometable.txt $head.gene.refFlat 500000"
+    mv chr*-bs500000 genedensity
     exit
 fi
 

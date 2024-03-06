@@ -33,6 +33,11 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 
 ## Changelog
 
+- 2024.03.2
+  - Added `mptable.UCSC.T2T.28mer.flen150.txt` and `mptable.UCSC.T2T.36mer.flen150.txt` in `SSP/data/mptable`.
+  - Added the ideogram file for the T2T genome in `DROMPAplus/data/ideogram`.
+  - Modified download_genomedata.sh to download the reference file of the T2T genome.
+
 - 2024.03
   - Fixed a bug in `download_genomedata.sh` that did not download the genome data correctly.
 

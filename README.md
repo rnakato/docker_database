@@ -33,9 +33,17 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 
 ## Changelog
 
+- 2024.04
+  - Changed Python environment from conda to micromamba (`/opt/micromamba`)
+
+- 2024.03.3
+  - Updated the version of Ensemble data from 106 to 111.
+  - Added `Medaka` genome in download_genomedata.sh.
+
 - 2024.03.2
   - Added `mptable.UCSC.T2T.28mer.flen150.txt` and `mptable.UCSC.T2T.36mer.flen150.txt` in `SSP/data/mptable`.
   - Added the ideogram file for the T2T genome in `DROMPAplus/data/ideogram`.
+  - Fixed the bug that did not create the genedensity directory correctly.
   - Modified download_genomedata.sh to download the reference file of the T2T genome.
 
 - 2024.03
@@ -43,7 +51,7 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 
 - 2024.02.2
   - Install MS core fonts (ttf-mscorefonts-installer)
-  
+
 - 2024.02
   - Installed `sudo`
   - Updated Miniconda from Python 3.9 to Python 3.10
@@ -93,4 +101,3 @@ The default user is `ubuntu`. Add `-u root` if you want to login as root:
     docker build -t youracount/database --target normal .
     # with GPU
     docker build -t youracount/database_gpu --target gpu .
- 

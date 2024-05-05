@@ -10,6 +10,7 @@ function usage()
     echo "         rat (mRatBN7.2|rn7)" 1>&2
     echo "         fly (BDGP6|dm6)" 1>&2
     echo "         zebrafish (GRCz11|danRer11)" 1>&2
+    echo "         Oryzias latipes (Medaka)" 1>&2
     echo "         chicken (GRCg6a|galGal6)" 1>&2
     echo "         African clawed frog (Xenopus_tropicalis|xenLae2)" 1>&2
     echo "         C. elegans (WBcel235|ce11)" 1>&2
@@ -58,7 +59,7 @@ download_genome2bit(){
 }
 
 mkdir -p $outputdir && cd $_
-Ensembl_version=106
+Ensembl_version=111
 
 if test $build = "GRCh38" -o $build = "hg38"; then
     download_genome2bit hg38
@@ -172,6 +173,18 @@ elif test $build = "WBcel235" -o $build = "ce11"; then
     ex "unpigz -f *gtf.gz *gff3.gz"
     download_mappability Ensembl-WBcel235
     chrs="I II III IV V X M"
+elif test $build = "Medaka"; then
+#    ex "$wget https://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/oryzias_latipes/dna/Oryzias_latipes.ASM223467v1.dna.toplevel.fa.gz"
+    ex "$wget https://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/oryzias_latipes/dna/Oryzias_latipes.ASM223467v1.dna_sm.toplevel.fa.gz"
+    ex "$wget https://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/oryzias_latipes/Oryzias_latipes.ASM223467v1.$Ensembl_version.chr.gtf.gz"
+    ex "$wget https://ftp.ensembl.org/pub/release-$Ensembl_version/gff3/oryzias_latipes/Oryzias_latipes.ASM223467v1.$Ensembl_version.chr.gff3.gz"
+    ex "$wget https://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/oryzias_latipes/cdna/Oryzias_latipes.ASM223467v1.cdna.all.fa.gz"
+    ex "$wget https://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/oryzias_latipes/ncrna/Oryzias_latipes.ASM223467v1.ncrna.fa.gz"
+    ex "unpigz -f *gtf.gz *gff3.gz"
+    ex "zcat Oryzias_latipes.ASM223467v1.dna_sm.toplevel.fa.gz | sed -e 's/>/>chr/g' > genome.fa"
+    ex "rm Oryzias_latipes.ASM223467v1.dna_sm.toplevel.fa.gz"
+    download_mappability Medaka
+    chrs="$(seq 1 24) MT"
 elif test $build = "R64-1-1" -o $build = "sacCer3"; then
     download_genome2bit sacCer3
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/saccharomyces_cerevisiae/Saccharomyces_cerevisiae.R64-1-1.$Ensembl_version.gtf.gz"
@@ -224,7 +237,7 @@ fi
 
 mkdir -p chromosomes GCcontents
 
-if test $build != "T2T" -a $build != "HVAEP"; then
+if test $build != "T2T" -a $build != "HVAEP" -a $build != "Medaka"; then
     ex "twoBitToFa genome_full.2bit genome_full.fa"
     ex "splitmultifasta genome_full.fa --dir chromosomes"
     ex "samtools faidx genome_full.fa"
@@ -261,9 +274,9 @@ if test $build = "T2T"; then
     cat $head.gene.refFlat       | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $6, $6, $1}  else {print $3, $5, $5, $1} }'  | uniq | grep -v chrom > $head.gene.TES.bed
     cat $head.transcript.refFlat | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $5, $5, $14} else {print $3, $5, $5, $14} }' | uniq | grep -v chrom > $head.transcript.TES.bed
 
-    mkdir -p genedensity
+    mkdir -p gtf_chrUCSC/genedensity
     ex "makegenedensity.pl genometable.txt $head.gene.refFlat 500000"
-    mv chr*-bs500000 genedensity
+    mv chr*-bs500000 gtf_chrUCSC/genedensity
     exit
 fi
 

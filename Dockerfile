@@ -1,5 +1,5 @@
 ## Docker image for download databases
-FROM rnakato/r_python:2024.02.2 as common
+FROM rnakato/r_python:2024.04 as common
 
 WORKDIR /opt
 USER root
@@ -7,14 +7,12 @@ USER root
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     libboost-all-dev \
-#    libbz2-dev \
     libcurl4-gnutls-dev \
     libgsl-dev \
     libgtkmm-3.0-dev \
     libgzstream0 \
     libgzstream-dev \
     liblzma-dev \
-#    libncurses5-dev \
     libz-dev \
     cmake \
     curl \
@@ -44,21 +42,23 @@ RUN tar zxvf gffread-0.12.7.Linux_x86_64.tar.gz \
     && rm -rf gffread-0.12.7.Linux_x86_64.tar.gz gffread-0.12.7.Linux_x86_64
 
 
-FROM rnakato/r_python:2024.02.2 as normal
+FROM rnakato/r_python:2024.04 as normal
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV PATH ${PATH}:/opt/:/opt/scripts:/opt/UCSCbins:/opt/bin:/opt/ChIPseqTools/bin/:/opt/SSP/bin:/opt/SSP/scripts:/opt/bin/sratoolkit.3.0.0/bin/
 
 COPY --from=common / /
 USER ubuntu
 WORKDIR /home/ubuntu
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["download_genomedata.sh"]
 
 
-FROM rnakato/r_python_gpu:2024.02.2 as gpu
+FROM rnakato/r_python_gpu:2024.04 as gpu
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV PATH ${PATH}:/opt/:/opt/scripts:/opt/UCSCbins:/opt/bin:/opt/ChIPseqTools/bin/:/opt/SSP/bin:/opt/SSP/scripts:/opt/bin/sratoolkit.3.0.0/bin/
 
 COPY --from=common / /
 USER ubuntu
 WORKDIR /home/ubuntu
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["download_genomedata.sh"]

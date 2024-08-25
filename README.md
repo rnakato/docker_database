@@ -33,6 +33,9 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 
 ## Changelog
 
+- 2024.08
+  - Updated ChIPseqTools (DROMPAplus v.1.20.0 and SSP v1.4.0)
+
 - 2024.04
   - Changed Python environment from conda to micromamba (`/opt/micromamba`)
 

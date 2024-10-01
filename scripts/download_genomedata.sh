@@ -10,12 +10,13 @@ function usage()
     echo "         rat (mRatBN7.2|rn7)" 1>&2
     echo "         fly (BDGP6|dm6)" 1>&2
     echo "         zebrafish (GRCz11|danRer11)" 1>&2
-    echo "         Oryzias latipes (Medaka)" 1>&2
+    echo "         Medaka (Oryzias latipes) (Medaka)" 1>&2
     echo "         chicken (GRCg6a|galGal6)" 1>&2
     echo "         African clawed frog (Xenopus_tropicalis|xenLae2)" 1>&2
     echo "         C. elegans (WBcel235|ce11)" 1>&2
     echo "         S. cerevisiae (R64-1-1|sacCer3)" 1>&2
     echo "         S. pombe (SPombe)" 1>&2
+    echo "         Arabidopsis thaliana (tair10)" 1>&2
     echo "         Hydra vulgaris AEP (HVAEP)" 1>&2
     echo "  Example:" 1>&2
     echo "         $cmdname GRCh38 Ensembl-GRCh38" 1>&2
@@ -185,6 +186,17 @@ elif test $build = "Medaka"; then
     ex "rm Oryzias_latipes.ASM223467v1.dna_sm.toplevel.fa.gz"
     download_mappability Medaka
     chrs="$(seq 1 24) MT"
+elif test $build = "TAIR10"; then
+    ex "$wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-59/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.$build.dna_sm.toplevel.fa.gz"
+    ex "zcat Arabidopsis_thaliana.$build.dna_sm.toplevel.fa.gz | sed -e 's/>/>chr/g' > genome.fa"
+    ex "rm Arabidopsis_thaliana.$build.dna_sm.toplevel.fa.gz"
+    ex "$wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-59/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.$build.59.gtf.gz"
+    ex "$wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-59/gff3/arabidopsis_thaliana/Arabidopsis_thaliana.$build.59.gff3.gz"
+    ex "$wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-59/fasta/arabidopsis_thaliana/cdna/Arabidopsis_thaliana.$build.cdna.all.fa"
+    ex "$wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-59/fasta/arabidopsis_thaliana/ncrna/Arabidopsis_thaliana.$build.ncrna.fa.gz"
+    ex "unpigz -f *gtf.gz *gff3.gz"
+    download_mappability $build
+    chrs="$(seq 1 5) Mt Pt"
 elif test $build = "R64-1-1" -o $build = "sacCer3"; then
     download_genome2bit sacCer3
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/saccharomyces_cerevisiae/Saccharomyces_cerevisiae.R64-1-1.$Ensembl_version.gtf.gz"
@@ -197,7 +209,7 @@ elif test $build = "R64-1-1" -o $build = "sacCer3"; then
     download_mappability Ensembl-R64-1-1
     chrs="I II III IV V VI VII VIII IX X XI XII XIII XIV XV XVI M"
 elif test $build = "SPombe"; then
-    ex "wget -nv https://www.pombase.org/data/genome_sequence_and_features/genome_sequence/Schizosaccharomyces_pombe_all_chromosomes.fa.gz -O genome_full.fa.gz"
+    ex "$wget https://www.pombase.org/data/genome_sequence_and_features/genome_sequence/Schizosaccharomyces_pombe_all_chromosomes.fa.gz -O genome_full.fa.gz"
     ex "unpigz -f genome_full.fa.gz"
     ex "sed -i -e 's/>I/>chrI/g' genome_full.fa"
     ex "sed -i -e 's/mitochondrial/chrM/g' genome_full.fa"
@@ -237,7 +249,7 @@ fi
 
 mkdir -p chromosomes GCcontents
 
-if test $build != "T2T" -a $build != "HVAEP" -a $build != "Medaka"; then
+if test $build != "T2T" -a $build != "HVAEP" -a $build != "Medaka" -a $build != "TAIR10"; then
     ex "twoBitToFa genome_full.2bit genome_full.fa"
     ex "splitmultifasta genome_full.fa --dir chromosomes"
     ex "samtools faidx genome_full.fa"

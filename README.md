@@ -33,6 +33,9 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 
 ## Changelog
 
+- 2024.10
+  - Added `Arabidopsis thaliana` genome (TAIR10) in `download_genomedata.sh`.
+
 - 2024.08
   - Updated ChIPseqTools (DROMPAplus v.1.20.0 and SSP v1.4.0)
 
@@ -41,7 +44,7 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 
 - 2024.03.3
   - Updated the version of Ensemble data from 106 to 111.
-  - Added `Medaka` genome in download_genomedata.sh.
+  - Added `Medaka` genome in `download_genomedata.sh`.
 
 - 2024.03.2
   - Added `mptable.UCSC.T2T.28mer.flen150.txt` and `mptable.UCSC.T2T.36mer.flen150.txt` in `SSP/data/mptable`.

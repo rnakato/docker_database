@@ -34,6 +34,8 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 ## Changelog
 
 - 2024.10
+  - Updated SAMtools from 1.19.2 to 1.21
+  - Updated SRA Toolkit from 3.0.10 to v3.1.1
   - Added `Arabidopsis thaliana` genome (TAIR10) in `download_genomedata.sh`.
 
 - 2024.08

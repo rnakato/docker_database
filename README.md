@@ -33,6 +33,10 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 
 ## Changelog
 
+- 2025.07
+  - Added `T2T-mhaESC` genome (T2T for mouse)
+  - Update ChIPseqTools (DROMPAplus v.1.20.1)
+
 - 2024.10
   - Updated SAMtools from 1.19.2 to 1.21
   - Updated SRA Toolkit from 3.0.10 to v3.1.1

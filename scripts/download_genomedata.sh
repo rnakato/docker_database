@@ -6,7 +6,7 @@ function usage()
     echo "$cmdname <build> <outputdir>" 1>&2
     echo "  build (Ensembl|UCSC, you can specify either):" 1>&2
     echo "         human (GRCh38|hg38, GRCh37|hg19, T2T)" 1>&2
-    echo "         mouse (GRCm39|mm39, GRCm38|mm10)" 1>&2
+    echo "         mouse (GRCm39|mm39, GRCm38|mm10, T2T-mhaESC)" 1>&2
     echo "         rat (mRatBN7.2|rn7)" 1>&2
     echo "         fly (BDGP6|dm6)" 1>&2
     echo "         zebrafish (GRCz11|danRer11)" 1>&2
@@ -16,7 +16,7 @@ function usage()
     echo "         C. elegans (WBcel235|ce11)" 1>&2
     echo "         S. cerevisiae (R64-1-1|sacCer3)" 1>&2
     echo "         S. pombe (SPombe)" 1>&2
-    echo "         Arabidopsis thaliana (tair10)" 1>&2
+    echo "         Arabidopsis thaliana (TAIR10)" 1>&2
     echo "         Hydra vulgaris AEP (HVAEP)" 1>&2
     echo "  Example:" 1>&2
     echo "         $cmdname GRCh38 Ensembl-GRCh38" 1>&2
@@ -118,6 +118,20 @@ elif test $build = "GRCm38" -o $build = "mm10"; then
     wget -q https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/RepeatMasker/mm10.txt.gz -O RepeatMasker.txt.gz
     download_mappability Ensembl-GRCm38
     chrs="$(seq 1 19) X Y M"
+elif test $build = "T2T-mhaESC"; then
+    ex "wget -nv --quiet https://tinyurl.com/4wkw3w7u -O genome.fa.gz"
+#    ex "wget -nv https://github.com/yulab-ql/mhaESC_genome/releases/download/upd_rmvector/mouse.241018.masked.fasta.gz -O genome.fa.gz"
+    ex "unpigz -f genome.fa.gz"
+#    ex "$wget https://github.com/yulab-ql/mhaESC_genome/releases/download/upd_rmvector/mhaESC.annotation.v1.1.0.20241018.gff3.gz"
+#    ex "unpigz -f mhaESC.annotation.v1.1.0.20241018.gff3.gz"
+ #   ex " gffread mhaESC.annotation.v1.1.0.20241018.gff3 -T -o mhaESC.annotation.v1.1.0.20241018.gtf"
+#    ex "mv mhaESC.annotation.v1.1.0.20241018.gtf gtf_chrUCSC/chr.gtf"
+    ex "wget -nv --quiet https://tinyurl.com/yc5rf8sm -O chr.gtf.gz"
+    unpigz chr.gtf.gz
+    mkdir -p gtf_chrUCSC
+    mv chr.gtf gtf_chrUCSC/chr.gtf
+    download_mappability T2T-mhaESC
+    chrs="$(seq 1 19) X M"
 elif test $build = "mRatBN7.2" -o $build = "rn7"; then
     download_genome2bit rn7
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/rattus_norvegicus/Rattus_norvegicus.mRatBN7.2.$Ensembl_version.chr.gtf.gz"
@@ -163,7 +177,6 @@ elif test $build = "BDGP6" -o $build = "dm6"; then
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/drosophila_melanogaster/ncrna/Drosophila_melanogaster.BDGP6.32.ncrna.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
     download_mappability Ensembl-BDGP6
-    echo "test"
     chrs="2L 2R 3L 3R 4 X Y M"
 elif test $build = "WBcel235" -o $build = "ce11"; then
     download_genome2bit ce11
@@ -249,7 +262,7 @@ fi
 
 mkdir -p chromosomes GCcontents
 
-if test $build != "T2T" -a $build != "HVAEP" -a $build != "Medaka" -a $build != "TAIR10"; then
+if test $build != "T2T" -a $build != "T2T-mhaESC" -a $build != "HVAEP" -a $build != "Medaka" -a $build != "TAIR10"; then
     ex "twoBitToFa genome_full.2bit genome_full.fa"
     ex "splitmultifasta genome_full.fa --dir chromosomes"
     ex "samtools faidx genome_full.fa"
@@ -273,11 +286,11 @@ ex "makegenometable.pl genome.fa > genometable.txt"
 ex "faToTwoBit genome.fa genome.2bit"
 ex "samtools faidx genome.fa"
 
-if test $build != "SPombe" -a $build != "xenLae2" -a $build != "T2T" -a $build != "HVAEP"; then
+if test $build != "SPombe" -a $build != "xenLae2" -a $build != "T2T" -a $build != "T2T-mhaESC" -a $build != "HVAEP"; then
     ex "zcat *.cdna.all.fa.gz *.ncrna.fa.gz > rna.fa"
 fi
 
-if test $build = "T2T"; then
+if test $build = "T2T" -o $build = "T2T-mhaESC"; then
     head=gtf_chrUCSC/chr
     gtf2refFlat -g $head.gtf > $head.transcript.refFlat
     gtf2refFlat -u -g $head.gtf > $head.gene.refFlat

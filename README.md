@@ -33,6 +33,12 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 
 ## Changelog
 
+- 2026.03
+  - Added `download_RPE1.sh` to download the RPE1 genome data.
+  - Added [pfastq-dump](https://github.com/inutano/pfastq-dump) (a bash implementation of parallel-fastq-dump)  and removed parallel-fastq-dump
+  - Bug fix: lost path to sratoolkit 3.2.1 in PATH
+
+
 - 2025.07
   - Added `T2T-mhaESC` genome (T2T for mouse)
   - Update ChIPseqTools (DROMPAplus v.1.20.1)

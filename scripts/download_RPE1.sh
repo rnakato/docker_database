@@ -49,16 +49,21 @@ mkdir -p chromosomes GCcontents gtf_chrUCSC
 
 URL=https://nakatolab.iqb.u-tokyo.ac.jp/Datafolder_for_sharing/DockerDatabase/RPE1/$build/
 
+# genome
 ex "$wget $URL/genome.fa.gz"
 ex "faToTwoBit genome.fa.gz genome.fa.2bit"
 ex "unpigz genome.fa.gz"
 ex "makegenometable.pl genome.fa > genometable.txt"
 ex "splitmultifasta genome.fa --dir chromosomes"
 ex "samtools faidx genome.fa"
-ex "pigz genome.fa.gz"
+
+# gtf
 ex "$wget $URL/chr.gtf.gz"
 ex "unpigz chr.gtf.gz"
 ex "mv chr.gtf gtf_chrUCSC/"
+ex "$wget $URL/chr.gene.refFlat.gz"
+ex "unpigz chr.gene.refFlat.gz"
+ex "mv chr.gene.refFlat gtf_chrUCSC/"
 
 echo -en "estimate GC contents..."
 for chr in $(seq 1 22) X #Y M
@@ -72,12 +77,12 @@ done
 echo "done."
 
 head=gtf_chrUCSC/chr
-gtf2refFlat -g $head.gtf > $head.transcript.refFlat
-gtf2refFlat -u -g $head.gtf > $head.gene.refFlat
+#gtf2refFlat -g $head.gtf > $head.transcript.refFlat
+#gtf2refFlat -u -g $head.gtf > $head.gene.refFlat
 cat $head.gene.refFlat       | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $5, $5, $1}  else {print $3, $6, $6, $1} }'  | uniq | grep -v chrom > $head.gene.TSS.bed
-cat $head.transcript.refFlat | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $5, $5, $14} else {print $3, $6, $6, $14} }' | uniq | grep -v chrom > $head.transcript.TSS.bed
+#cat $head.transcript.refFlat | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $5, $5, $14} else {print $3, $6, $6, $14} }' | uniq | grep -v chrom > $head.transcript.TSS.bed
 cat $head.gene.refFlat       | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $6, $6, $1}  else {print $3, $5, $5, $1} }'  | uniq | grep -v chrom > $head.gene.TES.bed
-cat $head.transcript.refFlat | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $5, $5, $14} else {print $3, $5, $5, $14} }' | uniq | grep -v chrom > $head.transcript.TES.bed
+#cat $head.transcript.refFlat | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $5, $5, $14} else {print $3, $5, $5, $14} }' | uniq | grep -v chrom > $head.transcript.TES.bed
 
 mkdir -p gtf_chrUCSC/genedensity
 ex "makegenedensity.pl genometable.txt $head.gene.refFlat 500000"

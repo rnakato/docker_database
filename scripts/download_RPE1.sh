@@ -33,17 +33,6 @@ echo "Start downloading. Selected genome build: RPE1 $build"
 
 wget="wget --timestamping"
 
-download_mappability(){
-    label=$1
-    url=https://nakatolab.iqb.u-tokyo.ac.jp/Datafolder_for_sharing/DockerDatabase/mappability
-    for k in 28 36 50
-    do
-        wget -q $url/${label}_mappability_Mosaics_${k}mer.tar.bz2
-        tar xvfj ${label}_mappability_Mosaics_${k}mer.tar.bz2 >& /dev/null
-        rm ${label}_mappability_Mosaics_${k}mer.tar.bz2
-    done
-}
-
 mkdir -p $outputdir && cd $_
 mkdir -p chromosomes GCcontents gtf_chrUCSC
 
@@ -87,3 +76,12 @@ cat $head.gene.refFlat       | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $
 mkdir -p gtf_chrUCSC/genedensity
 ex "makegenedensity.pl genometable.txt $head.gene.refFlat 500000"
 mv chr*-bs500000 gtf_chrUCSC/genedensity
+
+# mappability
+url=https://nakatolab.iqb.u-tokyo.ac.jp/Datafolder_for_sharing/DockerDatabase/mappability
+for k in 28 36 50
+do
+    wget -q $url/RPE1_${build}_mappability_Mosaics_${k}mer.tar.bz2
+    tar xvfj RPE1_${build}_mappability_Mosaics_${k}mer.tar.bz2 >& /dev/null
+    rm RPE1_${build}_mappability_Mosaics_${k}mer.tar.bz2
+done

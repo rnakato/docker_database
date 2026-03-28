@@ -1,0 +1,425 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile:
+#1 transferring dockerfile: 1.85kB 0.0s done
+#1 DONE 2.0s
+
+#2 [internal] load metadata for docker.io/rnakato/r_python:2024.02.2
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/rnakato/r_python_gpu:2024.02
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context:
+#4 transferring context: 2B 0.3s done
+#4 DONE 2.4s
+
+#5 [internal] load build context
+#5 DONE 0.0s
+
+#6 [common  1/11] FROM docker.io/rnakato/r_python:2024.02.2
+#6 DONE 0.0s
+
+#7 [gpu 1/3] FROM docker.io/rnakato/r_python_gpu:2024.02
+#7 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 20.04kB 0.8s done
+#5 DONE 1.4s
+
+#8 [common  5/11] RUN git clone https://github.com/rnakato/SSP.git     && cd SSP     && make
+#8 CACHED
+
+#9 [common  2/11] WORKDIR /opt
+#9 CACHED
+
+#10 [common  3/11] RUN apt-get update     && apt-get install -y --no-install-recommends     libboost-all-dev     libcurl4-gnutls-dev     libgsl-dev     libgtkmm-3.0-dev     libgzstream0     libgzstream-dev     liblzma-dev     libz-dev     cmake     curl     pigz     && apt-get clean     && rm -rf /var/lib/apt/list
+#10 CACHED
+
+#11 [common  4/11] RUN git clone --recursive https://github.com/rnakato/ChIPseqTools.git     && cd ChIPseqTools     && make
+#11 CACHED
+
+#12 [common  6/11] RUN pip --no-cache install ffq
+#12 CACHED
+
+#13 [common  7/11] COPY scripts/* scripts/
+#13 DONE 10.4s
+
+#14 [common  8/11] COPY bin bin
+#14 DONE 1.4s
+
+#15 [common  9/11] COPY OriDB OriDB
+#15 DONE 0.7s
+
+#16 [common 10/11] COPY gffread-0.12.7.Linux_x86_64.tar.gz gffread-0.12.7.Linux_x86_64.tar.gz
+#16 DONE 2.1s
+
+#17 [common 11/11] RUN tar zxvf gffread-0.12.7.Linux_x86_64.tar.gz     && mv gffread-0.12.7.Linux_x86_64/gffread /opt/bin/     && rm -rf gffread-0.12.7.Linux_x86_64.tar.gz gffread-0.12.7.Linux_x86_64
+#17 2.760 gffread-0.12.7.Linux_x86_64/
+#17 2.760 gffread-0.12.7.Linux_x86_64/README.md
+#17 2.761 gffread-0.12.7.Linux_x86_64/gffread
+#17 2.763 gffread-0.12.7.Linux_x86_64/LICENSE
+#17 DONE 4.8s
+
+#7 [gpu 1/3] FROM docker.io/rnakato/r_python_gpu:2024.02
+#7 CACHED
+
+#18 [gpu 2/3] COPY --from=common / /
+#18 DONE 111.4s
+
+#19 [gpu 3/3] WORKDIR /home/ubuntu
+#19 DONE 0.9s
+
+#20 exporting to image
+#20 exporting layers
+#20 exporting layers 855.1s done
+#20 writing image sha256:65784209ed9585ae7b4b0997f741f51ea4d186c3c2e45b274347a3497ef51170
+#20 writing image sha256:65784209ed9585ae7b4b0997f741f51ea4d186c3c2e45b274347a3497ef51170 0.2s done
+#20 naming to docker.io/rnakato/database_gpu:2024.03.2
+#20 naming to docker.io/rnakato/database_gpu:2024.03.2 0.5s done
+#20 DONE 855.8s
+The push refers to repository [docker.io/rnakato/database_gpu]
+5f70bf18a086: Preparing
+5404b3540d69: Preparing
+5f70bf18a086: Preparing
+a70e87a5f1f4: Preparing
+5f70bf18a086: Preparing
+db19264ed471: Preparing
+414140f54e7f: Preparing
+2e50b0efd9ad: Preparing
+b2bf72b2bd8d: Preparing
+3b93a6feba89: Preparing
+b15400eb0fa7: Preparing
+29ecaf0c2ae0: Preparing
+41e673079fce: Preparing
+cda9215846ee: Preparing
+c5eafb4bee8f: Preparing
+81182eb0608d: Preparing
+f2baf76d88ee: Preparing
+cdd7c7392317: Preparing
+29ecaf0c2ae0: Waiting
+cda9215846ee: Waiting
+81182eb0608d: Waiting
+b2bf72b2bd8d: Waiting
+41e673079fce: Waiting
+3b93a6feba89: Waiting
+b15400eb0fa7: Waiting
+cdd7c7392317: Waiting
+c5eafb4bee8f: Waiting
+f2baf76d88ee: Waiting
+2e50b0efd9ad: Waiting
+a70e87a5f1f4: Layer already exists
+5f70bf18a086: Layer already exists
+db19264ed471: Layer already exists
+414140f54e7f: Layer already exists
+2e50b0efd9ad: Layer already exists
+3b93a6feba89: Layer already exists
+b2bf72b2bd8d: Layer already exists
+29ecaf0c2ae0: Layer already exists
+b15400eb0fa7: Layer already exists
+41e673079fce: Layer already exists
+cda9215846ee: Layer already exists
+c5eafb4bee8f: Layer already exists
+f2baf76d88ee: Layer already exists
+cdd7c7392317: Layer already exists
+81182eb0608d: Layer already exists
+5404b3540d69: Pushed
+2024.03.2: digest: sha256:162f667b0b2b26b3d3102cf92c1dbe84ceddafd9c8993a2a367ac81af861e991 size: 4094
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile:
+#1 transferring dockerfile: 1.85kB done
+#1 DONE 1.1s
+
+#2 [internal] load metadata for docker.io/rnakato/r_python:2024.02.2
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/rnakato/r_python:2024.02
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context:
+#4 transferring context: 2B done
+#4 DONE 0.9s
+
+#5 [normal 1/3] FROM docker.io/rnakato/r_python:2024.02
+#5 DONE 0.0s
+
+#6 [common  1/11] FROM docker.io/rnakato/r_python:2024.02.2
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 transferring context: 1.98kB done
+#7 DONE 2.3s
+
+#8 [common  3/11] RUN apt-get update     && apt-get install -y --no-install-recommends     libboost-all-dev     libcurl4-gnutls-dev     libgsl-dev     libgtkmm-3.0-dev     libgzstream0     libgzstream-dev     liblzma-dev     libz-dev     cmake     curl     pigz     && apt-get clean     && rm -rf /var/lib/apt/list
+#8 CACHED
+
+#9 [common  4/11] RUN git clone --recursive https://github.com/rnakato/ChIPseqTools.git     && cd ChIPseqTools     && make
+#9 CACHED
+
+#10 [common  2/11] WORKDIR /opt
+#10 CACHED
+
+#11 [common  7/11] COPY scripts/* scripts/
+#11 CACHED
+
+#12 [common  9/11] COPY OriDB OriDB
+#12 CACHED
+
+#13 [common  6/11] RUN pip --no-cache install ffq
+#13 CACHED
+
+#14 [common  5/11] RUN git clone https://github.com/rnakato/SSP.git     && cd SSP     && make
+#14 CACHED
+
+#15 [common  8/11] COPY bin bin
+#15 CACHED
+
+#16 [common 10/11] COPY gffread-0.12.7.Linux_x86_64.tar.gz gffread-0.12.7.Linux_x86_64.tar.gz
+#16 CACHED
+
+#17 [common 11/11] RUN tar zxvf gffread-0.12.7.Linux_x86_64.tar.gz     && mv gffread-0.12.7.Linux_x86_64/gffread /opt/bin/     && rm -rf gffread-0.12.7.Linux_x86_64.tar.gz gffread-0.12.7.Linux_x86_64
+#17 CACHED
+
+#5 [normal 1/3] FROM docker.io/rnakato/r_python:2024.02
+#5 CACHED
+
+#18 [normal 2/3] COPY --from=common / /
+#18 DONE 1412.8s
+
+#19 [normal 3/3] WORKDIR /home/ubuntu
+#19 DONE 0.8s
+
+#20 exporting to image
+#20 exporting layers
+#20 exporting layers 1005.1s done
+#20 writing image sha256:c8731b080dd5e83d36ed4368a9887575720e660e036a3fcfc361c734f99ede8d
+#20 writing image sha256:c8731b080dd5e83d36ed4368a9887575720e660e036a3fcfc361c734f99ede8d 1.6s done
+#20 naming to docker.io/rnakato/database:2024.03.2
+#20 naming to docker.io/rnakato/database:2024.03.2 4.0s done
+#20 DONE 1010.7s
+The push refers to repository [docker.io/rnakato/database]
+5f70bf18a086: Preparing
+5404b3540d69: Preparing
+5f70bf18a086: Preparing
+a70e87a5f1f4: Preparing
+5f70bf18a086: Preparing
+3ac841ebf531: Preparing
+5f8c6cff0359: Preparing
+2e50b0efd9ad: Preparing
+b93c1bd012ab: Preparing
+b93c1bd012ab: Waiting
+2e50b0efd9ad: Waiting
+a70e87a5f1f4: Layer already exists
+5f70bf18a086: Layer already exists
+3ac841ebf531: Layer already exists
+5f8c6cff0359: Layer already exists
+b93c1bd012ab: Layer already exists
+2e50b0efd9ad: Layer already exists
+5404b3540d69: Mounted from rnakato/database_gpu
+2024.03.2: digest: sha256:7aaebd6575dd85e775c20270f65278fa6c19c163814990bb8478a5ceb17bd9a3 size: 2203
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.85kB done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/rnakato/r_python:2024.02.2
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/rnakato/r_python_gpu:2024.02
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.1s
+
+#5 [common  1/11] FROM docker.io/rnakato/r_python:2024.02.2
+#5 DONE 0.0s
+
+#6 [gpu 1/3] FROM docker.io/rnakato/r_python_gpu:2024.02
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 transferring context: 1.98kB done
+#7 DONE 0.1s
+
+#8 [common 10/11] COPY gffread-0.12.7.Linux_x86_64.tar.gz gffread-0.12.7.Linux_x86_64.tar.gz
+#8 CACHED
+
+#9 [common  4/11] RUN git clone --recursive https://github.com/rnakato/ChIPseqTools.git     && cd ChIPseqTools     && make
+#9 CACHED
+
+#10 [common  5/11] RUN git clone https://github.com/rnakato/SSP.git     && cd SSP     && make
+#10 CACHED
+
+#11 [common  2/11] WORKDIR /opt
+#11 CACHED
+
+#12 [common  6/11] RUN pip --no-cache install ffq
+#12 CACHED
+
+#13 [common  3/11] RUN apt-get update     && apt-get install -y --no-install-recommends     libboost-all-dev     libcurl4-gnutls-dev     libgsl-dev     libgtkmm-3.0-dev     libgzstream0     libgzstream-dev     liblzma-dev     libz-dev     cmake     curl     pigz     && apt-get clean     && rm -rf /var/lib/apt/list
+#13 CACHED
+
+#14 [gpu 2/3] COPY --from=common / /
+#14 CACHED
+
+#15 [common  9/11] COPY OriDB OriDB
+#15 CACHED
+
+#16 [common  7/11] COPY scripts/* scripts/
+#16 CACHED
+
+#17 [common 11/11] RUN tar zxvf gffread-0.12.7.Linux_x86_64.tar.gz     && mv gffread-0.12.7.Linux_x86_64/gffread /opt/bin/     && rm -rf gffread-0.12.7.Linux_x86_64.tar.gz gffread-0.12.7.Linux_x86_64
+#17 CACHED
+
+#18 [common  8/11] COPY bin bin
+#18 CACHED
+
+#19 [gpu 3/3] WORKDIR /home/ubuntu
+#19 CACHED
+
+#20 exporting to image
+#20 exporting layers done
+#20 writing image sha256:65784209ed9585ae7b4b0997f741f51ea4d186c3c2e45b274347a3497ef51170 0.0s done
+#20 naming to docker.io/rnakato/database_gpu:latest 0.0s done
+#20 DONE 0.0s
+The push refers to repository [docker.io/rnakato/database_gpu]
+5f70bf18a086: Preparing
+5404b3540d69: Preparing
+5f70bf18a086: Preparing
+a70e87a5f1f4: Preparing
+5f70bf18a086: Preparing
+db19264ed471: Preparing
+414140f54e7f: Preparing
+2e50b0efd9ad: Preparing
+b2bf72b2bd8d: Preparing
+3b93a6feba89: Preparing
+b15400eb0fa7: Preparing
+29ecaf0c2ae0: Preparing
+2e50b0efd9ad: Waiting
+41e673079fce: Preparing
+b15400eb0fa7: Waiting
+b2bf72b2bd8d: Waiting
+cda9215846ee: Preparing
+29ecaf0c2ae0: Waiting
+41e673079fce: Waiting
+3b93a6feba89: Waiting
+c5eafb4bee8f: Preparing
+cda9215846ee: Waiting
+81182eb0608d: Preparing
+c5eafb4bee8f: Waiting
+f2baf76d88ee: Preparing
+81182eb0608d: Waiting
+cdd7c7392317: Preparing
+f2baf76d88ee: Waiting
+cdd7c7392317: Waiting
+a70e87a5f1f4: Layer already exists
+5f70bf18a086: Layer already exists
+db19264ed471: Layer already exists
+414140f54e7f: Layer already exists
+5404b3540d69: Layer already exists
+2e50b0efd9ad: Layer already exists
+3b93a6feba89: Layer already exists
+b2bf72b2bd8d: Layer already exists
+b15400eb0fa7: Layer already exists
+29ecaf0c2ae0: Layer already exists
+cda9215846ee: Layer already exists
+41e673079fce: Layer already exists
+c5eafb4bee8f: Layer already exists
+81182eb0608d: Layer already exists
+f2baf76d88ee: Layer already exists
+cdd7c7392317: Layer already exists
+latest: digest: sha256:162f667b0b2b26b3d3102cf92c1dbe84ceddafd9c8993a2a367ac81af861e991 size: 4094
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.85kB done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/rnakato/r_python:2024.02
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/rnakato/r_python:2024.02.2
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.1s
+
+#5 [common  1/11] FROM docker.io/rnakato/r_python:2024.02.2
+#5 DONE 0.0s
+
+#6 [normal 1/3] FROM docker.io/rnakato/r_python:2024.02
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 transferring context: 1.98kB done
+#7 DONE 0.1s
+
+#8 [common  8/11] COPY bin bin
+#8 CACHED
+
+#9 [common  3/11] RUN apt-get update     && apt-get install -y --no-install-recommends     libboost-all-dev     libcurl4-gnutls-dev     libgsl-dev     libgtkmm-3.0-dev     libgzstream0     libgzstream-dev     liblzma-dev     libz-dev     cmake     curl     pigz     && apt-get clean     && rm -rf /var/lib/apt/list
+#9 CACHED
+
+#10 [common 10/11] COPY gffread-0.12.7.Linux_x86_64.tar.gz gffread-0.12.7.Linux_x86_64.tar.gz
+#10 CACHED
+
+#11 [common 11/11] RUN tar zxvf gffread-0.12.7.Linux_x86_64.tar.gz     && mv gffread-0.12.7.Linux_x86_64/gffread /opt/bin/     && rm -rf gffread-0.12.7.Linux_x86_64.tar.gz gffread-0.12.7.Linux_x86_64
+#11 CACHED
+
+#12 [common  5/11] RUN git clone https://github.com/rnakato/SSP.git     && cd SSP     && make
+#12 CACHED
+
+#13 [common  4/11] RUN git clone --recursive https://github.com/rnakato/ChIPseqTools.git     && cd ChIPseqTools     && make
+#13 CACHED
+
+#14 [common  2/11] WORKDIR /opt
+#14 CACHED
+
+#15 [common  9/11] COPY OriDB OriDB
+#15 CACHED
+
+#16 [common  6/11] RUN pip --no-cache install ffq
+#16 CACHED
+
+#17 [normal 2/3] COPY --from=common / /
+#17 CACHED
+
+#18 [common  7/11] COPY scripts/* scripts/
+#18 CACHED
+
+#19 [normal 3/3] WORKDIR /home/ubuntu
+#19 CACHED
+
+#20 exporting to image
+#20 exporting layers done
+#20 writing image sha256:c8731b080dd5e83d36ed4368a9887575720e660e036a3fcfc361c734f99ede8d done
+#20 naming to docker.io/rnakato/database:latest done
+#20 DONE 0.0s
+The push refers to repository [docker.io/rnakato/database]
+5f70bf18a086: Preparing
+5404b3540d69: Preparing
+5f70bf18a086: Preparing
+a70e87a5f1f4: Preparing
+5f70bf18a086: Preparing
+3ac841ebf531: Preparing
+5f8c6cff0359: Preparing
+2e50b0efd9ad: Preparing
+b93c1bd012ab: Preparing
+2e50b0efd9ad: Waiting
+b93c1bd012ab: Waiting
+a70e87a5f1f4: Layer already exists
+5f70bf18a086: Layer already exists
+5f8c6cff0359: Layer already exists
+5404b3540d69: Layer already exists
+3ac841ebf531: Layer already exists
+b93c1bd012ab: Layer already exists
+2e50b0efd9ad: Layer already exists
+latest: digest: sha256:7aaebd6575dd85e775c20270f65278fa6c19c163814990bb8478a5ceb17bd9a3 size: 2203

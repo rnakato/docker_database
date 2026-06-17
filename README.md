@@ -18,8 +18,8 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
     - Rstudio Desktop
     - Rstudio Server
 
-- SAMtools 1.19.2
-- SRAtoolkit 3.0.10
+- SAMtools 1.22.1
+- SRAtoolkit 3.4.1
 - BEDtools 2.31.0
 - OpenBLAS 0.3.24
 
@@ -33,8 +33,17 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 
 ## Changelog
 
+- 2026.06
+  - Added ``download_Ecoli.sh`` and ``download_Lambdaphage.sh``.
+  - Updated SRA Toolkit from 3.2.1 to v3.4.1
+  - Updated SAMtools from 1.21 to 1.22.1
+  - Added ``isnumber.sh``
+  - Updated Bioconductor 3.21 to 3.23
+
+- 2026.04
+  - Updated the Ensembl data from version 111 to 115.
 - 2026.03
-  - Added `download_RPE1.sh` to download the RPE1 genome data.
+  - Added ``download_RPE1.sh`` to download the RPE1 genome data.
   - Added [pfastq-dump](https://github.com/inutano/pfastq-dump) (a bash implementation of parallel-fastq-dump)  and removed parallel-fastq-dump
   - Bug fix: lost path to sratoolkit 3.2.1 in PATH
 

@@ -60,26 +60,28 @@ download_genome2bit(){
 }
 
 mkdir -p $outputdir && cd $_
-Ensembl_version=111
 
+#### Human
 if test $build = "GRCh38" -o $build = "hg38"; then
+    Ensembl_version=116
     download_genome2bit hg38
-    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/homo_sapiens/Homo_sapiens.GRCh38.$Ensembl_version.chr.gtf.gz"
-    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gff3/homo_sapiens/Homo_sapiens.GRCh38.$Ensembl_version.chr.gff3.gz"
-#    ex "$wget http://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_40/gencode.v40.annotation.gtf.gz"
-#    ex "$wget http://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_40/gencode.v40.annotation.gff3.gz"
-    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz"
-    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/homo_sapiens/ncrna/Homo_sapiens.GRCh38.ncrna.fa.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/vertebrates/gtf/homo_sapiens/Homo_sapiens.GRCh38.$Ensembl_version.chr.gtf.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/vertebrates/gff3/homo_sapiens/Homo_sapiens.GRCh38.$Ensembl_version.chr.gff3.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/vertebrates/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/vertebrates/fasta/homo_sapiens/ncrna/Homo_sapiens.GRCh38.ncrna.fa.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/vertebrates/fasta/homo_sapiens/pep/Homo_sapiens.GRCh38.pep.all.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
     wget -q https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/RepeatMasker/hg38.txt.gz -O RepeatMasker.txt.gz
     download_mappability Ensembl-GRCh38
     chrs="$(seq 1 22) X Y M"
 elif test $build = "GRCh37" -o $build = "hg19"; then
+    Ensembl_version=115
     download_genome2bit hg19
     ex "$wget http://ftp.ensembl.org/pub/grch37/release-$Ensembl_version/gtf/homo_sapiens/Homo_sapiens.GRCh37.87.chr.gtf.gz"
     ex "$wget http://ftp.ensembl.org/pub/grch37/release-$Ensembl_version/gff3/homo_sapiens/Homo_sapiens.GRCh37.87.chr.gff3.gz"
     ex "$wget http://ftp.ensembl.org/pub/grch37/release-$Ensembl_version/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh37.cdna.all.fa.gz"
     ex "$wget http://ftp.ensembl.org/pub/grch37/release-$Ensembl_version/fasta/homo_sapiens/ncrna/Homo_sapiens.GRCh37.ncrna.fa.gz"
+    ex "$wget http://ftp.ensembl.org/pub/grch37/release-$Ensembl_version/fasta/homo_sapiens/pep/Homo_sapiens.GRCh37.pep.all.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
     wget -q https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/RepeatMasker/hg19.txt.gz -O RepeatMasker.txt.gz
     download_mappability Ensembl-GRCh37
@@ -99,21 +101,26 @@ elif test $build = "T2T"; then
     ex "mv chm13v2.0_RefSeq_Liftoff_v5.1.gtf gtf_chrUCSC/chr.gtf"
     download_mappability T2T
     chrs="$(seq 1 22) X Y M"
+
+#### Mouse
 elif test $build = "GRCm39" -o $build = "mm39"; then
+    Ensembl_version=116
     download_genome2bit mm39
-    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/mus_musculus/Mus_musculus.GRCm39.$Ensembl_version.chr.gtf.gz"
-    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gff3/mus_musculus/Mus_musculus.GRCm39.$Ensembl_version.chr.gff3.gz"
-    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/mus_musculus/cdna/Mus_musculus.GRCm39.cdna.all.fa.gz"
-    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/mus_musculus/ncrna/Mus_musculus.GRCm39.ncrna.fa.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/vertebrates/gtf/mus_musculus/Mus_musculus.GRCm39.$Ensembl_version.chr.gtf.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/vertebrates/gff3/mus_musculus/Mus_musculus.GRCm39.$Ensembl_version.chr.gff3.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/vertebrates/fasta/mus_musculus/cdna/Mus_musculus.GRCm39.cdna.all.fa.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/vertebrates/fasta/mus_musculus/ncrna/Mus_musculus.GRCm39.ncrna.fa.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/vertebrates/fasta/mus_musculus/pep/Mus_musculus.GRCm39.pep.all.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
     download_mappability Ensembl-GRCm39
     chrs="$(seq 1 19) X Y M"
 elif test $build = "GRCm38" -o $build = "mm10"; then
+    Ensembl_version=102
     download_genome2bit mm10
-    ex "$wget http://ftp.ensembl.org/pub/release-102/gtf/mus_musculus/Mus_musculus.GRCm38.102.chr.gtf.gz"
-    ex "$wget http://ftp.ensembl.org/pub/release-102/gff3/mus_musculus/Mus_musculus.GRCm38.102.chr.gff3.gz"
-    ex "$wget http://ftp.ensembl.org/pub/release-102/fasta/mus_musculus/cdna/Mus_musculus.GRCm38.cdna.all.fa.gz"
-    ex "$wget http://ftp.ensembl.org/pub/release-102/fasta/mus_musculus/ncrna/Mus_musculus.GRCm38.ncrna.fa.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/mus_musculus/Mus_musculus.GRCm38.$Ensembl_version.chr.gtf.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gff3/mus_musculus/Mus_musculus.GRCm38.$Ensembl_version.chr.gff3.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/mus_musculus/cdna/Mus_musculus.GRCm38.cdna.all.fa.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/mus_musculus/ncrna/Mus_musculus.GRCm38.ncrna.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
     wget -q https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/RepeatMasker/mm10.txt.gz -O RepeatMasker.txt.gz
     download_mappability Ensembl-GRCm38
@@ -133,6 +140,7 @@ elif test $build = "T2T-mhaESC"; then
     download_mappability T2T-mhaESC
     chrs="$(seq 1 19) X M"
 elif test $build = "mRatBN7.2" -o $build = "rn7"; then
+    Ensembl_version=111
     download_genome2bit rn7
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/rattus_norvegicus/Rattus_norvegicus.mRatBN7.2.$Ensembl_version.chr.gtf.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gff3/rattus_norvegicus/Rattus_norvegicus.mRatBN7.2.$Ensembl_version.chr.gff3.gz"
@@ -141,7 +149,19 @@ elif test $build = "mRatBN7.2" -o $build = "rn7"; then
     ex "unpigz -f *gtf.gz *gff3.gz"
     download_mappability Ensembl-mRatBN7.2
     chrs="$(seq 1 20) X Y M"
+elif test $build = "GRCr8" -o $build = "rn8"; then
+    Ensembl_version=115
+    download_genome2bit rn7
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/rattus_norvegicus/Rattus_norvegicus.GRCr8.$Ensembl_version.chr.gtf.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gff3/rattus_norvegicus/Rattus_norvegicus.GRCr8.$Ensembl_version.chr.gff3.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/rattus_norvegicus/cdna/Rattus_norvegicus.GRCr8.cdna.all.fa.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/rattus_norvegicus/ncrna/Rattus_norvegicus.GRCr8.ncrna.fa.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/rattus_norvegicus/pep/Rattus_norvegicus.GRCr8.pep.all.fa.gz"
+    ex "unpigz -f *gtf.gz *gff3.gz"
+    download_mappability Ensembl-GRCr8
+    chrs="$(seq 1 20) X Y M"
 elif test $build = "GRCz11" -o $build = "danRer11"; then
+    Ensembl_version=115
     download_genome2bit danRer11
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/danio_rerio/Danio_rerio.GRCz11.$Ensembl_version.chr.gtf.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gff3/danio_rerio/Danio_rerio.GRCz11.$Ensembl_version.chr.gff3.gz"
@@ -151,6 +171,7 @@ elif test $build = "GRCz11" -o $build = "danRer11"; then
     download_mappability Ensembl-GRCz11
     chrs="$(seq 1 25) M"
 elif test $build = "GRCg6a" -o $build = "galGal6"; then
+    Ensembl_version=105
     download_genome2bit galGal6
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/gallus_gallus/Gallus_gallus.GRCg6a.$Ensembl_version.chr.gtf.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gff3/gallus_gallus/Gallus_gallus.GRCg6a.$Ensembl_version.chr.gff3.gz"
@@ -160,6 +181,7 @@ elif test $build = "GRCg6a" -o $build = "galGal6"; then
     download_mappability Ensembl-GRCg6a
     chrs="$(seq 1 28) $(seq 30 33) W Z M"
 elif test $build = "Xenopus_tropicalis" -o $build = "xenLae2"; then
+    Ensembl_version=105
     download_genome2bit xenLae2
     ex "$wget https://hgdownload.soe.ucsc.edu/goldenPath/xenLae2/bigZips/refMrna.fa.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/xenopus_tropicalis/Xenopus_tropicalis.Xenopus_tropicalis_v9.1.$Ensembl_version.chr.gtf.gz"
@@ -170,47 +192,55 @@ elif test $build = "Xenopus_tropicalis" -o $build = "xenLae2"; then
     download_mappability Ensembl-xenLae2
     chrs="1L 1S 2L 2S 3L 3S 4L 4S 5L 5S 6L 6S 7L 7S 8L 8S 9_10L 9_10S M"
 elif test $build = "BDGP6" -o $build = "dm6"; then
+    Ensembl_version=115
     download_genome2bit dm6
-    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/drosophila_melanogaster/Drosophila_melanogaster.BDGP6.32.$Ensembl_version.chr.gtf.gz"
-    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gff3/drosophila_melanogaster/Drosophila_melanogaster.BDGP6.32.$Ensembl_version.chr.gff3.gz"
-    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/drosophila_melanogaster/cdna/Drosophila_melanogaster.BDGP6.32.cdna.all.fa.gz"
-    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/drosophila_melanogaster/ncrna/Drosophila_melanogaster.BDGP6.32.ncrna.fa.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/drosophila_melanogaster/Drosophila_melanogaster.BDGP6.54.$Ensembl_version.chr.gtf.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gff3/drosophila_melanogaster/Drosophila_melanogaster.BDGP6.54.$Ensembl_version.chr.gff3.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/drosophila_melanogaster/cdna/Drosophila_melanogaster.BDGP6.54.cdna.all.fa.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/drosophila_melanogaster/ncrna/Drosophila_melanogaster.BDGP6.54.ncrna.fa.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/drosophila_melanogaster/pep/Drosophila_melanogaster.BDGP6.54.pep.all.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
     download_mappability Ensembl-BDGP6
     chrs="2L 2R 3L 3R 4 X Y M"
 elif test $build = "WBcel235" -o $build = "ce11"; then
+    Ensembl_version=115
     download_genome2bit ce11
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/caenorhabditis_elegans/Caenorhabditis_elegans.WBcel235.$Ensembl_version.gtf.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gff3/caenorhabditis_elegans/Caenorhabditis_elegans.WBcel235.$Ensembl_version.gff3.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/caenorhabditis_elegans/cdna/Caenorhabditis_elegans.WBcel235.cdna.all.fa.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/caenorhabditis_elegans/ncrna/Caenorhabditis_elegans.WBcel235.ncrna.fa.gz"
+    ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/caenorhabditis_elegans/pep/Caenorhabditis_elegans.WBcel235.pep.all.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
     download_mappability Ensembl-WBcel235
     chrs="I II III IV V X M"
 elif test $build = "Medaka"; then
+    Ensembl_version=115
 #    ex "$wget https://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/oryzias_latipes/dna/Oryzias_latipes.ASM223467v1.dna.toplevel.fa.gz"
     ex "$wget https://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/oryzias_latipes/dna/Oryzias_latipes.ASM223467v1.dna_sm.toplevel.fa.gz"
     ex "$wget https://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/oryzias_latipes/Oryzias_latipes.ASM223467v1.$Ensembl_version.chr.gtf.gz"
     ex "$wget https://ftp.ensembl.org/pub/release-$Ensembl_version/gff3/oryzias_latipes/Oryzias_latipes.ASM223467v1.$Ensembl_version.chr.gff3.gz"
     ex "$wget https://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/oryzias_latipes/cdna/Oryzias_latipes.ASM223467v1.cdna.all.fa.gz"
     ex "$wget https://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/oryzias_latipes/ncrna/Oryzias_latipes.ASM223467v1.ncrna.fa.gz"
+    ex "$wget https://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/oryzias_latipes/pep/Oryzias_latipes.ASM223467v1.pep.all.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
     ex "zcat Oryzias_latipes.ASM223467v1.dna_sm.toplevel.fa.gz | sed -e 's/>/>chr/g' > genome.fa"
     ex "rm Oryzias_latipes.ASM223467v1.dna_sm.toplevel.fa.gz"
     download_mappability Medaka
     chrs="$(seq 1 24) MT"
 elif test $build = "TAIR10"; then
-    ex "$wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-59/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.$build.dna_sm.toplevel.fa.gz"
+    Ensembl_version=62
+    ex "$wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-$Ensembl_version/fasta/arabidopsis_thaliana/dna/Arabidopsis_thaliana.$build.dna_sm.toplevel.fa.gz"
     ex "zcat Arabidopsis_thaliana.$build.dna_sm.toplevel.fa.gz | sed -e 's/>/>chr/g' > genome.fa"
     ex "rm Arabidopsis_thaliana.$build.dna_sm.toplevel.fa.gz"
-    ex "$wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-59/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.$build.59.gtf.gz"
-    ex "$wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-59/gff3/arabidopsis_thaliana/Arabidopsis_thaliana.$build.59.gff3.gz"
-    ex "$wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-59/fasta/arabidopsis_thaliana/cdna/Arabidopsis_thaliana.$build.cdna.all.fa"
-    ex "$wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-59/fasta/arabidopsis_thaliana/ncrna/Arabidopsis_thaliana.$build.ncrna.fa.gz"
+    ex "$wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-$Ensembl_version/gtf/arabidopsis_thaliana/Arabidopsis_thaliana.$build.$Ensembl_version.gtf.gz"
+    ex "$wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-$Ensembl_version/gff3/arabidopsis_thaliana/Arabidopsis_thaliana.$build.$Ensembl_version.gff3.gz"
+    ex "$wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-$Ensembl_version/fasta/arabidopsis_thaliana/cdna/Arabidopsis_thaliana.$build.cdna.all.fa"
+    ex "$wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-$Ensembl_version/fasta/arabidopsis_thaliana/ncrna/Arabidopsis_thaliana.$build.ncrna.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
     download_mappability $build
     chrs="$(seq 1 5) Mt Pt"
 elif test $build = "R64-1-1" -o $build = "sacCer3"; then
+    Ensembl_version=111
     download_genome2bit sacCer3
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gtf/saccharomyces_cerevisiae/Saccharomyces_cerevisiae.R64-1-1.$Ensembl_version.gtf.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/gff3/saccharomyces_cerevisiae/Saccharomyces_cerevisiae.R64-1-1.$Ensembl_version.gff3.gz"

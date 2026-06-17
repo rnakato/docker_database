@@ -1,0 +1,1473 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.80kB done
+#1 DONE 0.2s
+
+#2 [internal] load metadata for docker.io/rnakato/r_python:2026.06
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context:
+#3 transferring context: 2B done
+#3 DONE 0.2s
+
+#4 [internal] load build context
+#4 transferring context: 34.46MB 0.5s done
+#4 DONE 0.7s
+
+#5 [common  1/11] FROM docker.io/rnakato/r_python:2026.06
+#5 DONE 2.4s
+
+#6 [common  2/11] WORKDIR /opt
+#6 DONE 2.3s
+
+#7 [common  3/11] RUN apt-get update     && apt-get install -y --no-install-recommends     libboost-all-dev     libcurl4-gnutls-dev     libgsl-dev     libgtkmm-3.0-dev     libgzstream0     libgzstream-dev     liblzma-dev     libz-dev     cmake     curl     pigz     && apt-get clean     && rm -rf /var/lib/apt/list
+#7 2.697 Get:1 https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/ InRelease [3632 B]
+#7 3.022 Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+#7 3.029 Get:3 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB]
+#7 3.389 Get:4 https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/ Packages [95.6 kB]
+#7 3.836 Get:5 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [4024 kB]
+#7 4.227 Get:6 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+#7 4.490 Get:7 http://security.ubuntu.com/ubuntu jammy-security amd64 Contents (deb) [291 MB]
+#7 4.603 Get:8 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+#7 4.699 Get:9 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages [1792 kB]
+#7 5.003 Get:10 http://archive.ubuntu.com/ubuntu jammy amd64 Contents (deb) [46.9 MB]
+#7 6.661 Get:11 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages [164 kB]
+#7 6.663 Get:12 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [17.5 MB]
+#7 7.179 Get:13 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB]
+#7 7.180 Get:14 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [4357 kB]
+#7 7.225 Get:15 http://archive.ubuntu.com/ubuntu jammy-updates amd64 Contents (deb) [299 MB]
+#7 17.94 Get:16 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [7221 kB]
+#7 18.44 Get:17 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [1306 kB]
+#7 18.45 Get:18 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [77.8 kB]
+#7 19.71 Get:19 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [7489 kB]
+#7 19.78 Get:20 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1611 kB]
+#7 19.80 Get:21 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [86.4 kB]
+#7 19.80 Get:22 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [82.8 kB]
+#7 19.80 Get:23 http://archive.ubuntu.com/ubuntu jammy-backports amd64 Contents (deb) [795 kB]
+#7 19.82 Get:24 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [35.6 kB]
+#7 75.60 Fetched 684 MB in 1min 10s (9814 kB/s)
+#7 75.60 Reading package lists...
+#7 76.55 W: https://cloud.r-project.org/bin/linux/ubuntu/jammy-cran40/InRelease: Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
+#7 76.60 Reading package lists...
+#7 77.56 Building dependency tree...
+#7 77.75 Reading state information...
+#7 77.90 libboost-all-dev is already the newest version (1.74.0.3ubuntu7).
+#7 77.90 libgsl-dev is already the newest version (2.7.1+dfsg-3).
+#7 77.90 pigz is already the newest version (2.6-1).
+#7 77.90 cmake is already the newest version (3.22.1-1ubuntu1.22.04.2).
+#7 77.90 curl is already the newest version (7.81.0-1ubuntu1.24).
+#7 77.90 libcurl4-gnutls-dev is already the newest version (7.81.0-1ubuntu1.24).
+#7 77.90 liblzma-dev is already the newest version (5.2.5-2ubuntu1.1).
+#7 77.90 liblzma-dev set to manually installed.
+#7 77.90 zlib1g-dev is already the newest version (1:1.2.11.dfsg-2ubuntu9.2).
+#7 77.90 The following additional packages will be installed:
+#7 77.90   gir1.2-atk-1.0 gir1.2-atspi-2.0 gir1.2-gtk-3.0 gir1.2-pango-1.0
+#7 77.90   libatk-bridge2.0-dev libatk1.0-dev libatkmm-1.6-1v5 libatkmm-1.6-dev
+#7 77.90   libatspi2.0-dev libcairomm-1.0-1v5 libcairomm-1.0-dev libdatrie-dev
+#7 77.90   libdbus-1-dev libegl1-mesa-dev libepoxy-dev libgles-dev libgles1 libgles2
+#7 77.90   libglibmm-2.4-1v5 libglibmm-2.4-dev libglvnd-core-dev libglvnd-dev
+#7 77.90   libgtk-3-dev libgtkmm-3.0-1v5 libopengl-dev libpango1.0-dev
+#7 77.90   libpangomm-1.4-1v5 libpangomm-1.4-dev libpangoxft-1.0-0 libsigc++-2.0-0v5
+#7 77.90   libsigc++-2.0-dev libthai-dev libwayland-bin libwayland-dev
+#7 77.90   libxcomposite-dev libxcursor-dev libxdamage-dev libxfixes-dev libxft-dev
+#7 77.90   libxi-dev libxinerama-dev libxkbcommon-dev libxrandr-dev libxtst-dev
+#7 77.90   pango1.0-tools wayland-protocols
+#7 77.90 Suggested packages:
+#7 77.90   libatkmm-1.6-doc libcairomm-1.0-doc libdatrie-doc libglibmm-2.4-doc
+#7 77.90   libgtk-3-doc libgtkmm-3.0-doc libpango1.0-doc libsigc++-2.0-doc libthai-doc
+#7 77.90   libwayland-doc graphicsmagick
+#7 77.98 The following NEW packages will be installed:
+#7 77.98   gir1.2-atk-1.0 gir1.2-atspi-2.0 gir1.2-gtk-3.0 gir1.2-pango-1.0
+#7 77.98   libatk-bridge2.0-dev libatk1.0-dev libatkmm-1.6-1v5 libatkmm-1.6-dev
+#7 77.98   libatspi2.0-dev libcairomm-1.0-1v5 libcairomm-1.0-dev libdatrie-dev
+#7 77.98   libdbus-1-dev libegl1-mesa-dev libepoxy-dev libgles-dev libgles1 libgles2
+#7 77.98   libglibmm-2.4-1v5 libglibmm-2.4-dev libglvnd-core-dev libglvnd-dev
+#7 77.98   libgtk-3-dev libgtkmm-3.0-1v5 libgtkmm-3.0-dev libgzstream-dev libgzstream0
+#7 77.98   libopengl-dev libpango1.0-dev libpangomm-1.4-1v5 libpangomm-1.4-dev
+#7 77.98   libpangoxft-1.0-0 libsigc++-2.0-0v5 libsigc++-2.0-dev libthai-dev
+#7 77.98   libwayland-bin libwayland-dev libxcomposite-dev libxcursor-dev
+#7 77.98   libxdamage-dev libxfixes-dev libxft-dev libxi-dev libxinerama-dev
+#7 77.98   libxkbcommon-dev libxrandr-dev libxtst-dev pango1.0-tools wayland-protocols
+#7 78.27 0 upgraded, 49 newly installed, 0 to remove and 0 not upgraded.
+#7 78.27 Need to get 7010 kB of archives.
+#7 78.27 After this operation, 47.9 MB of additional disk space will be used.
+#7 78.27 Get:1 http://archive.ubuntu.com/ubuntu jammy/main amd64 gir1.2-atk-1.0 amd64 2.36.0-3build1 [21.0 kB]
+#7 78.29 Get:2 http://archive.ubuntu.com/ubuntu jammy/main amd64 gir1.2-atspi-2.0 amd64 2.44.0-3 [18.1 kB]
+#7 78.30 Get:3 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpangoxft-1.0-0 amd64 1.50.6+ds-2ubuntu1 [31.0 kB]
+#7 78.30 Get:4 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 gir1.2-pango-1.0 amd64 1.50.6+ds-2ubuntu1 [44.0 kB]
+#7 78.31 Get:5 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 gir1.2-gtk-3.0 amd64 3.24.33-1ubuntu2.2 [240 kB]
+#7 78.33 Get:6 http://archive.ubuntu.com/ubuntu jammy/main amd64 libatk1.0-dev amd64 2.36.0-3build1 [96.6 kB]
+#7 78.33 Get:7 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libdbus-1-dev amd64 1.12.20-2ubuntu4.1 [188 kB]
+#7 78.35 Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 libxfixes-dev amd64 1:6.0.0-1 [12.2 kB]
+#7 78.36 Get:9 http://archive.ubuntu.com/ubuntu jammy/main amd64 libxi-dev amd64 2:1.8-1build1 [193 kB]
+#7 78.37 Get:10 http://archive.ubuntu.com/ubuntu jammy/main amd64 libxtst-dev amd64 2:1.2.3-1build4 [16.3 kB]
+#7 78.38 Get:11 http://archive.ubuntu.com/ubuntu jammy/main amd64 libatspi2.0-dev amd64 2.44.0-3 [71.5 kB]
+#7 78.41 Get:12 http://archive.ubuntu.com/ubuntu jammy/main amd64 libatk-bridge2.0-dev amd64 2.38.0-3 [2954 B]
+#7 78.41 Get:13 http://archive.ubuntu.com/ubuntu jammy/main amd64 libsigc++-2.0-0v5 amd64 2.10.4-2ubuntu3 [12.1 kB]
+#7 78.42 Get:14 http://archive.ubuntu.com/ubuntu jammy/main amd64 libglibmm-2.4-1v5 amd64 2.66.2-2 [645 kB]
+#7 78.43 Get:15 http://archive.ubuntu.com/ubuntu jammy/main amd64 libatkmm-1.6-1v5 amd64 2.28.2-1build1 [78.5 kB]
+#7 78.86 Get:16 http://archive.ubuntu.com/ubuntu jammy/main amd64 libsigc++-2.0-dev amd64 2.10.4-2ubuntu3 [58.4 kB]
+#7 78.90 Get:17 http://archive.ubuntu.com/ubuntu jammy/main amd64 libglibmm-2.4-dev amd64 2.66.2-2 [452 kB]
+#7 78.92 Get:18 http://archive.ubuntu.com/ubuntu jammy/main amd64 libatkmm-1.6-dev amd64 2.28.2-1build1 [34.0 kB]
+#7 78.92 Get:19 http://archive.ubuntu.com/ubuntu jammy/main amd64 libcairomm-1.0-1v5 amd64 1.12.2-4build3 [45.1 kB]
+#7 78.92 Get:20 http://archive.ubuntu.com/ubuntu jammy/main amd64 libcairomm-1.0-dev amd64 1.12.2-4build3 [1157 kB]
+#7 78.93 Get:21 http://archive.ubuntu.com/ubuntu jammy/main amd64 libdatrie-dev amd64 0.2.13-2 [19.7 kB]
+#7 78.93 Get:22 http://archive.ubuntu.com/ubuntu jammy/main amd64 libglvnd-core-dev amd64 1.4.0-1 [12.7 kB]
+#7 78.94 Get:23 http://archive.ubuntu.com/ubuntu jammy/main amd64 libgles1 amd64 1.4.0-1 [11.5 kB]
+#7 78.95 Get:24 http://archive.ubuntu.com/ubuntu jammy/main amd64 libgles2 amd64 1.4.0-1 [18.0 kB]
+#7 78.95 Get:25 http://archive.ubuntu.com/ubuntu jammy/main amd64 libgles-dev amd64 1.4.0-1 [49.4 kB]
+#7 78.96 Get:26 http://archive.ubuntu.com/ubuntu jammy/main amd64 libopengl-dev amd64 1.4.0-1 [3400 B]
+#7 78.97 Get:27 http://archive.ubuntu.com/ubuntu jammy/main amd64 libglvnd-dev amd64 1.4.0-1 [3162 B]
+#7 78.97 Get:28 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libegl1-mesa-dev amd64 23.2.1-1ubuntu3.1~22.04.4 [11.3 kB]
+#7 78.98 Get:29 http://archive.ubuntu.com/ubuntu jammy/main amd64 libepoxy-dev amd64 1.5.10-1 [132 kB]
+#7 78.99 Get:30 http://archive.ubuntu.com/ubuntu jammy/main amd64 libthai-dev amd64 0.1.29-1build1 [26.4 kB]
+#7 79.00 Get:31 http://archive.ubuntu.com/ubuntu jammy/main amd64 libxft-dev amd64 2.3.4-1 [52.4 kB]
+#7 79.00 Get:32 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 pango1.0-tools amd64 1.50.6+ds-2ubuntu1 [45.8 kB]
+#7 79.01 Get:33 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpango1.0-dev amd64 1.50.6+ds-2ubuntu1 [154 kB]
+#7 79.02 Get:34 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libwayland-bin amd64 1.20.0-1ubuntu0.1 [20.4 kB]
+#7 79.02 Get:35 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libwayland-dev amd64 1.20.0-1ubuntu0.1 [69.5 kB]
+#7 79.03 Get:36 http://archive.ubuntu.com/ubuntu jammy/main amd64 libxcomposite-dev amd64 1:0.4.5-1build2 [9326 B]
+#7 79.11 Get:37 http://archive.ubuntu.com/ubuntu jammy/main amd64 libxcursor-dev amd64 1:1.2.0-2build4 [28.2 kB]
+#7 79.11 Get:38 http://archive.ubuntu.com/ubuntu jammy/main amd64 libxdamage-dev amd64 1:1.1.5-2build2 [5264 B]
+#7 79.20 Get:39 http://archive.ubuntu.com/ubuntu jammy/main amd64 libxinerama-dev amd64 2:1.1.4-3 [8104 B]
+#7 79.20 Get:40 http://archive.ubuntu.com/ubuntu jammy/main amd64 libxkbcommon-dev amd64 1.4.0-1 [54.9 kB]
+#7 79.30 Get:41 http://archive.ubuntu.com/ubuntu jammy/main amd64 libxrandr-dev amd64 2:1.5.2-1build1 [26.7 kB]
+#7 79.30 Get:42 http://archive.ubuntu.com/ubuntu jammy/main amd64 wayland-protocols all 1.25-1 [70.6 kB]
+#7 79.38 Get:43 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libgtk-3-dev amd64 3.24.33-1ubuntu2.2 [1082 kB]
+#7 79.48 Get:44 http://archive.ubuntu.com/ubuntu jammy/main amd64 libpangomm-1.4-1v5 amd64 2.46.2-1 [56.1 kB]
+#7 79.49 Get:45 http://archive.ubuntu.com/ubuntu jammy/main amd64 libgtkmm-3.0-1v5 amd64 3.24.5-1build1 [1003 kB]
+#7 79.56 Get:46 http://archive.ubuntu.com/ubuntu jammy/main amd64 libpangomm-1.4-dev amd64 2.46.2-1 [53.2 kB]
+#7 79.56 Get:47 http://archive.ubuntu.com/ubuntu jammy/main amd64 libgtkmm-3.0-dev amd64 3.24.5-1build1 [552 kB]
+#7 79.67 Get:48 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libgzstream0 amd64 1.5+git20171107.9a20658-1 [7410 B]
+#7 80.20 Get:49 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libgzstream-dev amd64 1.5+git20171107.9a20658-1 [6488 B]
+#7 85.04 Fetched 7010 kB in 2s (3158 kB/s)
+#7 85.27 Selecting previously unselected package gir1.2-atk-1.0:amd64.
+#7 85.27 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 95726 files and directories currently installed.)
+#7 85.31 Preparing to unpack .../00-gir1.2-atk-1.0_2.36.0-3build1_amd64.deb ...
+#7 85.37 Unpacking gir1.2-atk-1.0:amd64 (2.36.0-3build1) ...
+#7 85.76 Selecting previously unselected package gir1.2-atspi-2.0:amd64.
+#7 85.77 Preparing to unpack .../01-gir1.2-atspi-2.0_2.44.0-3_amd64.deb ...
+#7 85.83 Unpacking gir1.2-atspi-2.0:amd64 (2.44.0-3) ...
+#7 86.29 Selecting previously unselected package libpangoxft-1.0-0:amd64.
+#7 86.30 Preparing to unpack .../02-libpangoxft-1.0-0_1.50.6+ds-2ubuntu1_amd64.deb ...
+#7 86.44 Unpacking libpangoxft-1.0-0:amd64 (1.50.6+ds-2ubuntu1) ...
+#7 86.75 Selecting previously unselected package gir1.2-pango-1.0:amd64.
+#7 86.76 Preparing to unpack .../03-gir1.2-pango-1.0_1.50.6+ds-2ubuntu1_amd64.deb ...
+#7 86.82 Unpacking gir1.2-pango-1.0:amd64 (1.50.6+ds-2ubuntu1) ...
+#7 87.13 Selecting previously unselected package gir1.2-gtk-3.0:amd64.
+#7 87.14 Preparing to unpack .../04-gir1.2-gtk-3.0_3.24.33-1ubuntu2.2_amd64.deb ...
+#7 87.20 Unpacking gir1.2-gtk-3.0:amd64 (3.24.33-1ubuntu2.2) ...
+#7 87.72 Selecting previously unselected package libatk1.0-dev:amd64.
+#7 87.72 Preparing to unpack .../05-libatk1.0-dev_2.36.0-3build1_amd64.deb ...
+#7 87.78 Unpacking libatk1.0-dev:amd64 (2.36.0-3build1) ...
+#7 88.10 Selecting previously unselected package libdbus-1-dev:amd64.
+#7 88.11 Preparing to unpack .../06-libdbus-1-dev_1.12.20-2ubuntu4.1_amd64.deb ...
+#7 88.17 Unpacking libdbus-1-dev:amd64 (1.12.20-2ubuntu4.1) ...
+#7 88.54 Selecting previously unselected package libxfixes-dev:amd64.
+#7 88.54 Preparing to unpack .../07-libxfixes-dev_1%3a6.0.0-1_amd64.deb ...
+#7 88.60 Unpacking libxfixes-dev:amd64 (1:6.0.0-1) ...
+#7 89.03 Selecting previously unselected package libxi-dev:amd64.
+#7 89.04 Preparing to unpack .../08-libxi-dev_2%3a1.8-1build1_amd64.deb ...
+#7 89.10 Unpacking libxi-dev:amd64 (2:1.8-1build1) ...
+#7 89.63 Selecting previously unselected package libxtst-dev:amd64.
+#7 89.64 Preparing to unpack .../09-libxtst-dev_2%3a1.2.3-1build4_amd64.deb ...
+#7 89.70 Unpacking libxtst-dev:amd64 (2:1.2.3-1build4) ...
+#7 90.02 Selecting previously unselected package libatspi2.0-dev:amd64.
+#7 90.03 Preparing to unpack .../10-libatspi2.0-dev_2.44.0-3_amd64.deb ...
+#7 90.10 Unpacking libatspi2.0-dev:amd64 (2.44.0-3) ...
+#7 90.42 Selecting previously unselected package libatk-bridge2.0-dev:amd64.
+#7 90.43 Preparing to unpack .../11-libatk-bridge2.0-dev_2.38.0-3_amd64.deb ...
+#7 90.48 Unpacking libatk-bridge2.0-dev:amd64 (2.38.0-3) ...
+#7 91.15 Selecting previously unselected package libsigc++-2.0-0v5:amd64.
+#7 91.15 Preparing to unpack .../12-libsigc++-2.0-0v5_2.10.4-2ubuntu3_amd64.deb ...
+#7 91.21 Unpacking libsigc++-2.0-0v5:amd64 (2.10.4-2ubuntu3) ...
+#7 91.61 Selecting previously unselected package libglibmm-2.4-1v5:amd64.
+#7 91.62 Preparing to unpack .../13-libglibmm-2.4-1v5_2.66.2-2_amd64.deb ...
+#7 91.68 Unpacking libglibmm-2.4-1v5:amd64 (2.66.2-2) ...
+#7 92.18 Selecting previously unselected package libatkmm-1.6-1v5:amd64.
+#7 92.19 Preparing to unpack .../14-libatkmm-1.6-1v5_2.28.2-1build1_amd64.deb ...
+#7 92.25 Unpacking libatkmm-1.6-1v5:amd64 (2.28.2-1build1) ...
+#7 92.58 Selecting previously unselected package libsigc++-2.0-dev:amd64.
+#7 92.58 Preparing to unpack .../15-libsigc++-2.0-dev_2.10.4-2ubuntu3_amd64.deb ...
+#7 92.79 Unpacking libsigc++-2.0-dev:amd64 (2.10.4-2ubuntu3) ...
+#7 93.13 Selecting previously unselected package libglibmm-2.4-dev:amd64.
+#7 93.14 Preparing to unpack .../16-libglibmm-2.4-dev_2.66.2-2_amd64.deb ...
+#7 93.20 Unpacking libglibmm-2.4-dev:amd64 (2.66.2-2) ...
+#7 93.59 Selecting previously unselected package libatkmm-1.6-dev:amd64.
+#7 93.60 Preparing to unpack .../17-libatkmm-1.6-dev_2.28.2-1build1_amd64.deb ...
+#7 93.66 Unpacking libatkmm-1.6-dev:amd64 (2.28.2-1build1) ...
+#7 94.07 Selecting previously unselected package libcairomm-1.0-1v5:amd64.
+#7 94.09 Preparing to unpack .../18-libcairomm-1.0-1v5_1.12.2-4build3_amd64.deb ...
+#7 94.15 Unpacking libcairomm-1.0-1v5:amd64 (1.12.2-4build3) ...
+#7 94.57 Selecting previously unselected package libcairomm-1.0-dev:amd64.
+#7 94.58 Preparing to unpack .../19-libcairomm-1.0-dev_1.12.2-4build3_amd64.deb ...
+#7 94.72 Unpacking libcairomm-1.0-dev:amd64 (1.12.2-4build3) ...
+#7 95.14 Selecting previously unselected package libdatrie-dev:amd64.
+#7 95.15 Preparing to unpack .../20-libdatrie-dev_0.2.13-2_amd64.deb ...
+#7 95.21 Unpacking libdatrie-dev:amd64 (0.2.13-2) ...
+#7 95.54 Selecting previously unselected package libglvnd-core-dev:amd64.
+#7 95.55 Preparing to unpack .../21-libglvnd-core-dev_1.4.0-1_amd64.deb ...
+#7 95.61 Unpacking libglvnd-core-dev:amd64 (1.4.0-1) ...
+#7 96.17 Selecting previously unselected package libgles1:amd64.
+#7 96.18 Preparing to unpack .../22-libgles1_1.4.0-1_amd64.deb ...
+#7 96.24 Unpacking libgles1:amd64 (1.4.0-1) ...
+#7 96.69 Selecting previously unselected package libgles2:amd64.
+#7 96.70 Preparing to unpack .../23-libgles2_1.4.0-1_amd64.deb ...
+#7 96.76 Unpacking libgles2:amd64 (1.4.0-1) ...
+#7 97.19 Selecting previously unselected package libgles-dev:amd64.
+#7 97.20 Preparing to unpack .../24-libgles-dev_1.4.0-1_amd64.deb ...
+#7 97.27 Unpacking libgles-dev:amd64 (1.4.0-1) ...
+#7 97.60 Selecting previously unselected package libopengl-dev:amd64.
+#7 97.60 Preparing to unpack .../25-libopengl-dev_1.4.0-1_amd64.deb ...
+#7 97.66 Unpacking libopengl-dev:amd64 (1.4.0-1) ...
+#7 98.20 Selecting previously unselected package libglvnd-dev:amd64.
+#7 98.21 Preparing to unpack .../26-libglvnd-dev_1.4.0-1_amd64.deb ...
+#7 98.26 Unpacking libglvnd-dev:amd64 (1.4.0-1) ...
+#7 98.59 Selecting previously unselected package libegl1-mesa-dev:amd64.
+#7 98.60 Preparing to unpack .../27-libegl1-mesa-dev_23.2.1-1ubuntu3.1~22.04.4_amd64.deb ...
+#7 98.66 Unpacking libegl1-mesa-dev:amd64 (23.2.1-1ubuntu3.1~22.04.4) ...
+#7 98.98 Selecting previously unselected package libepoxy-dev:amd64.
+#7 98.99 Preparing to unpack .../28-libepoxy-dev_1.5.10-1_amd64.deb ...
+#7 99.05 Unpacking libepoxy-dev:amd64 (1.5.10-1) ...
+#7 99.45 Selecting previously unselected package libthai-dev:amd64.
+#7 99.47 Preparing to unpack .../29-libthai-dev_0.1.29-1build1_amd64.deb ...
+#7 99.53 Unpacking libthai-dev:amd64 (0.1.29-1build1) ...
+#7 100.3 Selecting previously unselected package libxft-dev:amd64.
+#7 100.3 Preparing to unpack .../30-libxft-dev_2.3.4-1_amd64.deb ...
+#7 100.4 Unpacking libxft-dev:amd64 (2.3.4-1) ...
+#7 100.7 Selecting previously unselected package pango1.0-tools.
+#7 100.7 Preparing to unpack .../31-pango1.0-tools_1.50.6+ds-2ubuntu1_amd64.deb ...
+#7 100.8 Unpacking pango1.0-tools (1.50.6+ds-2ubuntu1) ...
+#7 101.2 Selecting previously unselected package libpango1.0-dev:amd64.
+#7 101.2 Preparing to unpack .../32-libpango1.0-dev_1.50.6+ds-2ubuntu1_amd64.deb ...
+#7 101.3 Unpacking libpango1.0-dev:amd64 (1.50.6+ds-2ubuntu1) ...
+#7 101.6 Selecting previously unselected package libwayland-bin.
+#7 101.6 Preparing to unpack .../33-libwayland-bin_1.20.0-1ubuntu0.1_amd64.deb ...
+#7 101.7 Unpacking libwayland-bin (1.20.0-1ubuntu0.1) ...
+#7 102.0 Selecting previously unselected package libwayland-dev:amd64.
+#7 102.0 Preparing to unpack .../34-libwayland-dev_1.20.0-1ubuntu0.1_amd64.deb ...
+#7 102.2 Unpacking libwayland-dev:amd64 (1.20.0-1ubuntu0.1) ...
+#7 102.5 Selecting previously unselected package libxcomposite-dev:amd64.
+#7 102.5 Preparing to unpack .../35-libxcomposite-dev_1%3a0.4.5-1build2_amd64.deb ...
+#7 102.6 Unpacking libxcomposite-dev:amd64 (1:0.4.5-1build2) ...
+#7 102.9 Selecting previously unselected package libxcursor-dev:amd64.
+#7 102.9 Preparing to unpack .../36-libxcursor-dev_1%3a1.2.0-2build4_amd64.deb ...
+#7 102.9 Unpacking libxcursor-dev:amd64 (1:1.2.0-2build4) ...
+#7 103.3 Selecting previously unselected package libxdamage-dev:amd64.
+#7 103.3 Preparing to unpack .../37-libxdamage-dev_1%3a1.1.5-2build2_amd64.deb ...
+#7 103.3 Unpacking libxdamage-dev:amd64 (1:1.1.5-2build2) ...
+#7 103.9 Selecting previously unselected package libxinerama-dev:amd64.
+#7 103.9 Preparing to unpack .../38-libxinerama-dev_2%3a1.1.4-3_amd64.deb ...
+#7 104.0 Unpacking libxinerama-dev:amd64 (2:1.1.4-3) ...
+#7 104.3 Selecting previously unselected package libxkbcommon-dev:amd64.
+#7 104.3 Preparing to unpack .../39-libxkbcommon-dev_1.4.0-1_amd64.deb ...
+#7 104.4 Unpacking libxkbcommon-dev:amd64 (1.4.0-1) ...
+#7 104.8 Selecting previously unselected package libxrandr-dev:amd64.
+#7 104.8 Preparing to unpack .../40-libxrandr-dev_2%3a1.5.2-1build1_amd64.deb ...
+#7 104.9 Unpacking libxrandr-dev:amd64 (2:1.5.2-1build1) ...
+#7 105.2 Selecting previously unselected package wayland-protocols.
+#7 105.2 Preparing to unpack .../41-wayland-protocols_1.25-1_all.deb ...
+#7 105.3 Unpacking wayland-protocols (1.25-1) ...
+#7 105.6 Selecting previously unselected package libgtk-3-dev:amd64.
+#7 105.6 Preparing to unpack .../42-libgtk-3-dev_3.24.33-1ubuntu2.2_amd64.deb ...
+#7 105.7 Unpacking libgtk-3-dev:amd64 (3.24.33-1ubuntu2.2) ...
+#7 106.3 Selecting previously unselected package libpangomm-1.4-1v5:amd64.
+#7 106.3 Preparing to unpack .../43-libpangomm-1.4-1v5_2.46.2-1_amd64.deb ...
+#7 106.4 Unpacking libpangomm-1.4-1v5:amd64 (2.46.2-1) ...
+#7 106.8 Selecting previously unselected package libgtkmm-3.0-1v5:amd64.
+#7 106.8 Preparing to unpack .../44-libgtkmm-3.0-1v5_3.24.5-1build1_amd64.deb ...
+#7 106.9 Unpacking libgtkmm-3.0-1v5:amd64 (3.24.5-1build1) ...
+#7 107.3 Selecting previously unselected package libpangomm-1.4-dev:amd64.
+#7 107.3 Preparing to unpack .../45-libpangomm-1.4-dev_2.46.2-1_amd64.deb ...
+#7 107.4 Unpacking libpangomm-1.4-dev:amd64 (2.46.2-1) ...
+#7 107.7 Selecting previously unselected package libgtkmm-3.0-dev:amd64.
+#7 107.7 Preparing to unpack .../46-libgtkmm-3.0-dev_3.24.5-1build1_amd64.deb ...
+#7 107.8 Unpacking libgtkmm-3.0-dev:amd64 (3.24.5-1build1) ...
+#7 108.4 Selecting previously unselected package libgzstream0:amd64.
+#7 108.4 Preparing to unpack .../47-libgzstream0_1.5+git20171107.9a20658-1_amd64.deb ...
+#7 108.7 Unpacking libgzstream0:amd64 (1.5+git20171107.9a20658-1) ...
+#7 109.0 Selecting previously unselected package libgzstream-dev:amd64.
+#7 109.0 Preparing to unpack .../48-libgzstream-dev_1.5+git20171107.9a20658-1_amd64.deb ...
+#7 109.1 Unpacking libgzstream-dev:amd64 (1.5+git20171107.9a20658-1) ...
+#7 109.5 Setting up libpangoxft-1.0-0:amd64 (1.50.6+ds-2ubuntu1) ...
+#7 109.8 Setting up libglvnd-core-dev:amd64 (1.4.0-1) ...
+#7 110.0 Setting up gir1.2-atk-1.0:amd64 (2.36.0-3build1) ...
+#7 110.1 Setting up libxkbcommon-dev:amd64 (1.4.0-1) ...
+#7 110.3 Setting up libepoxy-dev:amd64 (1.5.10-1) ...
+#7 110.5 Setting up pango1.0-tools (1.50.6+ds-2ubuntu1) ...
+#7 110.7 Setting up gir1.2-atspi-2.0:amd64 (2.44.0-3) ...
+#7 110.9 Setting up libxfixes-dev:amd64 (1:6.0.0-1) ...
+#7 111.1 Setting up libwayland-bin (1.20.0-1ubuntu0.1) ...
+#7 111.3 Setting up gir1.2-pango-1.0:amd64 (1.50.6+ds-2ubuntu1) ...
+#7 111.5 Setting up libxrandr-dev:amd64 (2:1.5.2-1build1) ...
+#7 111.8 Setting up libgles2:amd64 (1.4.0-1) ...
+#7 111.9 Setting up libdbus-1-dev:amd64 (1.12.20-2ubuntu4.1) ...
+#7 112.1 Setting up libsigc++-2.0-0v5:amd64 (2.10.4-2ubuntu3) ...
+#7 112.3 Setting up libgles1:amd64 (1.4.0-1) ...
+#7 112.6 Setting up libxinerama-dev:amd64 (2:1.1.4-3) ...
+#7 112.8 Setting up libgzstream0:amd64 (1.5+git20171107.9a20658-1) ...
+#7 113.0 Setting up wayland-protocols (1.25-1) ...
+#7 113.1 Setting up libdatrie-dev:amd64 (0.2.13-2) ...
+#7 113.4 Setting up libopengl-dev:amd64 (1.4.0-1) ...
+#7 113.7 Setting up libgles-dev:amd64 (1.4.0-1) ...
+#7 114.5 Setting up libxi-dev:amd64 (2:1.8-1build1) ...
+#7 114.7 Setting up libatk1.0-dev:amd64 (2.36.0-3build1) ...
+#7 114.9 Setting up libxft-dev:amd64 (2.3.4-1) ...
+#7 115.1 Setting up libxtst-dev:amd64 (2:1.2.3-1build4) ...
+#7 115.3 Setting up libxdamage-dev:amd64 (1:1.1.5-2build2) ...
+#7 115.5 Setting up libglibmm-2.4-1v5:amd64 (2.66.2-2) ...
+#7 115.7 Setting up libatspi2.0-dev:amd64 (2.44.0-3) ...
+#7 115.9 Setting up libxcomposite-dev:amd64 (1:0.4.5-1build2) ...
+#7 116.1 Setting up libxcursor-dev:amd64 (1:1.2.0-2build4) ...
+#7 116.4 Setting up gir1.2-gtk-3.0:amd64 (3.24.33-1ubuntu2.2) ...
+#7 116.6 Setting up libglvnd-dev:amd64 (1.4.0-1) ...
+#7 116.8 Setting up libatk-bridge2.0-dev:amd64 (2.38.0-3) ...
+#7 117.0 Setting up libwayland-dev:amd64 (1.20.0-1ubuntu0.1) ...
+#7 117.1 Setting up libcairomm-1.0-1v5:amd64 (1.12.2-4build3) ...
+#7 117.4 Setting up libgzstream-dev:amd64 (1.5+git20171107.9a20658-1) ...
+#7 117.5 Setting up libsigc++-2.0-dev:amd64 (2.10.4-2ubuntu3) ...
+#7 117.7 Setting up libcairomm-1.0-dev:amd64 (1.12.2-4build3) ...
+#7 117.8 Setting up libglibmm-2.4-dev:amd64 (2.66.2-2) ...
+#7 118.0 Setting up libpangomm-1.4-1v5:amd64 (2.46.2-1) ...
+#7 118.1 Setting up libthai-dev:amd64 (0.1.29-1build1) ...
+#7 118.3 Setting up libatkmm-1.6-1v5:amd64 (2.28.2-1build1) ...
+#7 118.4 Setting up libegl1-mesa-dev:amd64 (23.2.1-1ubuntu3.1~22.04.4) ...
+#7 118.5 Setting up libgtkmm-3.0-1v5:amd64 (3.24.5-1build1) ...
+#7 118.7 Setting up libpango1.0-dev:amd64 (1.50.6+ds-2ubuntu1) ...
+#7 118.9 Setting up libatkmm-1.6-dev:amd64 (2.28.2-1build1) ...
+#7 119.2 Setting up libpangomm-1.4-dev:amd64 (2.46.2-1) ...
+#7 119.3 Setting up libgtk-3-dev:amd64 (3.24.33-1ubuntu2.2) ...
+#7 119.5 Setting up libgtkmm-3.0-dev:amd64 (3.24.5-1build1) ...
+#7 119.7 Processing triggers for man-db (2.10.2-1) ...
+#7 122.1 Processing triggers for libc-bin (2.35-0ubuntu3.13) ...
+#7 DONE 127.0s
+
+#8 [common  4/11] RUN git clone --recursive https://github.com/rnakato/ChIPseqTools.git     && cd ChIPseqTools     && make
+#8 1.569 Cloning into 'ChIPseqTools'...
+#8 5.990 Submodule 'submodules/DROMPAplus' (https://github.com/rnakato/DROMPAplus.git) registered for path 'submodules/DROMPAplus'
+#8 5.991 Submodule 'submodules/SSP' (https://github.com/rnakato/SSP.git) registered for path 'submodules/SSP'
+#8 6.021 Cloning into '/opt/ChIPseqTools/submodules/DROMPAplus'...
+#8 8.142 Cloning into '/opt/ChIPseqTools/submodules/SSP'...
+#8 9.594 Submodule path 'submodules/DROMPAplus': checked out '7beeadd989775283f90a7aa0334e0163910b5ad5'
+#8 9.602 Submodule 'submodules/SSP' (https://github.com/rnakato/SSP.git) registered for path 'submodules/DROMPAplus/submodules/SSP'
+#8 9.603 Submodule 'submodules/cpdf' (https://github.com/coherentgraphics/cpdf-binaries.git) registered for path 'submodules/DROMPAplus/submodules/cpdf'
+#8 9.609 Cloning into '/opt/ChIPseqTools/submodules/DROMPAplus/submodules/SSP'...
+#8 10.61 Cloning into '/opt/ChIPseqTools/submodules/DROMPAplus/submodules/cpdf'...
+#8 19.75 Submodule path 'submodules/DROMPAplus/submodules/SSP': checked out 'a90512a8cd8b32899d033f033927be1d5108c34b'
+#8 20.06 Submodule path 'submodules/DROMPAplus/submodules/cpdf': checked out 'cab7d41cb03a0a2eb8c1df9201486d3e36bf8de5'
+#8 20.14 Submodule path 'submodules/SSP': checked out 'a90512a8cd8b32899d033f033927be1d5108c34b'
+#8 20.17 make -C submodules/DROMPAplus/submodules/SSP/src/htslib-1.10.2/
+#8 20.17 make[1]: Entering directory '/opt/ChIPseqTools/submodules/DROMPAplus/submodules/SSP/src/htslib-1.10.2'
+#8 20.20 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o kfunc.o kfunc.c
+#8 21.42 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o knetfile.o knetfile.c
+#8 21.86 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o kstring.o kstring.c
+#8 22.06 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o bcf_sr_sort.o bcf_sr_sort.c
+#8 22.52 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o bgzf.o bgzf.c
+#8 23.15 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o errmod.o errmod.c
+#8 23.30 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o faidx.o faidx.c
+#8 23.67 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o header.o header.c
+#8 24.59 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o hfile.o hfile.c
+#8 24.91 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o hfile_net.o hfile_net.c
+#8 24.95 echo '#define HTS_VERSION_TEXT "1.10.2"' > version.h
+#8 24.95 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o hts.o hts.c
+#8 25.01 hts.c: In function ‘hts_idx_init’:
+#8 25.01 hts.c:1631:59: warning: overflow in conversion from ‘uint32_t’ {aka ‘unsigned int’} to ‘int’ changes value from ‘idx->z.last_bin = 4294967295’ to ‘-1’ [-Woverflow]
+#8 25.01  1631 |     idx->z.save_bin = idx->z.save_tid = idx->z.last_tid = idx->z.last_bin = 0xffffffffu;
+#8 25.01       |                                                           ^~~
+#8 26.38 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o hts_os.o hts_os.c
+#8 26.41 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o md5.o md5.c
+#8 26.52 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o multipart.o multipart.c
+#8 26.63 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o probaln.o probaln.c
+#8 26.78 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o realn.o realn.c
+#8 26.96 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o regidx.o regidx.c
+#8 27.26 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o region.o region.c
+#8 27.40 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o sam.o sam.c
+#8 29.40 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o synced_bcf_reader.o synced_bcf_reader.c
+#8 30.25 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o vcf_sweep.o vcf_sweep.c
+#8 30.32 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o tbx.o tbx.c
+#8 30.49 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o textutils.o textutils.c
+#8 30.67 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o thread_pool.o thread_pool.c
+#8 30.85 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o vcf.o vcf.c
+#8 33.26 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o vcfutils.o vcfutils.c
+#8 33.82 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/cram_codecs.o cram/cram_codecs.c
+#8 34.60 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/cram_decode.o cram/cram_decode.c
+#8 35.88 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/cram_encode.o cram/cram_encode.c
+#8 37.26 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/cram_external.o cram/cram_external.c
+#8 37.40 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/cram_index.o cram/cram_index.c
+#8 37.64 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/cram_io.o cram/cram_io.c
+#8 38.82 In file included from /usr/include/string.h:535,
+#8 38.82                  from cram/cram_io.c:49:
+#8 38.82 In function ‘strncpy’,
+#8 38.82     inlined from ‘cram_dopen’ at cram/cram_io.c:4304:9:
+#8 38.82 /usr/include/x86_64-linux-gnu/bits/string_fortified.h:95:10: warning: ‘__builtin_strncpy’ specified bound 20 equals destination size [-Wstringop-truncation]
+#8 38.82    95 |   return __builtin___strncpy_chk (__dest, __src, __len,
+#8 38.82       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#8 38.82    96 |                                   __glibc_objsize (__dest));
+#8 38.82       |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~
+#8 39.02 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/cram_samtools.o cram/cram_samtools.c
+#8 39.09 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/cram_stats.o cram/cram_stats.c
+#8 39.23 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/mFILE.o cram/mFILE.c
+#8 39.36 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/open_trace_file.o cram/open_trace_file.c
+#8 39.48 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/pooled_alloc.o cram/pooled_alloc.c
+#8 39.52 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/rANS_static.o cram/rANS_static.c
+#8 39.85 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/string_alloc.o cram/string_alloc.c
+#8 39.89 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o hfile_libcurl.o hfile_libcurl.c
+#8 40.39 ar -rc libhts.a kfunc.o knetfile.o kstring.o bcf_sr_sort.o bgzf.o errmod.o faidx.o header.o hfile.o hfile_net.o hts.o hts_os.o md5.o multipart.o probaln.o realn.o regidx.o region.o sam.o synced_bcf_reader.o vcf_sweep.o tbx.o textutils.o thread_pool.o vcf.o vcfutils.o cram/cram_codecs.o cram/cram_decode.o cram/cram_encode.o cram/cram_external.o cram/cram_index.o cram/cram_io.o cram/cram_samtools.o cram/cram_stats.o cram/mFILE.o cram/open_trace_file.o cram/pooled_alloc.o cram/rANS_static.o cram/string_alloc.o hfile_libcurl.o
+#8 40.50 ranlib libhts.a
+#8 40.54 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o kfunc.pico kfunc.c
+#8 40.64 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o knetfile.pico knetfile.c
+#8 40.81 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o kstring.pico kstring.c
+#8 40.99 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o bcf_sr_sort.pico bcf_sr_sort.c
+#8 41.47 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o bgzf.pico bgzf.c
+#8 42.06 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o errmod.pico errmod.c
+#8 42.20 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o faidx.pico faidx.c
+#8 42.66 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o header.pico header.c
+#8 43.60 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o hfile.pico hfile.c
+#8 43.89 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o hfile_net.pico hfile_net.c
+#8 43.94 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o hts.pico hts.c
+#8 44.00 hts.c: In function ‘hts_idx_init’:
+#8 44.00 hts.c:1631:59: warning: overflow in conversion from ‘uint32_t’ {aka ‘unsigned int’} to ‘int’ changes value from ‘idx->z.last_bin = 4294967295’ to ‘-1’ [-Woverflow]
+#8 44.00  1631 |     idx->z.save_bin = idx->z.save_tid = idx->z.last_tid = idx->z.last_bin = 0xffffffffu;
+#8 44.00       |                                                           ^~~
+#8 45.33 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o hts_os.pico hts_os.c
+#8 45.36 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o md5.pico md5.c
+#8 45.47 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o multipart.pico multipart.c
+#8 45.58 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o probaln.pico probaln.c
+#8 45.74 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o realn.pico realn.c
+#8 45.92 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o regidx.pico regidx.c
+#8 46.22 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o region.pico region.c
+#8 46.36 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o sam.pico sam.c
+#8 48.31 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o synced_bcf_reader.pico synced_bcf_reader.c
+#8 48.79 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o vcf_sweep.pico vcf_sweep.c
+#8 48.86 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o tbx.pico tbx.c
+#8 49.03 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o textutils.pico textutils.c
+#8 49.21 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o thread_pool.pico thread_pool.c
+#8 49.37 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o vcf.pico vcf.c
+#8 51.68 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o vcfutils.pico vcfutils.c
+#8 52.25 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/cram_codecs.pico cram/cram_codecs.c
+#8 53.02 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/cram_decode.pico cram/cram_decode.c
+#8 54.33 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/cram_encode.pico cram/cram_encode.c
+#8 55.68 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/cram_external.pico cram/cram_external.c
+#8 55.82 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/cram_index.pico cram/cram_index.c
+#8 56.06 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/cram_io.pico cram/cram_io.c
+#8 57.16 In file included from /usr/include/string.h:535,
+#8 57.16                  from cram/cram_io.c:49:
+#8 57.16 In function ‘strncpy’,
+#8 57.16     inlined from ‘cram_dopen’ at cram/cram_io.c:4304:9:
+#8 57.16 /usr/include/x86_64-linux-gnu/bits/string_fortified.h:95:10: warning: ‘__builtin_strncpy’ specified bound 20 equals destination size [-Wstringop-truncation]
+#8 57.16    95 |   return __builtin___strncpy_chk (__dest, __src, __len,
+#8 57.16       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#8 57.16    96 |                                   __glibc_objsize (__dest));
+#8 57.16       |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~
+#8 57.35 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/cram_samtools.pico cram/cram_samtools.c
+#8 57.43 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/cram_stats.pico cram/cram_stats.c
+#8 57.57 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/mFILE.pico cram/mFILE.c
+#8 57.70 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/open_trace_file.pico cram/open_trace_file.c
+#8 57.81 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/pooled_alloc.pico cram/pooled_alloc.c
+#8 57.86 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/rANS_static.pico cram/rANS_static.c
+#8 58.18 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/string_alloc.pico cram/string_alloc.c
+#8 58.23 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o hfile_libcurl.pico hfile_libcurl.c
+#8 58.73 gcc -shared -Wl,-soname,libhts.so.3 -fvisibility=hidden -o libhts.so kfunc.pico knetfile.pico kstring.pico bcf_sr_sort.pico bgzf.pico errmod.pico faidx.pico header.pico hfile.pico hfile_net.pico hts.pico hts_os.pico md5.pico multipart.pico probaln.pico realn.pico regidx.pico region.pico sam.pico synced_bcf_reader.pico vcf_sweep.pico tbx.pico textutils.pico thread_pool.pico vcf.pico vcfutils.pico cram/cram_codecs.pico cram/cram_decode.pico cram/cram_encode.pico cram/cram_external.pico cram/cram_index.pico cram/cram_io.pico cram/cram_samtools.pico cram/cram_stats.pico cram/mFILE.pico cram/open_trace_file.pico cram/pooled_alloc.pico cram/rANS_static.pico cram/string_alloc.pico hfile_libcurl.pico -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 58.86 ln -sf libhts.so libhts.so.3
+#8 58.89 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o bgzip.o bgzip.c
+#8 59.06 gcc -fvisibility=hidden -o bgzip bgzip.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 59.14 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o htsfile.o htsfile.c
+#8 59.27 gcc -fvisibility=hidden -o htsfile htsfile.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 59.35 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o tabix.o tabix.c
+#8 59.55 gcc -fvisibility=hidden -o tabix tabix.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 59.63 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/hts_endian.o test/hts_endian.c
+#8 59.84 gcc -fvisibility=hidden -o test/hts_endian test/hts_endian.o -lz -lm -lbz2 -llzma -lcurl
+#8 59.87 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/fieldarith.o test/fieldarith.c
+#8 59.90 gcc -fvisibility=hidden -o test/fieldarith test/fieldarith.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 59.98 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/hfile.o test/hfile.c
+#8 60.16 gcc -fvisibility=hidden -o test/hfile test/hfile.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 60.24 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/pileup.o test/pileup.c
+#8 60.32 gcc -fvisibility=hidden -o test/pileup test/pileup.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 60.41 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/sam.o test/sam.c
+#8 60.87 gcc -fvisibility=hidden -o test/sam test/sam.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 60.95 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test_bgzf.o test/test_bgzf.c
+#8 61.23 gcc -fvisibility=hidden -o test/test_bgzf test/test_bgzf.o libhts.a -lz -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 61.31 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test_kstring.o test/test_kstring.c
+#8 61.41 gcc -fvisibility=hidden -o test/test_kstring test/test_kstring.o libhts.a -lz -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 61.44 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test_realn.o test/test_realn.c
+#8 61.50 gcc -fvisibility=hidden -o test/test_realn test/test_realn.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 61.58 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test-regidx.o test/test-regidx.c
+#8 61.75 gcc -fvisibility=hidden -o test/test-regidx test/test-regidx.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 61.84 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test_str2int.o test/test_str2int.c
+#8 61.95 gcc -fvisibility=hidden -o test/test_str2int test/test_str2int.o
+#8 61.97 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test_view.o test/test_view.c
+#8 62.12 gcc -fvisibility=hidden -o test/test_view test/test_view.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 62.21 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test_index.o test/test_index.c
+#8 62.25 gcc -fvisibility=hidden -o test/test_index test/test_index.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 62.34 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test-vcf-api.o test/test-vcf-api.c
+#8 62.50 gcc -fvisibility=hidden -o test/test-vcf-api test/test-vcf-api.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 62.58 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test-vcf-sweep.o test/test-vcf-sweep.c
+#8 62.64 gcc -fvisibility=hidden -o test/test-vcf-sweep test/test-vcf-sweep.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 62.72 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test-bcf-sr.o test/test-bcf-sr.c
+#8 62.81 gcc -fvisibility=hidden -o test/test-bcf-sr test/test-bcf-sr.o libhts.a -lz -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 62.89 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/fuzz/hts_open_fuzzer.o test/fuzz/hts_open_fuzzer.c
+#8 62.95 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test-bcf-translate.o test/test-bcf-translate.c
+#8 63.00 gcc -fvisibility=hidden -o test/test-bcf-translate test/test-bcf-translate.o libhts.a -lz -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 63.09 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test-parse-reg.o test/test-parse-reg.c
+#8 63.15 gcc -fvisibility=hidden -o test/test-parse-reg test/test-parse-reg.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#8 63.23 make[1]: Leaving directory '/opt/ChIPseqTools/submodules/DROMPAplus/submodules/SSP/src/htslib-1.10.2'
+#8 63.23 mkdir -p build && cd build && cmake .. && make
+#8 63.46 CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+#8 63.46   Compatibility with CMake < 2.8.12 will be removed from a future version of
+#8 63.46   CMake.
+#8 63.46 
+#8 63.46   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+#8 63.46   CMake that the project does not need compatibility with older versions.
+#8 63.46 
+#8 63.46 
+#8 64.01 -- The CXX compiler identification is GNU 11.4.0
+#8 64.02 -- Detecting CXX compiler ABI info
+#8 64.14 -- Detecting CXX compiler ABI info - done
+#8 64.16 -- Check for working CXX compiler: /usr/bin/c++ - skipped
+#8 64.16 -- Detecting CXX compile features
+#8 64.16 -- Detecting CXX compile features - done
+#8 64.16 CMake Deprecation Warning at src/C/CMakeLists.txt:1 (cmake_minimum_required):
+#8 64.16   Compatibility with CMake < 2.8.12 will be removed from a future version of
+#8 64.16   CMake.
+#8 64.16 
+#8 64.16   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+#8 64.16   CMake that the project does not need compatibility with older versions.
+#8 64.16 
+#8 64.16 
+#8 64.21 -- The C compiler identification is GNU 11.4.0
+#8 64.22 -- Detecting C compiler ABI info
+#8 64.29 -- Detecting C compiler ABI info - done
+#8 64.30 -- Check for working C compiler: /usr/bin/cc - skipped
+#8 64.30 -- Detecting C compile features
+#8 64.30 -- Detecting C compile features - done
+#8 64.30 CMake Deprecation Warning at submodules/DROMPAplus/CMakeLists.txt:1 (cmake_minimum_required):
+#8 64.30   Compatibility with CMake < 2.8.12 will be removed from a future version of
+#8 64.30   CMake.
+#8 64.30 
+#8 64.30   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+#8 64.30   CMake that the project does not need compatibility with older versions.
+#8 64.30 
+#8 64.30 
+#8 64.32 -- Found PkgConfig: /usr/bin/pkg-config (found version "1.8.0") 
+#8 64.32 -- Checking for module 'gtkmm-3.0'
+#8 64.35 --   Found gtkmm-3.0, version 3.24.5
+#8 65.10 CMake Deprecation Warning at submodules/DROMPAplus/submodules/SSP/CMakeLists.txt:1 (cmake_minimum_required):
+#8 65.10   Compatibility with CMake < 2.8.12 will be removed from a future version of
+#8 65.10   CMake.
+#8 65.10 
+#8 65.10   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+#8 65.10   CMake that the project does not need compatibility with older versions.
+#8 65.10 
+#8 65.10 
+#8 65.11 -- Configuring done
+#8 65.19 -- Generating done
+#8 65.19 -- Build files have been written to: /opt/ChIPseqTools/build
+#8 65.20 make[1]: Entering directory '/opt/ChIPseqTools/build'
+#8 65.22 make[2]: Entering directory '/opt/ChIPseqTools/build'
+#8 65.22 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 65.23 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 65.24 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 65.24 [  1%] Building C object src/C/CMakeFiles/compare_bs.dir/compare_bs.c.o
+#8 65.41 [  2%] Building C object src/C/CMakeFiles/compare_bs.dir/compare.c.o
+#8 65.48 [  4%] Building C object src/C/CMakeFiles/compare_bs.dir/readgene.c.o
+#8 65.69 [  5%] Building C object src/C/CMakeFiles/compare_bs.dir/my.c.o
+#8 65.75 [  6%] Building C object src/C/CMakeFiles/compare_bs.dir/stringp.c.o
+#8 65.81 [  8%] Linking C executable compare_bs
+#8 65.85 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 65.86 [  8%] Built target compare_bs
+#8 65.86 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 65.87 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 65.87 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 65.88 [  9%] Building C object src/C/CMakeFiles/compare_bs2CRM.dir/compare_bs.c.o
+#8 65.98 [ 11%] Building C object src/C/CMakeFiles/compare_bs2CRM.dir/compare.c.o
+#8 66.06 [ 12%] Building C object src/C/CMakeFiles/compare_bs2CRM.dir/readgene.c.o
+#8 66.26 [ 13%] Building C object src/C/CMakeFiles/compare_bs2CRM.dir/my.c.o
+#8 66.31 [ 15%] Building C object src/C/CMakeFiles/compare_bs2CRM.dir/stringp.c.o
+#8 66.36 [ 16%] Linking C executable compare_bs2CRM
+#8 66.40 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 66.41 [ 16%] Built target compare_bs2CRM
+#8 66.41 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 66.42 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 66.43 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 66.43 [ 18%] Building CXX object submodules/DROMPAplus/src/common/CMakeFiles/common.dir/util.cpp.o
+#8 67.46 [ 19%] Building CXX object submodules/DROMPAplus/src/common/CMakeFiles/common.dir/WigStats.cpp.o
+#8 71.34 In file included from /usr/include/boost/bind.hpp:30,
+#8 71.34                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/common/WigStats.hpp:9,
+#8 71.34                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/common/WigStats.cpp:4:
+#8 71.34 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 71.34    36 | BOOST_PRAGMA_MESSAGE(
+#8 71.34       | ^~~~~~~~~~~~~~~~~~~~
+#8 73.54 [ 20%] Building CXX object submodules/DROMPAplus/src/common/CMakeFiles/common.dir/significancetest.cpp.o
+#8 73.68 [ 22%] Building CXX object submodules/DROMPAplus/src/common/CMakeFiles/common.dir/statistics.cpp.o
+#8 74.41 [ 23%] Building CXX object submodules/DROMPAplus/src/common/CMakeFiles/common.dir/extendBedFormat.cpp.o
+#8 76.09 [ 25%] Linking CXX static library libcommon.a
+#8 76.14 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 76.15 [ 25%] Built target common
+#8 76.15 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 76.16 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 76.16 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 76.17 [ 26%] Building CXX object submodules/DROMPAplus/src/parse2wig/CMakeFiles/pw_func.dir/pw_makefile.cpp.o
+#8 77.15 In file included from /usr/include/boost/bind.hpp:30,
+#8 77.15                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/common/WigStats.hpp:9,
+#8 77.15                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/parse2wig/pw_gv.hpp:9,
+#8 77.15                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/parse2wig/pw_makefile.cpp:5:
+#8 77.15 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 77.15    36 | BOOST_PRAGMA_MESSAGE(
+#8 77.15       | ^~~~~~~~~~~~~~~~~~~~
+#8 80.35 [ 27%] Building CXX object submodules/DROMPAplus/src/parse2wig/CMakeFiles/pw_func.dir/GenomeCoverage.cpp.o
+#8 81.49 In file included from /usr/include/boost/smart_ptr/detail/sp_thread_sleep.hpp:22,
+#8 81.49                  from /usr/include/boost/smart_ptr/detail/yield_k.hpp:23,
+#8 81.49                  from /usr/include/boost/smart_ptr/detail/spinlock_gcc_atomic.hpp:14,
+#8 81.49                  from /usr/include/boost/smart_ptr/detail/spinlock.hpp:42,
+#8 81.49                  from /usr/include/boost/smart_ptr/detail/spinlock_pool.hpp:25,
+#8 81.49                  from /usr/include/boost/smart_ptr/shared_ptr.hpp:29,
+#8 81.49                  from /usr/include/boost/shared_ptr.hpp:17,
+#8 81.49                  from /usr/include/boost/format/alt_sstream.hpp:22,
+#8 81.49                  from /usr/include/boost/format/internals.hpp:24,
+#8 81.49                  from /usr/include/boost/format.hpp:38,
+#8 81.49                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/parse2wig/GenomeCoverage.hpp:10,
+#8 81.49                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/parse2wig/GenomeCoverage.cpp:5:
+#8 81.49 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 81.49    36 | BOOST_PRAGMA_MESSAGE(
+#8 81.49       | ^~~~~~~~~~~~~~~~~~~~
+#8 83.55 [ 29%] Building CXX object submodules/DROMPAplus/src/parse2wig/CMakeFiles/pw_func.dir/GCnormalization.cpp.o
+#8 87.76 [ 30%] Building CXX object submodules/DROMPAplus/src/parse2wig/CMakeFiles/pw_func.dir/ReadMpbldata.cpp.o
+#8 90.88 [ 31%] Building CXX object submodules/DROMPAplus/src/parse2wig/CMakeFiles/pw_func.dir/pw_strShiftProfile.cpp.o
+#8 92.74 In file included from /usr/include/boost/smart_ptr/detail/sp_thread_sleep.hpp:22,
+#8 92.74                  from /usr/include/boost/smart_ptr/detail/yield_k.hpp:23,
+#8 92.74                  from /usr/include/boost/smart_ptr/detail/spinlock_gcc_atomic.hpp:14,
+#8 92.74                  from /usr/include/boost/smart_ptr/detail/spinlock.hpp:42,
+#8 92.74                  from /usr/include/boost/smart_ptr/detail/spinlock_pool.hpp:25,
+#8 92.74                  from /usr/include/boost/smart_ptr/shared_ptr.hpp:29,
+#8 92.74                  from /usr/include/boost/shared_ptr.hpp:17,
+#8 92.74                  from /usr/include/boost/date_time/time_clock.hpp:17,
+#8 92.74                  from /usr/include/boost/thread/thread_time.hpp:9,
+#8 92.74                  from /usr/include/boost/thread/lock_types.hpp:18,
+#8 92.74                  from /usr/include/boost/thread/pthread/thread_data.hpp:12,
+#8 92.74                  from /usr/include/boost/thread/thread_only.hpp:17,
+#8 92.74                  from /usr/include/boost/thread/thread.hpp:12,
+#8 92.74                  from /usr/include/boost/thread.hpp:13,
+#8 92.74                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/../submodules/SSP/src/SeqStats.hpp:8,
+#8 92.74                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/common/SeqStatsDROMPA.hpp:7,
+#8 92.74                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/parse2wig/pw_strShiftProfile.cpp:4:
+#8 92.74 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 92.74    36 | BOOST_PRAGMA_MESSAGE(
+#8 92.74       | ^~~~~~~~~~~~~~~~~~~~
+#8 95.05 [ 33%] Linking CXX static library libpw_func.a
+#8 95.09 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 95.09 [ 33%] Built target pw_func
+#8 95.10 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 95.11 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 95.11 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 95.12 [ 34%] Building CXX object submodules/DROMPAplus/src/drompa/CMakeFiles/dd_func.dir/dd_init.cpp.o
+#8 96.56 In file included from /usr/include/boost/bind.hpp:30,
+#8 96.56                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/common/WigStats.hpp:9,
+#8 96.56                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_sample_definition.hpp:8,
+#8 96.56                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_gv.hpp:8,
+#8 96.56                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_init.cpp:4:
+#8 96.56 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 96.56    36 | BOOST_PRAGMA_MESSAGE(
+#8 96.56       | ^~~~~~~~~~~~~~~~~~~~
+#8 102.4 [ 36%] Building CXX object submodules/DROMPAplus/src/drompa/CMakeFiles/dd_func.dir/dd_draw_dataframe.cpp.o
+#8 104.1 In file included from /usr/include/boost/bind.hpp:30,
+#8 104.1                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/common/WigStats.hpp:9,
+#8 104.1                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_sample_definition.hpp:8,
+#8 104.1                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_gv.hpp:8,
+#8 104.1                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_draw_pdfpage.hpp:10,
+#8 104.1                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_draw_dataframe.hpp:7,
+#8 104.1                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_draw_dataframe.cpp:4:
+#8 104.1 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 104.1    36 | BOOST_PRAGMA_MESSAGE(
+#8 104.1       | ^~~~~~~~~~~~~~~~~~~~
+#8 106.3 [ 37%] Building CXX object submodules/DROMPAplus/src/drompa/CMakeFiles/dd_func.dir/dd_classfunc_draw.cpp.o
+#8 107.7 In file included from /usr/include/boost/bind.hpp:30,
+#8 107.7                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/common/WigStats.hpp:9,
+#8 107.7                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_sample_definition.hpp:8,
+#8 107.7                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_gv.hpp:8,
+#8 107.7                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_classfunc_draw.cpp:4:
+#8 107.7 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 107.7    36 | BOOST_PRAGMA_MESSAGE(
+#8 107.7       | ^~~~~~~~~~~~~~~~~~~~
+#8 109.7 [ 38%] Building CXX object submodules/DROMPAplus/src/drompa/CMakeFiles/dd_func.dir/dd_command.cpp.o
+#8 111.1 In file included from /usr/include/boost/bind.hpp:30,
+#8 111.1                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/common/WigStats.hpp:9,
+#8 111.1                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_sample_definition.hpp:8,
+#8 111.1                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_gv.hpp:8,
+#8 111.1                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_command.hpp:8,
+#8 111.1                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_command.cpp:5:
+#8 111.1 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 111.1    36 | BOOST_PRAGMA_MESSAGE(
+#8 111.1       | ^~~~~~~~~~~~~~~~~~~~
+#8 111.9 /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_command.cpp: In member function ‘void Command::InitDump()’:
+#8 111.9 /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_command.cpp:113:11: warning: enumeration value ‘MULTICI’ not handled in switch [-Wswitch]
+#8 111.9   113 |     switch(x) {
+#8 111.9       |           ^
+#8 114.5 [ 40%] Building CXX object submodules/DROMPAplus/src/drompa/CMakeFiles/dd_func.dir/dd_readfile.cpp.o
+#8 115.9 In file included from /usr/include/boost/bind.hpp:30,
+#8 115.9                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/common/WigStats.hpp:9,
+#8 115.9                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_sample_definition.hpp:8,
+#8 115.9                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_gv.hpp:8,
+#8 115.9                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_readfile.hpp:10,
+#8 115.9                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_readfile.cpp:5:
+#8 115.9 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 115.9    36 | BOOST_PRAGMA_MESSAGE(
+#8 115.9       | ^~~~~~~~~~~~~~~~~~~~
+#8 118.4 [ 41%] Building CXX object submodules/DROMPAplus/src/drompa/CMakeFiles/dd_func.dir/dd_draw.cpp.o
+#8 119.8 In file included from /usr/include/boost/bind.hpp:30,
+#8 119.8                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/common/WigStats.hpp:9,
+#8 119.8                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_sample_definition.hpp:8,
+#8 119.8                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_gv.hpp:8,
+#8 119.8                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_draw.hpp:7,
+#8 119.8                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_draw.cpp:7:
+#8 119.8 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 119.8    36 | BOOST_PRAGMA_MESSAGE(
+#8 119.8       | ^~~~~~~~~~~~~~~~~~~~
+#8 120.7 /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_draw.cpp: In function ‘void setcolor(const Cairo::RefPtr<Cairo::Context>&, bed&)’:
+#8 120.7 /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_draw.cpp:334:61: warning: unused parameter ‘x’ [-Wunused-parameter]
+#8 120.7   334 | void setcolor(const Cairo::RefPtr<Cairo::Context> &cr, bed &x)
+#8 120.7       |                                                        ~~~~~^
+#8 123.7 [ 43%] Building CXX object submodules/DROMPAplus/src/drompa/CMakeFiles/dd_func.dir/dd_chiadrop.cpp.o
+#8 125.1 In file included from /usr/include/boost/bind.hpp:30,
+#8 125.1                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/common/WigStats.hpp:9,
+#8 125.1                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_sample_definition.hpp:8,
+#8 125.1                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_gv.hpp:8,
+#8 125.1                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_draw.hpp:7,
+#8 125.1                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_chiadrop.cpp:5:
+#8 125.1 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 125.1    36 | BOOST_PRAGMA_MESSAGE(
+#8 125.1       | ^~~~~~~~~~~~~~~~~~~~
+#8 128.0 [ 44%] Building CXX object submodules/DROMPAplus/src/drompa/CMakeFiles/dd_func.dir/dd_drawgenes.cpp.o
+#8 129.4 In file included from /usr/include/boost/bind.hpp:30,
+#8 129.4                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/common/WigStats.hpp:9,
+#8 129.4                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_sample_definition.hpp:8,
+#8 129.4                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_gv.hpp:8,
+#8 129.4                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_draw.hpp:7,
+#8 129.4                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_drawgenes.cpp:6:
+#8 129.4 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 129.4    36 | BOOST_PRAGMA_MESSAGE(
+#8 129.4       | ^~~~~~~~~~~~~~~~~~~~
+#8 132.4 [ 45%] Building CXX object submodules/DROMPAplus/src/drompa/CMakeFiles/dd_func.dir/dd_sample_definition.cpp.o
+#8 133.6 In file included from /usr/include/boost/bind.hpp:30,
+#8 133.6                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/common/WigStats.hpp:9,
+#8 133.6                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_sample_definition.hpp:8,
+#8 133.6                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_sample_definition.cpp:4:
+#8 133.6 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 133.6    36 | BOOST_PRAGMA_MESSAGE(
+#8 133.6       | ^~~~~~~~~~~~~~~~~~~~
+#8 137.4 [ 47%] Building CXX object submodules/DROMPAplus/src/drompa/CMakeFiles/dd_func.dir/dd_profile.cpp.o
+#8 138.8 In file included from /usr/include/boost/bind.hpp:30,
+#8 138.8                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/common/WigStats.hpp:9,
+#8 138.8                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_sample_definition.hpp:8,
+#8 138.8                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_gv.hpp:8,
+#8 138.8                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_profile.hpp:7,
+#8 138.8                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_profile.cpp:4:
+#8 138.8 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 138.8    36 | BOOST_PRAGMA_MESSAGE(
+#8 138.8       | ^~~~~~~~~~~~~~~~~~~~
+#8 142.2 [ 48%] Building CXX object submodules/DROMPAplus/src/drompa/CMakeFiles/dd_func.dir/ReadAnnotation.cpp.o
+#8 143.5 /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/ReadAnnotation.cpp: In function ‘int32_t countmp(HashOfGeneDataMap&)’:
+#8 143.5 /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/ReadAnnotation.cpp:36:16: warning: unused variable ‘x’ [-Wunused-variable]
+#8 143.5    36 |     for (auto &x: mp.at(pair.first)) ++n;
+#8 143.5       |                ^
+#8 145.3 [ 50%] Building CXX object submodules/DROMPAplus/src/drompa/CMakeFiles/dd_func.dir/color.cpp.o
+#8 145.4 [ 51%] Linking CXX static library libdd_func.a
+#8 145.5 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 145.5 [ 51%] Built target dd_func
+#8 145.5 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 145.5 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 145.5 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 145.5 [ 52%] Building CXX object submodules/DROMPAplus/submodules/SSP/src/CMakeFiles/ssp_func.dir/Mapfile.cpp.o
+#8 149.5 [ 54%] Building CXX object submodules/DROMPAplus/submodules/SSP/src/CMakeFiles/ssp_func.dir/ParseMapfile.cpp.o
+#8 153.7 [ 55%] Building CXX object submodules/DROMPAplus/submodules/SSP/src/CMakeFiles/ssp_func.dir/LibraryComplexity.cpp.o
+#8 156.9 [ 56%] Building CXX object submodules/DROMPAplus/submodules/SSP/src/CMakeFiles/ssp_func.dir/ShiftProfile.cpp.o
+#8 158.4 In file included from /usr/include/boost/smart_ptr/detail/sp_thread_sleep.hpp:22,
+#8 158.4                  from /usr/include/boost/smart_ptr/detail/yield_k.hpp:23,
+#8 158.4                  from /usr/include/boost/smart_ptr/detail/spinlock_gcc_atomic.hpp:14,
+#8 158.4                  from /usr/include/boost/smart_ptr/detail/spinlock.hpp:42,
+#8 158.4                  from /usr/include/boost/smart_ptr/detail/spinlock_pool.hpp:25,
+#8 158.4                  from /usr/include/boost/smart_ptr/shared_ptr.hpp:29,
+#8 158.4                  from /usr/include/boost/shared_ptr.hpp:17,
+#8 158.4                  from /usr/include/boost/date_time/time_clock.hpp:17,
+#8 158.4                  from /usr/include/boost/thread/thread_time.hpp:9,
+#8 158.4                  from /usr/include/boost/thread/lock_types.hpp:18,
+#8 158.4                  from /usr/include/boost/thread/pthread/thread_data.hpp:12,
+#8 158.4                  from /usr/include/boost/thread/thread_only.hpp:17,
+#8 158.4                  from /usr/include/boost/thread/thread.hpp:12,
+#8 158.4                  from /usr/include/boost/thread.hpp:13,
+#8 158.4                  from /opt/ChIPseqTools/submodules/DROMPAplus/submodules/SSP/src/ShiftProfile.cpp:5:
+#8 158.4 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 158.4    36 | BOOST_PRAGMA_MESSAGE(
+#8 158.4       | ^~~~~~~~~~~~~~~~~~~~
+#8 161.2 [ 58%] Building CXX object submodules/DROMPAplus/submodules/SSP/src/CMakeFiles/ssp_func.dir/FragmentClusterScore.cpp.o
+#8 162.2 In file included from /usr/include/boost/bind.hpp:30,
+#8 162.2                  from /opt/ChIPseqTools/submodules/DROMPAplus/submodules/SSP/src/FragmentClusterScore.hpp:8,
+#8 162.2                  from /opt/ChIPseqTools/submodules/DROMPAplus/submodules/SSP/src/FragmentClusterScore.cpp:4:
+#8 162.2 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 162.2    36 | BOOST_PRAGMA_MESSAGE(
+#8 162.2       | ^~~~~~~~~~~~~~~~~~~~
+#8 164.7 [ 59%] Linking CXX static library libssp_func.a
+#8 164.8 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 164.8 [ 59%] Built target ssp_func
+#8 164.8 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 164.8 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 164.8 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 164.8 [ 61%] Building CXX object submodules/DROMPAplus/submodules/SSP/common/CMakeFiles/ssp_common.dir/BoostOptions.cpp.o
+#8 165.5 In file included from /usr/include/boost/bind.hpp:30,
+#8 165.5                  from /opt/ChIPseqTools/submodules/DROMPAplus/submodules/SSP/common/BoostOptions.cpp:4:
+#8 165.5 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 165.5    36 | BOOST_PRAGMA_MESSAGE(
+#8 165.5       | ^~~~~~~~~~~~~~~~~~~~
+#8 167.5 [ 62%] Building CXX object submodules/DROMPAplus/submodules/SSP/common/CMakeFiles/ssp_common.dir/util.cpp.o
+#8 169.0 [ 63%] Building CXX object submodules/DROMPAplus/submodules/SSP/common/CMakeFiles/ssp_common.dir/gzstream.C.o
+#8 169.4 [ 65%] Linking CXX static library libssp_common.a
+#8 169.4 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 169.4 [ 65%] Built target ssp_common
+#8 169.4 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 169.4 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 169.4 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 169.4 [ 66%] Building CXX object submodules/DROMPAplus/submodules/SSP/test/CMakeFiles/ssp.dir/ssp_main.cpp.o
+#8 171.2 In file included from /usr/include/boost/smart_ptr/detail/sp_thread_sleep.hpp:22,
+#8 171.2                  from /usr/include/boost/smart_ptr/detail/yield_k.hpp:23,
+#8 171.2                  from /usr/include/boost/smart_ptr/detail/spinlock_gcc_atomic.hpp:14,
+#8 171.2                  from /usr/include/boost/smart_ptr/detail/spinlock.hpp:42,
+#8 171.2                  from /usr/include/boost/smart_ptr/detail/spinlock_pool.hpp:25,
+#8 171.2                  from /usr/include/boost/smart_ptr/shared_ptr.hpp:29,
+#8 171.2                  from /usr/include/boost/shared_ptr.hpp:17,
+#8 171.2                  from /usr/include/boost/format/alt_sstream.hpp:22,
+#8 171.2                  from /usr/include/boost/format/internals.hpp:24,
+#8 171.2                  from /usr/include/boost/format.hpp:38,
+#8 171.2                  from /opt/ChIPseqTools/submodules/DROMPAplus/submodules/SSP/src/LibraryComplexity.hpp:11,
+#8 171.2                  from /opt/ChIPseqTools/submodules/DROMPAplus/submodules/SSP/src/ssp_gv.hpp:9,
+#8 171.2                  from /opt/ChIPseqTools/submodules/DROMPAplus/submodules/SSP/test/ssp_main.cpp:10:
+#8 171.2 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 171.2    36 | BOOST_PRAGMA_MESSAGE(
+#8 171.2       | ^~~~~~~~~~~~~~~~~~~~
+#8 174.3 [ 68%] Linking CXX executable ssp
+#8 174.4 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 174.4 [ 68%] Built target ssp
+#8 174.5 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 174.5 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 174.5 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 174.5 [ 69%] Building CXX object submodules/DROMPAplus/test/parse2wig/CMakeFiles/parse2wig+.dir/pw_main.cpp.o
+#8 175.7 In file included from /usr/include/boost/bind.hpp:30,
+#8 175.7                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/common/WigStats.hpp:9,
+#8 175.7                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/parse2wig/pw_gv.hpp:9,
+#8 175.7                  from /opt/ChIPseqTools/submodules/DROMPAplus/test/parse2wig/pw_main.cpp:13:
+#8 175.7 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 175.7    36 | BOOST_PRAGMA_MESSAGE(
+#8 175.7       | ^~~~~~~~~~~~~~~~~~~~
+#8 180.3 [ 70%] Linking CXX executable parse2wig+
+#8 180.5 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 180.6 [ 70%] Built target parse2wig+
+#8 180.6 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 180.6 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 180.6 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 180.6 [ 72%] Building CXX object submodules/DROMPAplus/test/drompa/CMakeFiles/drompa+.dir/dd_main.cpp.o
+#8 181.8 In file included from /usr/include/boost/bind.hpp:30,
+#8 181.8                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/common/WigStats.hpp:9,
+#8 181.8                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_sample_definition.hpp:8,
+#8 181.8                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_gv.hpp:8,
+#8 181.8                  from /opt/ChIPseqTools/submodules/DROMPAplus/src/drompa/dd_command.hpp:8,
+#8 181.8                  from /opt/ChIPseqTools/submodules/DROMPAplus/test/drompa/dd_main.cpp:4:
+#8 181.8 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#8 181.8    36 | BOOST_PRAGMA_MESSAGE(
+#8 181.8       | ^~~~~~~~~~~~~~~~~~~~
+#8 185.4 [ 73%] Linking CXX executable drompa+
+#8 185.5 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 185.6 [ 73%] Built target drompa+
+#8 185.6 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 185.6 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 185.6 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 185.6 [ 75%] Building CXX object src/C++/CMakeFiles/compare_bed2loop.dir/compare_bed2loop.cpp.o
+#8 189.6 [ 76%] Building CXX object src/C++/CMakeFiles/compare_bed2loop.dir/gene_bed.cpp.o
+#8 193.0 [ 77%] Linking CXX executable compare_bed2loop
+#8 193.1 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 193.1 [ 77%] Built target compare_bed2loop
+#8 193.1 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 193.1 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 193.1 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 193.1 [ 79%] Building CXX object src/C++/CMakeFiles/gtf2refFlat.dir/gtf2refFlat.cpp.o
+#8 196.9 [ 80%] Linking CXX executable gtf2refFlat
+#8 197.0 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 197.0 [ 80%] Built target gtf2refFlat
+#8 197.0 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 197.0 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 197.0 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 197.0 [ 81%] Building CXX object src/C++/CMakeFiles/parseChIADropReadList.dir/parseChIADropReadList.cpp.o
+#8 201.2 [ 83%] Linking CXX executable parseChIADropReadList
+#8 201.3 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 201.3 [ 83%] Built target parseChIADropReadList
+#8 201.3 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 201.3 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 201.3 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 201.3 [ 84%] Building CXX object src/C++/CMakeFiles/compare_bed2tss.dir/compare_bed2tss.cpp.o
+#8 206.8 [ 86%] Building CXX object src/C++/CMakeFiles/compare_bed2tss.dir/gene_bed.cpp.o
+#8 210.2 [ 87%] Linking CXX executable compare_bed2tss
+#8 210.3 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 210.3 [ 87%] Built target compare_bed2tss
+#8 210.3 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 210.4 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 210.4 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 210.4 [ 88%] Building CXX object src/C++/CMakeFiles/peak_occurance.dir/peak_occurance.cpp.o
+#8 218.7 [ 90%] Building CXX object src/C++/CMakeFiles/peak_occurance.dir/gene_bed.cpp.o
+#8 222.1 [ 91%] Building CXX object src/C++/CMakeFiles/peak_occurance.dir/statistics.cpp.o
+#8 222.7 [ 93%] Linking CXX executable peak_occurance
+#8 222.8 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 222.8 [ 93%] Built target peak_occurance
+#8 222.8 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 222.8 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 222.8 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 222.9 [ 94%] Building CXX object src/C++/CMakeFiles/multibed2gene.dir/multibed2gene.cpp.o
+#8 227.3 [ 95%] Building CXX object src/C++/CMakeFiles/multibed2gene.dir/gene_bed.cpp.o
+#8 230.7 [ 97%] Linking CXX executable multibed2gene
+#8 230.8 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 230.8 [ 97%] Built target multibed2gene
+#8 230.8 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 230.8 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 230.8 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 230.9 [ 98%] Building CXX object src/C++/CMakeFiles/FRiR.dir/FRiR.cpp.o
+#8 235.4 [100%] Linking CXX executable FRiR
+#8 235.5 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 235.5 [100%] Built target FRiR
+#8 235.5 make[2]: Leaving directory '/opt/ChIPseqTools/build'
+#8 235.5 make[1]: Leaving directory '/opt/ChIPseqTools/build'
+#8 235.5 mkdir -p bin
+#8 235.6 cp build/src/C/compare_bs build/src/C/compare_bs2CRM build/src/C++/compare_bed2loop build/src/C++/gtf2refFlat build/src/C++/parseChIADropReadList build/src/C++/compare_bed2tss build/src/C++/peak_occurance build/src/C++/multibed2gene build/src/C++/FRiR bin
+#8 235.6 mkdir -p build && cd build && cmake .. && make
+#8 235.6 CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+#8 235.6   Compatibility with CMake < 2.8.12 will be removed from a future version of
+#8 235.6   CMake.
+#8 235.6 
+#8 235.6   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+#8 235.6   CMake that the project does not need compatibility with older versions.
+#8 235.6 
+#8 235.6 
+#8 235.6 CMake Deprecation Warning at src/C/CMakeLists.txt:1 (cmake_minimum_required):
+#8 235.6   Compatibility with CMake < 2.8.12 will be removed from a future version of
+#8 235.6   CMake.
+#8 235.6 
+#8 235.6   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+#8 235.6   CMake that the project does not need compatibility with older versions.
+#8 235.6 
+#8 235.6 
+#8 235.6 CMake Deprecation Warning at submodules/DROMPAplus/CMakeLists.txt:1 (cmake_minimum_required):
+#8 235.6   Compatibility with CMake < 2.8.12 will be removed from a future version of
+#8 235.6   CMake.
+#8 235.6 
+#8 235.6   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+#8 235.6   CMake that the project does not need compatibility with older versions.
+#8 235.6 
+#8 235.6 
+#8 235.6 CMake Deprecation Warning at submodules/DROMPAplus/submodules/SSP/CMakeLists.txt:1 (cmake_minimum_required):
+#8 235.6   Compatibility with CMake < 2.8.12 will be removed from a future version of
+#8 235.6   CMake.
+#8 235.6 
+#8 235.6   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+#8 235.6   CMake that the project does not need compatibility with older versions.
+#8 235.6 
+#8 235.6 
+#8 235.6 -- Configuring done
+#8 235.6 -- Generating done
+#8 235.7 -- Build files have been written to: /opt/ChIPseqTools/build
+#8 235.7 make[1]: Entering directory '/opt/ChIPseqTools/build'
+#8 235.7 make[2]: Entering directory '/opt/ChIPseqTools/build'
+#8 235.7 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 235.7 Consolidate compiler generated dependencies of target compare_bs
+#8 235.7 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 235.7 [  8%] Built target compare_bs
+#8 235.7 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 235.8 Consolidate compiler generated dependencies of target compare_bs2CRM
+#8 235.8 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 235.8 [ 16%] Built target compare_bs2CRM
+#8 235.8 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 235.8 Consolidate compiler generated dependencies of target common
+#8 235.8 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 235.8 [ 25%] Built target common
+#8 235.8 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 235.9 Consolidate compiler generated dependencies of target pw_func
+#8 235.9 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 235.9 [ 33%] Built target pw_func
+#8 235.9 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 236.0 Consolidate compiler generated dependencies of target dd_func
+#8 236.0 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 236.0 [ 51%] Built target dd_func
+#8 236.0 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 236.1 Consolidate compiler generated dependencies of target ssp_func
+#8 236.1 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 236.1 [ 59%] Built target ssp_func
+#8 236.1 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 236.1 Consolidate compiler generated dependencies of target ssp_common
+#8 236.2 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 236.2 [ 65%] Built target ssp_common
+#8 236.2 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 236.2 Consolidate compiler generated dependencies of target ssp
+#8 236.2 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 236.2 [ 68%] Built target ssp
+#8 236.2 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 236.2 Consolidate compiler generated dependencies of target parse2wig+
+#8 236.3 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 236.3 [ 70%] Built target parse2wig+
+#8 236.3 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 236.3 Consolidate compiler generated dependencies of target drompa+
+#8 236.3 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 236.3 [ 73%] Built target drompa+
+#8 236.3 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 236.3 Consolidate compiler generated dependencies of target compare_bed2loop
+#8 236.3 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 236.4 [ 77%] Built target compare_bed2loop
+#8 236.4 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 236.4 Consolidate compiler generated dependencies of target gtf2refFlat
+#8 236.4 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 236.4 [ 80%] Built target gtf2refFlat
+#8 236.4 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 236.4 Consolidate compiler generated dependencies of target parseChIADropReadList
+#8 236.4 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 236.5 [ 83%] Built target parseChIADropReadList
+#8 236.5 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 236.5 Consolidate compiler generated dependencies of target compare_bed2tss
+#8 236.5 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 236.5 [ 87%] Built target compare_bed2tss
+#8 236.5 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 236.6 Consolidate compiler generated dependencies of target peak_occurance
+#8 236.6 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 236.6 [ 93%] Built target peak_occurance
+#8 236.6 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 236.6 Consolidate compiler generated dependencies of target multibed2gene
+#8 236.6 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 236.6 [ 97%] Built target multibed2gene
+#8 236.6 make[3]: Entering directory '/opt/ChIPseqTools/build'
+#8 236.7 Consolidate compiler generated dependencies of target FRiR
+#8 236.7 make[3]: Leaving directory '/opt/ChIPseqTools/build'
+#8 236.7 [100%] Built target FRiR
+#8 236.7 make[2]: Leaving directory '/opt/ChIPseqTools/build'
+#8 236.7 make[1]: Leaving directory '/opt/ChIPseqTools/build'
+#8 236.7 mkdir -p bin
+#8 236.7 cp build/src/C/compare_bs build/src/C/compare_bs2CRM build/src/C++/compare_bed2loop build/src/C++/gtf2refFlat build/src/C++/parseChIADropReadList build/src/C++/compare_bed2tss build/src/C++/peak_occurance build/src/C++/multibed2gene build/src/C++/FRiR bin
+#8 DONE 238.1s
+
+#9 [common  5/11] RUN git clone https://github.com/rnakato/SSP.git     && cd SSP     && make
+#9 1.276 Cloning into 'SSP'...
+#9 2.424 make -C src/htslib-1.10.2/
+#9 2.426 make[1]: Entering directory '/opt/SSP/src/htslib-1.10.2'
+#9 2.441 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o kfunc.o kfunc.c
+#9 2.542 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o knetfile.o knetfile.c
+#9 2.705 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o kstring.o kstring.c
+#9 2.889 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o bcf_sr_sort.o bcf_sr_sort.c
+#9 3.346 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o bgzf.o bgzf.c
+#9 3.940 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o errmod.o errmod.c
+#9 4.074 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o faidx.o faidx.c
+#9 4.443 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o header.o header.c
+#9 5.368 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o hfile.o hfile.c
+#9 5.673 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o hfile_net.o hfile_net.c
+#9 5.716 echo '#define HTS_VERSION_TEXT "1.10.2"' > version.h
+#9 5.717 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o hts.o hts.c
+#9 5.779 hts.c: In function ‘hts_idx_init’:
+#9 5.779 hts.c:1631:59: warning: overflow in conversion from ‘uint32_t’ {aka ‘unsigned int’} to ‘int’ changes value from ‘idx->z.last_bin = 4294967295’ to ‘-1’ [-Woverflow]
+#9 5.779  1631 |     idx->z.save_bin = idx->z.save_tid = idx->z.last_tid = idx->z.last_bin = 0xffffffffu;
+#9 5.779       |                                                           ^~~
+#9 7.098 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o hts_os.o hts_os.c
+#9 7.129 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o md5.o md5.c
+#9 7.241 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o multipart.o multipart.c
+#9 7.358 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o probaln.o probaln.c
+#9 7.518 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o realn.o realn.c
+#9 7.695 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o regidx.o regidx.c
+#9 8.002 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o region.o region.c
+#9 8.133 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o sam.o sam.c
+#9 10.11 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o synced_bcf_reader.o synced_bcf_reader.c
+#9 10.59 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o vcf_sweep.o vcf_sweep.c
+#9 10.67 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o tbx.o tbx.c
+#9 10.83 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o textutils.o textutils.c
+#9 11.02 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o thread_pool.o thread_pool.c
+#9 11.19 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o vcf.o vcf.c
+#9 13.55 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o vcfutils.o vcfutils.c
+#9 14.10 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/cram_codecs.o cram/cram_codecs.c
+#9 14.87 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/cram_decode.o cram/cram_decode.c
+#9 16.15 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/cram_encode.o cram/cram_encode.c
+#9 17.50 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/cram_external.o cram/cram_external.c
+#9 17.65 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/cram_index.o cram/cram_index.c
+#9 17.89 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/cram_io.o cram/cram_io.c
+#9 19.02 In file included from /usr/include/string.h:535,
+#9 19.02                  from cram/cram_io.c:49:
+#9 19.02 In function ‘strncpy’,
+#9 19.02     inlined from ‘cram_dopen’ at cram/cram_io.c:4304:9:
+#9 19.02 /usr/include/x86_64-linux-gnu/bits/string_fortified.h:95:10: warning: ‘__builtin_strncpy’ specified bound 20 equals destination size [-Wstringop-truncation]
+#9 19.02    95 |   return __builtin___strncpy_chk (__dest, __src, __len,
+#9 19.02       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#9 19.02    96 |                                   __glibc_objsize (__dest));
+#9 19.02       |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~
+#9 19.22 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/cram_samtools.o cram/cram_samtools.c
+#9 19.29 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/cram_stats.o cram/cram_stats.c
+#9 19.44 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/mFILE.o cram/mFILE.c
+#9 19.56 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/open_trace_file.o cram/open_trace_file.c
+#9 19.68 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/pooled_alloc.o cram/pooled_alloc.c
+#9 19.73 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/rANS_static.o cram/rANS_static.c
+#9 20.05 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o cram/string_alloc.o cram/string_alloc.c
+#9 20.10 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o hfile_libcurl.o hfile_libcurl.c
+#9 20.59 ar -rc libhts.a kfunc.o knetfile.o kstring.o bcf_sr_sort.o bgzf.o errmod.o faidx.o header.o hfile.o hfile_net.o hts.o hts_os.o md5.o multipart.o probaln.o realn.o regidx.o region.o sam.o synced_bcf_reader.o vcf_sweep.o tbx.o textutils.o thread_pool.o vcf.o vcfutils.o cram/cram_codecs.o cram/cram_decode.o cram/cram_encode.o cram/cram_external.o cram/cram_index.o cram/cram_io.o cram/cram_samtools.o cram/cram_stats.o cram/mFILE.o cram/open_trace_file.o cram/pooled_alloc.o cram/rANS_static.o cram/string_alloc.o hfile_libcurl.o
+#9 20.63 ranlib libhts.a
+#9 20.67 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o kfunc.pico kfunc.c
+#9 20.77 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o knetfile.pico knetfile.c
+#9 20.93 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o kstring.pico kstring.c
+#9 21.11 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o bcf_sr_sort.pico bcf_sr_sort.c
+#9 21.57 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o bgzf.pico bgzf.c
+#9 22.18 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o errmod.pico errmod.c
+#9 22.31 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o faidx.pico faidx.c
+#9 22.68 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o header.pico header.c
+#9 23.61 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o hfile.pico hfile.c
+#9 23.91 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o hfile_net.pico hfile_net.c
+#9 23.95 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o hts.pico hts.c
+#9 24.01 hts.c: In function ‘hts_idx_init’:
+#9 24.01 hts.c:1631:59: warning: overflow in conversion from ‘uint32_t’ {aka ‘unsigned int’} to ‘int’ changes value from ‘idx->z.last_bin = 4294967295’ to ‘-1’ [-Woverflow]
+#9 24.01  1631 |     idx->z.save_bin = idx->z.save_tid = idx->z.last_tid = idx->z.last_bin = 0xffffffffu;
+#9 24.01       |                                                           ^~~
+#9 25.33 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o hts_os.pico hts_os.c
+#9 25.36 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o md5.pico md5.c
+#9 25.47 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o multipart.pico multipart.c
+#9 25.58 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o probaln.pico probaln.c
+#9 25.74 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o realn.pico realn.c
+#9 25.92 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o regidx.pico regidx.c
+#9 26.22 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o region.pico region.c
+#9 26.35 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o sam.pico sam.c
+#9 28.26 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o synced_bcf_reader.pico synced_bcf_reader.c
+#9 28.74 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o vcf_sweep.pico vcf_sweep.c
+#9 28.81 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o tbx.pico tbx.c
+#9 28.98 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o textutils.pico textutils.c
+#9 29.16 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o thread_pool.pico thread_pool.c
+#9 29.33 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o vcf.pico vcf.c
+#9 31.60 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o vcfutils.pico vcfutils.c
+#9 32.15 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/cram_codecs.pico cram/cram_codecs.c
+#9 32.93 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/cram_decode.pico cram/cram_decode.c
+#9 34.23 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/cram_encode.pico cram/cram_encode.c
+#9 35.57 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/cram_external.pico cram/cram_external.c
+#9 35.71 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/cram_index.pico cram/cram_index.c
+#9 35.95 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/cram_io.pico cram/cram_io.c
+#9 37.04 In file included from /usr/include/string.h:535,
+#9 37.04                  from cram/cram_io.c:49:
+#9 37.04 In function ‘strncpy’,
+#9 37.04     inlined from ‘cram_dopen’ at cram/cram_io.c:4304:9:
+#9 37.04 /usr/include/x86_64-linux-gnu/bits/string_fortified.h:95:10: warning: ‘__builtin_strncpy’ specified bound 20 equals destination size [-Wstringop-truncation]
+#9 37.04    95 |   return __builtin___strncpy_chk (__dest, __src, __len,
+#9 37.04       |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#9 37.04    96 |                                   __glibc_objsize (__dest));
+#9 37.04       |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~
+#9 37.24 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/cram_samtools.pico cram/cram_samtools.c
+#9 37.31 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/cram_stats.pico cram/cram_stats.c
+#9 37.46 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/mFILE.pico cram/mFILE.c
+#9 37.59 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/open_trace_file.pico cram/open_trace_file.c
+#9 37.70 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/pooled_alloc.pico cram/pooled_alloc.c
+#9 37.74 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/rANS_static.pico cram/rANS_static.c
+#9 38.07 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o cram/string_alloc.pico cram/string_alloc.c
+#9 38.12 gcc -g -Wall -O2 -fvisibility=hidden -I.  -fpic -c -o hfile_libcurl.pico hfile_libcurl.c
+#9 38.61 gcc -shared -Wl,-soname,libhts.so.3 -fvisibility=hidden -o libhts.so kfunc.pico knetfile.pico kstring.pico bcf_sr_sort.pico bgzf.pico errmod.pico faidx.pico header.pico hfile.pico hfile_net.pico hts.pico hts_os.pico md5.pico multipart.pico probaln.pico realn.pico regidx.pico region.pico sam.pico synced_bcf_reader.pico vcf_sweep.pico tbx.pico textutils.pico thread_pool.pico vcf.pico vcfutils.pico cram/cram_codecs.pico cram/cram_decode.pico cram/cram_encode.pico cram/cram_external.pico cram/cram_index.pico cram/cram_io.pico cram/cram_samtools.pico cram/cram_stats.pico cram/mFILE.pico cram/open_trace_file.pico cram/pooled_alloc.pico cram/rANS_static.pico cram/string_alloc.pico hfile_libcurl.pico -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 38.67 ln -sf libhts.so libhts.so.3
+#9 38.67 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o bgzip.o bgzip.c
+#9 38.81 gcc -fvisibility=hidden -o bgzip bgzip.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 38.89 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o htsfile.o htsfile.c
+#9 39.01 gcc -fvisibility=hidden -o htsfile htsfile.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 39.09 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o tabix.o tabix.c
+#9 39.29 gcc -fvisibility=hidden -o tabix tabix.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 39.37 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/hts_endian.o test/hts_endian.c
+#9 39.59 gcc -fvisibility=hidden -o test/hts_endian test/hts_endian.o -lz -lm -lbz2 -llzma -lcurl
+#9 39.61 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/fieldarith.o test/fieldarith.c
+#9 39.65 gcc -fvisibility=hidden -o test/fieldarith test/fieldarith.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 39.73 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/hfile.o test/hfile.c
+#9 39.91 gcc -fvisibility=hidden -o test/hfile test/hfile.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 39.99 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/pileup.o test/pileup.c
+#9 40.08 gcc -fvisibility=hidden -o test/pileup test/pileup.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 40.16 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/sam.o test/sam.c
+#9 40.61 gcc -fvisibility=hidden -o test/sam test/sam.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 40.69 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test_bgzf.o test/test_bgzf.c
+#9 40.98 gcc -fvisibility=hidden -o test/test_bgzf test/test_bgzf.o libhts.a -lz -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 41.05 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test_kstring.o test/test_kstring.c
+#9 41.16 gcc -fvisibility=hidden -o test/test_kstring test/test_kstring.o libhts.a -lz -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 41.18 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test_realn.o test/test_realn.c
+#9 41.24 gcc -fvisibility=hidden -o test/test_realn test/test_realn.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 41.33 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test-regidx.o test/test-regidx.c
+#9 41.50 gcc -fvisibility=hidden -o test/test-regidx test/test-regidx.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 41.58 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test_str2int.o test/test_str2int.c
+#9 41.69 gcc -fvisibility=hidden -o test/test_str2int test/test_str2int.o
+#9 41.71 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test_view.o test/test_view.c
+#9 41.87 gcc -fvisibility=hidden -o test/test_view test/test_view.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 41.96 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test_index.o test/test_index.c
+#9 42.01 gcc -fvisibility=hidden -o test/test_index test/test_index.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 42.09 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test-vcf-api.o test/test-vcf-api.c
+#9 42.25 gcc -fvisibility=hidden -o test/test-vcf-api test/test-vcf-api.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 42.33 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test-vcf-sweep.o test/test-vcf-sweep.c
+#9 42.39 gcc -fvisibility=hidden -o test/test-vcf-sweep test/test-vcf-sweep.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 42.48 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test-bcf-sr.o test/test-bcf-sr.c
+#9 42.57 gcc -fvisibility=hidden -o test/test-bcf-sr test/test-bcf-sr.o libhts.a -lz -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 42.65 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/fuzz/hts_open_fuzzer.o test/fuzz/hts_open_fuzzer.c
+#9 42.71 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test-bcf-translate.o test/test-bcf-translate.c
+#9 42.77 gcc -fvisibility=hidden -o test/test-bcf-translate test/test-bcf-translate.o libhts.a -lz -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 42.85 gcc -g -Wall -O2 -fvisibility=hidden -I.  -c -o test/test-parse-reg.o test/test-parse-reg.c
+#9 42.92 gcc -fvisibility=hidden -o test/test-parse-reg test/test-parse-reg.o libhts.a -lz -lm -lbz2 -llzma -lcurl -lpthread
+#9 43.00 make[1]: Leaving directory '/opt/SSP/src/htslib-1.10.2'
+#9 43.00 mkdir -p build
+#9 43.00 cd build && cmake  .. && make
+#9 43.01 CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+#9 43.01   Compatibility with CMake < 2.8.12 will be removed from a future version of
+#9 43.01   CMake.
+#9 43.01 
+#9 43.01   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+#9 43.01   CMake that the project does not need compatibility with older versions.
+#9 43.01 
+#9 43.01 
+#9 43.08 -- The CXX compiler identification is GNU 11.4.0
+#9 43.09 -- Detecting CXX compiler ABI info
+#9 43.18 -- Detecting CXX compiler ABI info - done
+#9 43.19 -- Check for working CXX compiler: /usr/bin/c++ - skipped
+#9 43.19 -- Detecting CXX compile features
+#9 43.19 -- Detecting CXX compile features - done
+#9 43.19 -- Configuring done
+#9 43.20 -- Generating done
+#9 43.20 -- Build files have been written to: /opt/SSP/build
+#9 43.20 make[1]: Entering directory '/opt/SSP/build'
+#9 43.22 make[2]: Entering directory '/opt/SSP/build'
+#9 43.22 make[3]: Entering directory '/opt/SSP/build'
+#9 43.23 make[3]: Leaving directory '/opt/SSP/build'
+#9 43.23 make[3]: Entering directory '/opt/SSP/build'
+#9 43.24 [  8%] Building CXX object src/CMakeFiles/ssp_func.dir/Mapfile.cpp.o
+#9 47.28 [ 16%] Building CXX object src/CMakeFiles/ssp_func.dir/ParseMapfile.cpp.o
+#9 51.37 [ 25%] Building CXX object src/CMakeFiles/ssp_func.dir/LibraryComplexity.cpp.o
+#9 54.62 [ 33%] Building CXX object src/CMakeFiles/ssp_func.dir/ShiftProfile.cpp.o
+#9 56.09 In file included from /usr/include/boost/smart_ptr/detail/sp_thread_sleep.hpp:22,
+#9 56.09                  from /usr/include/boost/smart_ptr/detail/yield_k.hpp:23,
+#9 56.09                  from /usr/include/boost/smart_ptr/detail/spinlock_gcc_atomic.hpp:14,
+#9 56.09                  from /usr/include/boost/smart_ptr/detail/spinlock.hpp:42,
+#9 56.09                  from /usr/include/boost/smart_ptr/detail/spinlock_pool.hpp:25,
+#9 56.09                  from /usr/include/boost/smart_ptr/shared_ptr.hpp:29,
+#9 56.09                  from /usr/include/boost/shared_ptr.hpp:17,
+#9 56.09                  from /usr/include/boost/date_time/time_clock.hpp:17,
+#9 56.09                  from /usr/include/boost/thread/thread_time.hpp:9,
+#9 56.09                  from /usr/include/boost/thread/lock_types.hpp:18,
+#9 56.09                  from /usr/include/boost/thread/pthread/thread_data.hpp:12,
+#9 56.09                  from /usr/include/boost/thread/thread_only.hpp:17,
+#9 56.09                  from /usr/include/boost/thread/thread.hpp:12,
+#9 56.09                  from /usr/include/boost/thread.hpp:13,
+#9 56.09                  from /opt/SSP/src/ShiftProfile.cpp:5:
+#9 56.09 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#9 56.09    36 | BOOST_PRAGMA_MESSAGE(
+#9 56.09       | ^~~~~~~~~~~~~~~~~~~~
+#9 58.94 [ 41%] Building CXX object src/CMakeFiles/ssp_func.dir/FragmentClusterScore.cpp.o
+#9 59.89 In file included from /usr/include/boost/bind.hpp:30,
+#9 59.89                  from /opt/SSP/src/FragmentClusterScore.hpp:8,
+#9 59.89                  from /opt/SSP/src/FragmentClusterScore.cpp:4:
+#9 59.89 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#9 59.89    36 | BOOST_PRAGMA_MESSAGE(
+#9 59.89       | ^~~~~~~~~~~~~~~~~~~~
+#9 62.48 [ 50%] Linking CXX static library libssp_func.a
+#9 62.52 make[3]: Leaving directory '/opt/SSP/build'
+#9 62.53 [ 50%] Built target ssp_func
+#9 62.53 make[3]: Entering directory '/opt/SSP/build'
+#9 62.54 make[3]: Leaving directory '/opt/SSP/build'
+#9 62.54 make[3]: Entering directory '/opt/SSP/build'
+#9 62.55 [ 58%] Building CXX object common/CMakeFiles/ssp_common.dir/BoostOptions.cpp.o
+#9 63.24 In file included from /usr/include/boost/bind.hpp:30,
+#9 63.24                  from /opt/SSP/common/BoostOptions.cpp:4:
+#9 63.24 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#9 63.24    36 | BOOST_PRAGMA_MESSAGE(
+#9 63.24       | ^~~~~~~~~~~~~~~~~~~~
+#9 65.30 [ 66%] Building CXX object common/CMakeFiles/ssp_common.dir/util.cpp.o
+#9 66.82 [ 75%] Building CXX object common/CMakeFiles/ssp_common.dir/gzstream.C.o
+#9 67.14 [ 83%] Linking CXX static library libssp_common.a
+#9 67.18 make[3]: Leaving directory '/opt/SSP/build'
+#9 67.19 [ 83%] Built target ssp_common
+#9 67.19 make[3]: Entering directory '/opt/SSP/build'
+#9 67.20 make[3]: Leaving directory '/opt/SSP/build'
+#9 67.20 make[3]: Entering directory '/opt/SSP/build'
+#9 67.21 [ 91%] Building CXX object test/CMakeFiles/ssp.dir/ssp_main.cpp.o
+#9 69.01 In file included from /usr/include/boost/smart_ptr/detail/sp_thread_sleep.hpp:22,
+#9 69.01                  from /usr/include/boost/smart_ptr/detail/yield_k.hpp:23,
+#9 69.01                  from /usr/include/boost/smart_ptr/detail/spinlock_gcc_atomic.hpp:14,
+#9 69.01                  from /usr/include/boost/smart_ptr/detail/spinlock.hpp:42,
+#9 69.01                  from /usr/include/boost/smart_ptr/detail/spinlock_pool.hpp:25,
+#9 69.01                  from /usr/include/boost/smart_ptr/shared_ptr.hpp:29,
+#9 69.01                  from /usr/include/boost/shared_ptr.hpp:17,
+#9 69.01                  from /usr/include/boost/format/alt_sstream.hpp:22,
+#9 69.01                  from /usr/include/boost/format/internals.hpp:24,
+#9 69.01                  from /usr/include/boost/format.hpp:38,
+#9 69.01                  from /opt/SSP/src/LibraryComplexity.hpp:11,
+#9 69.01                  from /opt/SSP/src/ssp_gv.hpp:9,
+#9 69.01                  from /opt/SSP/test/ssp_main.cpp:10:
+#9 69.01 /usr/include/boost/bind.hpp:36:1: note: ‘#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.’
+#9 69.01    36 | BOOST_PRAGMA_MESSAGE(
+#9 69.01       | ^~~~~~~~~~~~~~~~~~~~
+#9 72.05 [100%] Linking CXX executable ssp
+#9 72.22 make[3]: Leaving directory '/opt/SSP/build'
+#9 72.23 [100%] Built target ssp
+#9 72.23 make[2]: Leaving directory '/opt/SSP/build'
+#9 72.24 make[1]: Leaving directory '/opt/SSP/build'
+#9 72.24 mkdir -p bin
+#9 72.24 cp build/test/ssp bin
+#9 DONE 73.3s
+
+#10 [common  6/11] RUN pip --no-cache install ffq
+#10 4.027 Collecting ffq
+#10 4.097   Downloading ffq-0.3.1-py3-none-any.whl.metadata (18 kB)
+#10 4.107 Requirement already satisfied: beautifulsoup4>=4.8.2 in ./micromamba/lib/python3.10/site-packages (from ffq) (4.15.0)
+#10 4.213 Collecting frozendict>=2.0.3 (from ffq)
+#10 4.226   Downloading frozendict-2.4.7-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (23 kB)
+#10 4.232 Requirement already satisfied: lxml>=4.5.0 in ./micromamba/lib/python3.10/site-packages (from ffq) (5.1.0)
+#10 4.233 Requirement already satisfied: requests>=2.23.0 in ./micromamba/lib/python3.10/site-packages (from ffq) (2.31.0)
+#10 4.300 Requirement already satisfied: soupsieve>=1.6.1 in ./micromamba/lib/python3.10/site-packages (from beautifulsoup4>=4.8.2->ffq) (2.8.4)
+#10 4.301 Requirement already satisfied: typing-extensions>=4.0.0 in ./micromamba/lib/python3.10/site-packages (from beautifulsoup4>=4.8.2->ffq) (4.15.0)
+#10 4.401 Requirement already satisfied: charset-normalizer<4,>=2 in ./micromamba/lib/python3.10/site-packages (from requests>=2.23.0->ffq) (3.4.7)
+#10 4.402 Requirement already satisfied: idna<4,>=2.5 in ./micromamba/lib/python3.10/site-packages (from requests>=2.23.0->ffq) (3.17)
+#10 4.403 Requirement already satisfied: urllib3<3,>=1.21.1 in ./micromamba/lib/python3.10/site-packages (from requests>=2.23.0->ffq) (2.5.0)
+#10 4.404 Requirement already satisfied: certifi>=2017.4.17 in ./micromamba/lib/python3.10/site-packages (from requests>=2.23.0->ffq) (2026.5.20)
+#10 4.814 Downloading ffq-0.3.1-py3-none-any.whl (25 kB)
+#10 4.829 Downloading frozendict-2.4.7-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (120 kB)
+#10 4.845    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 120.2/120.2 kB 8.1 MB/s eta 0:00:00
+#10 7.347 Installing collected packages: frozendict, ffq
+#10 7.579 Successfully installed ffq-0.3.1 frozendict-2.4.7
+#10 7.579 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#10 DONE 8.8s
+
+#11 [common  7/11] COPY scripts/* scripts/
+#11 DONE 2.0s
+
+#12 [common  8/11] COPY bin bin
+#12 DONE 1.6s
+
+#13 [common  9/11] COPY OriDB OriDB
+#13 DONE 1.8s
+
+#14 [common 10/11] COPY gffread-0.12.7.Linux_x86_64.tar.gz gffread-0.12.7.Linux_x86_64.tar.gz
+#14 DONE 1.5s
+
+#15 [common 11/11] RUN tar zxvf gffread-0.12.7.Linux_x86_64.tar.gz     && mv gffread-0.12.7.Linux_x86_64/gffread /opt/bin/     && rm -rf gffread-0.12.7.Linux_x86_64.tar.gz gffread-0.12.7.Linux_x86_64
+#15 1.411 gffread-0.12.7.Linux_x86_64/
+#15 1.411 gffread-0.12.7.Linux_x86_64/README.md
+#15 1.411 gffread-0.12.7.Linux_x86_64/gffread
+#15 1.414 gffread-0.12.7.Linux_x86_64/LICENSE
+#15 DONE 3.7s
+
+#16 [normal 2/3] COPY --from=common / /
+#16 DONE 155.1s
+
+#17 [normal 3/3] WORKDIR /home/ubuntu
+#17 DONE 1.4s
+
+#18 exporting to image
+#18 exporting layers
+#18 exporting layers 41.9s done
+#18 writing image sha256:fc4e37d50e3930c2b69b3663864bcda78374f331235286a395e81b2fcb86392f 0.0s done
+#18 naming to docker.io/rnakato/database:2026.06 0.1s done
+#18 DONE 42.3s
+The push refers to repository [docker.io/rnakato/database]
+5f70bf18a086: Preparing
+1c90900b74e5: Preparing
+5f70bf18a086: Preparing
+053146f54243: Preparing
+942e891ca580: Preparing
+5f70bf18a086: Preparing
+3e0259eab71a: Preparing
+6f5cee74fb30: Preparing
+3af2fc4541de: Preparing
+01af71cfc316: Preparing
+8bba68e76219: Preparing
+3af2fc4541de: Waiting
+01af71cfc316: Waiting
+6f5cee74fb30: Waiting
+8bba68e76219: Waiting
+5f70bf18a086: Layer already exists
+3e0259eab71a: Mounted from rnakato/r_python
+053146f54243: Mounted from rnakato/r_python
+942e891ca580: Mounted from rnakato/r_python
+6f5cee74fb30: Mounted from rnakato/r_python
+3af2fc4541de: Mounted from rnakato/r_python
+01af71cfc316: Mounted from rnakato/r_python
+8bba68e76219: Mounted from rnakato/r_python
+1c90900b74e5: Pushed
+2026.06: digest: sha256:4d28ffdc76d5427819d4fc6a2ab58a74878a5a92efb9f1b681bd4f1b91b82092 size: 2617
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.80kB done
+#1 DONE 0.3s
+
+#2 [internal] load metadata for docker.io/rnakato/r_python:2026.06
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context:
+#3 transferring context: 2B done
+#3 DONE 0.3s
+
+#4 [common  1/11] FROM docker.io/rnakato/r_python:2026.06
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 2.71kB done
+#5 DONE 0.2s
+
+#6 [normal 2/3] COPY --from=common / /
+#6 CACHED
+
+#7 [common  3/11] RUN apt-get update     && apt-get install -y --no-install-recommends     libboost-all-dev     libcurl4-gnutls-dev     libgsl-dev     libgtkmm-3.0-dev     libgzstream0     libgzstream-dev     liblzma-dev     libz-dev     cmake     curl     pigz     && apt-get clean     && rm -rf /var/lib/apt/list
+#7 CACHED
+
+#8 [common  4/11] RUN git clone --recursive https://github.com/rnakato/ChIPseqTools.git     && cd ChIPseqTools     && make
+#8 CACHED
+
+#9 [common  7/11] COPY scripts/* scripts/
+#9 CACHED
+
+#10 [common  9/11] COPY OriDB OriDB
+#10 CACHED
+
+#11 [common  2/11] WORKDIR /opt
+#11 CACHED
+
+#12 [common  8/11] COPY bin bin
+#12 CACHED
+
+#13 [common 10/11] COPY gffread-0.12.7.Linux_x86_64.tar.gz gffread-0.12.7.Linux_x86_64.tar.gz
+#13 CACHED
+
+#14 [common  6/11] RUN pip --no-cache install ffq
+#14 CACHED
+
+#15 [common  5/11] RUN git clone https://github.com/rnakato/SSP.git     && cd SSP     && make
+#15 CACHED
+
+#16 [common 11/11] RUN tar zxvf gffread-0.12.7.Linux_x86_64.tar.gz     && mv gffread-0.12.7.Linux_x86_64/gffread /opt/bin/     && rm -rf gffread-0.12.7.Linux_x86_64.tar.gz gffread-0.12.7.Linux_x86_64
+#16 CACHED
+
+#17 [normal 3/3] WORKDIR /home/ubuntu
+#17 CACHED
+
+#18 exporting to image
+#18 exporting layers done
+#18 writing image sha256:fc4e37d50e3930c2b69b3663864bcda78374f331235286a395e81b2fcb86392f 0.0s done
+#18 naming to docker.io/rnakato/database:latest
+#18 naming to docker.io/rnakato/database:latest 0.1s done
+#18 DONE 0.2s
+The push refers to repository [docker.io/rnakato/database]
+5f70bf18a086: Preparing
+1c90900b74e5: Preparing
+5f70bf18a086: Preparing
+053146f54243: Preparing
+942e891ca580: Preparing
+5f70bf18a086: Preparing
+3e0259eab71a: Preparing
+6f5cee74fb30: Preparing
+3af2fc4541de: Preparing
+01af71cfc316: Preparing
+8bba68e76219: Preparing
+6f5cee74fb30: Waiting
+3af2fc4541de: Waiting
+01af71cfc316: Waiting
+8bba68e76219: Waiting
+5f70bf18a086: Layer already exists
+053146f54243: Layer already exists
+3e0259eab71a: Layer already exists
+942e891ca580: Layer already exists
+1c90900b74e5: Layer already exists
+3af2fc4541de: Layer already exists
+01af71cfc316: Layer already exists
+6f5cee74fb30: Layer already exists
+8bba68e76219: Layer already exists
+latest: digest: sha256:4d28ffdc76d5427819d4fc6a2ab58a74878a5a92efb9f1b681bd4f1b91b82092 size: 2617

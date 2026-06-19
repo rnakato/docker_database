@@ -35,6 +35,8 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 
 - 2026.06
   - Added ``download_Ecoli.sh`` and ``download_Lambdaphage.sh``.
+  - Modified ``download_genomedata.sh`` to use parseGtftorefFlat.sh instead of ``gtf2refFlat`` for creating refFlaf files from a gtf file
+  - Added ``-s`` option to ``download_genomedata.sh`` that skips gene annotation creation
   - Updated SRA Toolkit from 3.2.1 to v3.4.1
   - Updated SAMtools from 1.21 to 1.22.1
   - Added ``isnumber.sh``

@@ -18,17 +18,32 @@ function usage()
     echo "         S. pombe (SPombe)" 1>&2
     echo "         Arabidopsis thaliana (TAIR10)" 1>&2
     echo "         Hydra vulgaris AEP (HVAEP)" 1>&2
+    echo '  Options:' 1>&2
+    echo '      -s: Skip gene annotation creation' 1>&2
     echo "  Example:" 1>&2
-    echo "         $cmdname GRCh38 Ensembl-GRCh38" 1>&2
+    echo "         $cmdname hg38 Referencedata_hg38" 1>&2
 }
 
-build=$1
-outputdir=$2
+skipgtf=0
+while getopts s option
+do
+    case ${option} in
+        s) skipgtf=1;;
+        *)
+            usage
+            exit 1
+            ;;
+    esac
+done
+shift $((OPTIND - 1))
 
 if [ $# -ne 2 ]; then
   usage
   exit 1
 fi
+
+build=$1
+outputdir=$2
 
 ex(){
     echo $1
@@ -320,6 +335,13 @@ if test $build != "SPombe" -a $build != "xenLae2" -a $build != "T2T" -a $build !
     ex "zcat *.cdna.all.fa.gz *.ncrna.fa.gz > rna.fa"
 fi
 
+
+if test "$skipgtf" -eq 1; then
+    echo "Skip gene annotation creation. Exit"
+    exit 0
+fi
+
+
 if test $build = "T2T" -o $build = "T2T-mhaESC"; then
     head=gtf_chrUCSC/chr
     gtf2refFlat -g $head.gtf > $head.transcript.refFlat
@@ -343,6 +365,24 @@ ex "mv $gtf gtf_original/chr.gtf"
 ex "mv $gff gtf_original/chr.gff3"
 
 convert_gtf_to_refFlat(){
+    dir=$1
+    ex "mkdir -p $dir"
+#    ex "extract_proteincoding $dir/chr.gtf > $dir/chr.proteincoding.gtf"
+    for head in $dir/chr #$dir/chr.proteincoding
+    do
+        ex "parseGtftorefFlat.sh $head.gtf $head"
+        cat $head.gene.refFlat | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $5, $5, $1} else {print $3, $6, $6, $1} }' | uniq | grep -v chrom > $head.gene.TSS.bed
+        cat $head.transcript.refFlat | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $5, $5, $14} else {print $3, $6, $6, $14} }' | uniq | grep -v chrom > $head.transcript.TSS.bed
+        cat $head.gene.refFlat | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $6, $6, $1} else {print $3, $5, $5, $1} }' | uniq | grep -v chrom > $head.gene.TES.bed
+        cat $head.transcript.refFlat | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $5, $5, $14} else {print $3, $5, $5, $14} }' | uniq | grep -v chrom > $head.transcript.TES.bed
+    done
+
+    mkdir -p $dir/genedensity
+    ex "makegenedensity.pl genometable.txt $head.gene.refFlat 500000"
+    mv chr*-bs500000 $dir/genedensity
+}
+
+convert_gtf_to_refFlat_old(){
     dir=$1
     ex "mkdir -p $dir"
     ex "extract_proteincoding $dir/chr.gtf > $dir/chr.proteincoding.gtf"

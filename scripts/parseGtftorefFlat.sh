@@ -2,7 +2,7 @@
 set -euo pipefail
 
 gtf=${1:?Usage: parseGtftorefFlat.sh genes.gtf[.gz] prefix}
-prefix=${2:-genes}
+prefix=${2:-chr}
 
 gp="${prefix}.genePredExt"
 meta="${prefix}.transcript_meta.tsv"
@@ -18,15 +18,12 @@ zcat -f "$gtf" \
     stdin \
     "$gp"
 
-# 2. transcript-level standard refFlat
-awk 'BEGIN{OFS="\t"} {
-    print $12,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10
-}' "$gp" > "${prefix}.transcript.refFlat"
-
 # transcript_id_to_name
-gawk -F'\t' '
-BEGIN { OFS="\t" }
-$0 !~ /^#/ {
+# Works with both .gtf and .gtf.gz.
+zcat -f "$gtf" \
+| gawk -F'	' '
+BEGIN { OFS="	" }
+$0 !~ /^#/ && NF >= 9 {
     if (match($9, /transcript_id "([^"]+)"/, tid) &&
         match($9, /transcript_name "([^"]+)"/, tname)) {
         id = tid[1]
@@ -36,7 +33,7 @@ $0 !~ /^#/ {
         }
     }
 }
-' $gtf > $prefix.transcript_id_to_name.tsv
+' > "${prefix}.transcript_id_to_name.tsv"
 
 # 3. transcript feature だけから metadata と代表 transcript 用 score を作る
 zcat -f "$gtf" \
@@ -95,9 +92,10 @@ $0 !~ /^#/ && NF >= 9 && $3 == "transcript" {
     | LC_ALL=C sort -u
 } > "${prefix}.gene_id_to_name.tsv"
 
+
 # 5. representative transcript を選ぶ
 # tie-breaker として exon length を足す
-awk -F'\t' '
+gawk -F'\t' '
 BEGIN{OFS="\t"}
 
 ARGIND == 1 {
@@ -145,27 +143,21 @@ END {
 }
 ' "$meta" "$gp" \
 | LC_ALL=C sort -k3,3 -k5,5n \
-> "${prefix}.gene.extended.refFlat.tsv.tmp"
+> "${prefix}.gene.refFlat.tmp"
+
 
 # 6. header 付き gene-level extended refFlat
 {
     echo -e "geneName\tname\tchrom\tstrand\ttxStart\ttxEnd\tcdsStart\tcdsEnd\texonCount\texonStarts\texonEnds\tgene_type\ttranscript_type\treference_transcript_name\treference_transcript_id"
-    cat "${prefix}.gene.extended.refFlat.tsv.tmp"
-} > "${prefix}.gene.extended.refFlat.tsv"
+    cat "${prefix}.gene.refFlat.tmp"
+} > "${prefix}.gene.refFlat"
 
 # 7. 11列版 gene refFlat-like
 awk -F'\t' 'BEGIN{OFS="\t"} NR > 1 {
     print $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11
-}' "${prefix}.gene.extended.refFlat.tsv" > "${prefix}.gene.refFlat"
+}' "${prefix}.gene.refFlat" > "${prefix}.gene.simple.refFlat"
 
-rm -f "${prefix}.gene.extended.refFlat.tsv.tmp"
-
-echo "[done]"
-echo "  ${prefix}.transcript.refFlat"
-echo "  ${prefix}.gene.refFlat"
-echo "  ${prefix}.gene.extended.refFlat.tsv"
-echo "  ${prefix}.gene_id_to_name.tsv"
-
+rm -f "${prefix}.gene.refFlat.tmp"
 
 # 8. protein_coding gene only: gene-level refFlat-like files
 awk -F'\t' 'BEGIN{OFS="\t"}
@@ -176,95 +168,135 @@ NR == 1 {
 $12 == "protein_coding" {
     print $0
 }
-' "${prefix}.gene.extended.refFlat.tsv" \
-> "${prefix}.protein_coding.gene.extended.refFlat.tsv"
+' "${prefix}.gene.refFlat" \
+> "${prefix}.protein_coding.gene.refFlat"
 
 awk -F'\t' 'BEGIN{OFS="\t"}
 NR > 1 {
     print $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11
 }
-' "${prefix}.protein_coding.gene.extended.refFlat.tsv" \
-> "${prefix}.protein_coding.gene.refFlat"
+' "${prefix}.protein_coding.gene.refFlat" \
+> "${prefix}.protein_coding.gene.simple.refFlat"
 
 
-# 9. protein_coding gene only: transcript-level refFlat-like files
-# Definition:
-#   include all transcripts whose parent gene_type is protein_coding.
-gawk -F'\t' '
-BEGIN{OFS="\t"}
+# 9. transcript-level refFlat-like files
+# Outputs:
+#   ${prefix}.transcript.refFlat
+#   ${prefix}.transcript.simple.refFlat
+#   ${prefix}.protein_coding.transcript.refFlat
+#   ${prefix}.protein_coding.transcript.simple.refFlat
+#
+# Definition of protein_coding transcript set:
+#   include transcripts whose parent gene_type is protein_coding.
+#   If you want transcript_type == protein_coding as well, change the condition below.
+out_transcript_ext="${prefix}.transcript.refFlat"
+out_transcript_ref="${prefix}.transcript.simple.refFlat"
+out_pc_transcript_ext="${prefix}.protein_coding.transcript.refFlat"
+out_pc_transcript_ref="${prefix}.protein_coding.transcript.simple.refFlat"
+
+# Avoid appending to old files when the script is rerun.
+: > "$out_transcript_ref"
+: > "$out_pc_transcript_ref"
+
+gawk -F'\t' \
+    -v out_ext="$out_transcript_ext" \
+    -v out_ref="$out_transcript_ref" \
+    -v out_pc_ext="$out_pc_transcript_ext" \
+    -v out_pc_ref="$out_pc_transcript_ref" '
+BEGIN {
+    OFS="\t"
+
+    print "transcriptName","transcriptId","chrom","strand", \
+          "txStart","txEnd","cdsStart","cdsEnd","exonCount", \
+          "exonStarts","exonEnds","gene_type","transcript_type", \
+          "gene_name","gene_id" > out_ext
+
+    print "transcriptName","transcriptId","chrom","strand", \
+          "txStart","txEnd","cdsStart","cdsEnd","exonCount", \
+          "exonStarts","exonEnds","gene_type","transcript_type", \
+          "gene_name","gene_id" > out_pc_ext
+}
 
 ARGIND == 1 {
     tid = $1
-    gid = $2
-    gname = $3
-    tname = $4
-    gtype = $5
-    ttype = $6
-
-    if (gtype == "protein_coding") {
-        keep[tid] = 1
-        TNAME[tid] = tname
-        GID[tid] = gid
-        GNAME[tid] = gname
-        GTYPE[tid] = gtype
-        TTYPE[tid] = ttype
-    }
+    GID[tid]   = $2
+    GNAME[tid] = $3
+    TNAME[tid] = $4
+    GTYPE[tid] = $5
+    TTYPE[tid] = $6
     next
 }
 
 ARGIND == 2 {
     tid = $1
-    if (!(tid in keep)) next
 
-    geneName = $12
-    if (geneName == "") geneName = GNAME[tid]
+    chrom      = $2
+    strand     = $3
+    txStart    = $4
+    txEnd      = $5
+    cdsStart   = $6
+    cdsEnd     = $7
+    exonCount  = $8
+    exonStarts = $9
+    exonEnds   = $10
+
+    geneName = GNAME[tid]
+    if (geneName == "") geneName = $12
     if (geneName == "") geneName = GID[tid]
+    if (geneName == "") geneName = tid
 
-    print geneName,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10
+    geneId = GID[tid]
+    if (geneId == "") geneId = geneName
+
+    transcriptName = TNAME[tid]
+    if (transcriptName == "") transcriptName = tid
+
+    geneType = GTYPE[tid]
+    if (geneType == "") geneType = "NA"
+
+    transcriptType = TTYPE[tid]
+    if (transcriptType == "") transcriptType = "NA"
+
+    # 11-column standard refFlat: no header.
+    print geneName,tid,chrom,strand,txStart,txEnd,cdsStart,cdsEnd, \
+          exonCount,exonStarts,exonEnds >> out_ref
+
+    # 15-column extended transcript table: header is written above.
+    print transcriptName,tid,chrom,strand,txStart,txEnd,cdsStart,cdsEnd, \
+          exonCount,exonStarts,exonEnds,geneType,transcriptType, \
+          geneName,geneId >> out_ext
+
+    if (geneType == "protein_coding") {
+        print geneName,tid,chrom,strand,txStart,txEnd,cdsStart,cdsEnd, \
+              exonCount,exonStarts,exonEnds >> out_pc_ref
+
+        print transcriptName,tid,chrom,strand,txStart,txEnd,cdsStart,cdsEnd, \
+              exonCount,exonStarts,exonEnds,geneType,transcriptType, \
+              geneName,geneId >> out_pc_ext
+    }
 }
-' "$meta" "$gp" \
-> "${prefix}.protein_coding.transcript.refFlat"
+' "$meta" "$gp"
+
+# Basic column checks.
+awk 'NF != 11 {print "Error:", FILENAME, "line", NR, "has", NF, "columns"; exit 1}' "$out_transcript_ref"
+awk 'NF != 11 {print "Error:", FILENAME, "line", NR, "has", NF, "columns"; exit 1}' "$out_pc_transcript_ref"
+awk -F'\t' 'NR > 1 && NF != 15 {print "Error:", FILENAME, "line", NR, "has", NF, "columns"; exit 1}' "$out_transcript_ext"
+awk -F'\t' 'NR > 1 && NF != 15 {print "Error:", FILENAME, "line", NR, "has", NF, "columns"; exit 1}' "$out_pc_transcript_ext"
 
 
-{
-    echo -e "transcriptName\ttranscriptId\tchrom\tstrand\ttxStart\ttxEnd\tcdsStart\tcdsEnd\texonCount\texonStarts\texonEnds\tgene_type\ttranscript_type\tgene_name\tgene_id"
+echo "[done]"
+echo "  ${prefix}.gene.simple.refFlat"
+echo "  ${prefix}.gene.refFlat"
+echo "  ${prefix}.protein_coding.gene.refFlat"
+echo "  ${prefix}.protein_coding.gene.simple.refFlat"
+echo "  ${prefix}.gene_id_to_name.tsv"
+echo "  ${prefix}.transcript_id_to_name.tsv"
+echo "  $meta"
 
-    gawk -F'\t' '
-    BEGIN{OFS="\t"}
 
-    ARGIND == 1 {
-        tid = $1
-        gid = $2
-        gname = $3
-        tname = $4
-        gtype = $5
-        ttype = $6
+rm -f "$gp"
 
-        if (gtype == "protein_coding") {
-            keep[tid] = 1
-            TNAME[tid] = tname
-            GID[tid] = gid
-            GNAME[tid] = gname
-            GTYPE[tid] = gtype
-            TTYPE[tid] = ttype
-        }
-        next
-    }
-
-    ARGIND == 2 {
-        tid = $1
-        if (!(tid in keep)) next
-
-        transcriptName = TNAME[tid]
-        if (transcriptName == "") transcriptName = tid
-
-        geneName = GNAME[tid]
-        if (geneName == "") geneName = GID[tid]
-
-        print transcriptName,tid,$2,$3,$4,$5,$6,$7,$8,$9,$10,
-              GTYPE[tid],TTYPE[tid],geneName,GID[tid]
-    }
-    ' "$meta" "$gp"
-} > "${prefix}.protein_coding.transcript.extended.refFlat.tsv"
-
-rm $gp
+echo "  ${prefix}.transcript.simple.refFlat"
+echo "  ${prefix}.transcript.refFlat"
+echo "  ${prefix}.protein_coding.transcript.refFlat"
+echo "  ${prefix}.protein_coding.transcript.simple.refFlat"

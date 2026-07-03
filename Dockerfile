@@ -18,7 +18,7 @@ RUN apt-get update \
     curl \
     pigz \
     && apt-get clean \
-    && rm -rf /var/lib/apt/list
+    && rm -rf /var/lib/apt/lists/*
 
 # ChIPseqTools
 RUN git clone --recursive https://github.com/rnakato/ChIPseqTools.git \
@@ -41,10 +41,12 @@ RUN tar zxvf gffread-0.12.7.Linux_x86_64.tar.gz \
     && mv gffread-0.12.7.Linux_x86_64/gffread /opt/bin/ \
     && rm -rf gffread-0.12.7.Linux_x86_64.tar.gz gffread-0.12.7.Linux_x86_64
 
+RUN sh -c "$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)" \
+    && mv $HOME/edirect /opt/edirect
 
 FROM rnakato/r_python:2026.06 AS normal
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
-ENV PATH=${PATH}:/opt/:/opt/scripts:/opt/UCSCbins:/opt/bin:/opt/ChIPseqTools/bin/:/opt/SSP/bin:/opt/SSP/scripts
+ENV PATH=${PATH}:/opt/:/opt/scripts:/opt/UCSCbins:/opt/bin:/opt/ChIPseqTools/bin/:/opt/SSP/bin:/opt/SSP/scripts:/opt/edirect
 
 COPY --from=common / /
 USER ubuntu
@@ -55,7 +57,7 @@ CMD ["download_genomedata.sh"]
 
 FROM rnakato/r_python_gpu:2026.06 AS gpu
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
-ENV PATH=${PATH}:/opt/:/opt/scripts:/opt/UCSCbins:/opt/bin:/opt/ChIPseqTools/bin/:/opt/SSP/bin:/opt/SSP/scripts
+ENV PATH=${PATH}:/opt/:/opt/scripts:/opt/UCSCbins:/opt/bin:/opt/ChIPseqTools/bin/:/opt/SSP/bin:/opt/SSP/scripts:/opt/edirect
 
 COPY --from=common / /
 USER ubuntu

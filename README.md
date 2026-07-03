@@ -22,6 +22,7 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 - SRAtoolkit 3.4.1
 - BEDtools 2.31.0
 - OpenBLAS 0.3.24
+- edirect
 
 - user:password
     - ubuntu:ubuntu
@@ -39,6 +40,7 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
   - Added ``-s`` option to ``download_genomedata.sh`` that skips gene annotation creation
   - Updated SRA Toolkit from 3.2.1 to v3.4.1
   - Updated SAMtools from 1.21 to 1.22.1
+  - Added [edirect](https://manpages.debian.org/testing/ncbi-entrez-direct/edirect.1.en.html)
   - Added ``isnumber.sh``
   - Updated Bioconductor 3.21 to 3.23
 

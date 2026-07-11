@@ -34,6 +34,18 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 
 ## Changelog
 
+- 2026.07
+  - Bug fix in ``parseGtftorefFlat.sh`` that did not create the refFlat file correctly when gene names contain spaces.
+  - Bug fix where the RepeatMasker.txt.gz was not downloaded successfully
+  - Added the repeatmasker file for the following genomes:
+    - Mus_musculus.GRCm39
+    - Rattus_norvegicus.GRCr8
+    - Danio_rerio.GRCz11
+    - Gallus_gallus.GRCg6a
+    - Xenopus_tropicalis.xenLae2
+    - Drosophila_melanogaster.BDGP6
+    - Caenorhabditis_elegans.WBcel235
+
 - 2026.06
   - Added ``download_Ecoli.sh`` and ``download_Lambdaphage.sh``.
   - Modified ``download_genomedata.sh`` to use parseGtftorefFlat.sh instead of ``gtf2refFlat`` for creating refFlaf files from a gtf file

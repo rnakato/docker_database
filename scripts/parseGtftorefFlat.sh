@@ -142,7 +142,7 @@ END {
     for (gene in line) print line[gene]
 }
 ' "$meta" "$gp" \
-| LC_ALL=C sort -k3,3 -k5,5n \
+| LC_ALL=C sort -t$'\t' -k3,3 -k5,5n \
 > "${prefix}.gene.refFlat.tmp"
 
 
@@ -278,11 +278,34 @@ ARGIND == 2 {
 ' "$meta" "$gp"
 
 # Basic column checks.
-awk 'NF != 11 {print "Error:", FILENAME, "line", NR, "has", NF, "columns"; exit 1}' "$out_transcript_ref"
-awk 'NF != 11 {print "Error:", FILENAME, "line", NR, "has", NF, "columns"; exit 1}' "$out_pc_transcript_ref"
-awk -F'\t' 'NR > 1 && NF != 15 {print "Error:", FILENAME, "line", NR, "has", NF, "columns"; exit 1}' "$out_transcript_ext"
-awk -F'\t' 'NR > 1 && NF != 15 {print "Error:", FILENAME, "line", NR, "has", NF, "columns"; exit 1}' "$out_pc_transcript_ext"
+# Basic column checks. All output files are tab-separated.
+awk -F'\t' '
+NF != 11 {
+    print "Error:", FILENAME, "line", NR, "has", NF, "tab-separated columns"
+    exit 1
+}
+' "$out_transcript_ref"
 
+awk -F'\t' '
+NF != 11 {
+    print "Error:", FILENAME, "line", NR, "has", NF, "tab-separated columns"
+    exit 1
+}
+' "$out_pc_transcript_ref"
+
+awk -F'\t' '
+NR > 1 && NF != 15 {
+    print "Error:", FILENAME, "line", NR, "has", NF, "tab-separated columns"
+    exit 1
+}
+' "$out_transcript_ext"
+
+awk -F'\t' '
+NR > 1 && NF != 15 {
+    print "Error:", FILENAME, "line", NR, "has", NF, "tab-separated columns"
+    exit 1
+}
+' "$out_pc_transcript_ext"
 
 echo "[done]"
 echo "  ${prefix}.gene.simple.refFlat"

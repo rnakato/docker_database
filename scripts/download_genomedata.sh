@@ -86,7 +86,8 @@ if test $build = "GRCh38" -o $build = "hg38"; then
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/vertebrates/fasta/homo_sapiens/ncrna/Homo_sapiens.GRCh38.ncrna.fa.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/vertebrates/fasta/homo_sapiens/pep/Homo_sapiens.GRCh38.pep.all.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
-    wget -q https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/RepeatMasker/hg38.txt.gz -O RepeatMasker.txt.gz
+#    wget -q https://www.nakatolab.iqb.u-tokyo.ac.jp/Datafolder_for_sharing/DockerDatabase/RepeatMasker/hg38.txt.gz -O RepeatMasker.txt.gz
+    ex "$wget https://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/rmsk.txt.gz -O RepeatMasker.UCSC.txt.gz"
     download_mappability Ensembl-GRCh38
     chrs="$(seq 1 22) X Y M"
 elif test $build = "GRCh37" -o $build = "hg19"; then
@@ -98,7 +99,8 @@ elif test $build = "GRCh37" -o $build = "hg19"; then
     ex "$wget http://ftp.ensembl.org/pub/grch37/release-$Ensembl_version/fasta/homo_sapiens/ncrna/Homo_sapiens.GRCh37.ncrna.fa.gz"
     ex "$wget http://ftp.ensembl.org/pub/grch37/release-$Ensembl_version/fasta/homo_sapiens/pep/Homo_sapiens.GRCh37.pep.all.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
-    wget -q https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/RepeatMasker/hg19.txt.gz -O RepeatMasker.txt.gz
+#    wget -q https://www.nakatolab.iqb.u-tokyo.ac.jp/Datafolder_for_sharing/DockerDatabase/RepeatMasker/hg19.txt.gz -O RepeatMasker.txt.gz
+    ex "$wget https://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/rmsk.txt.gz -O RepeatMasker.UCSC.txt.gz"
     download_mappability Ensembl-GRCh37
     chrs="$(seq 1 22) X Y M"
 elif test $build = "T2T"; then
@@ -127,6 +129,7 @@ elif test $build = "GRCm39" -o $build = "mm39"; then
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/vertebrates/fasta/mus_musculus/ncrna/Mus_musculus.GRCm39.ncrna.fa.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/vertebrates/fasta/mus_musculus/pep/Mus_musculus.GRCm39.pep.all.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
+    ex "$wget https://hgdownload.soe.ucsc.edu/goldenPath/mm39/database/rmsk.txt.gz -O RepeatMasker.UCSC.txt.gz"
     download_mappability Ensembl-GRCm39
     chrs="$(seq 1 19) X Y M"
 elif test $build = "GRCm38" -o $build = "mm10"; then
@@ -137,7 +140,8 @@ elif test $build = "GRCm38" -o $build = "mm10"; then
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/mus_musculus/cdna/Mus_musculus.GRCm38.cdna.all.fa.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/mus_musculus/ncrna/Mus_musculus.GRCm38.ncrna.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
-    wget -q https://www.nakatolab.iqb.u-tokyo.ac.jp/DockerDatabase/RepeatMasker/mm10.txt.gz -O RepeatMasker.txt.gz
+#    wget -q https://www.nakatolab.iqb.u-tokyo.ac.jp/Datafolder_for_sharing/DockerDatabase/RepeatMasker/mm10.txt.gz -O RepeatMasker.txt.gz
+    ex "$wget https://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/rmsk.txt.gz -O RepeatMasker.UCSC.txt.gz"
     download_mappability Ensembl-GRCm38
     chrs="$(seq 1 19) X Y M"
 elif test $build = "T2T-mhaESC"; then
@@ -162,6 +166,7 @@ elif test $build = "mRatBN7.2" -o $build = "rn7"; then
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/rattus_norvegicus/cdna/Rattus_norvegicus.mRatBN7.2.cdna.all.fa.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/rattus_norvegicus/ncrna/Rattus_norvegicus.mRatBN7.2.ncrna.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
+    ex "$wget https://hgdownload.soe.ucsc.edu/goldenPath/rn7/database/rmsk.txt.gz -O RepeatMasker.UCSC.txt.gz"
     download_mappability Ensembl-mRatBN7.2
     chrs="$(seq 1 20) X Y M"
 elif test $build = "GRCr8" -o $build = "rn8"; then
@@ -173,6 +178,7 @@ elif test $build = "GRCr8" -o $build = "rn8"; then
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/rattus_norvegicus/ncrna/Rattus_norvegicus.GRCr8.ncrna.fa.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/rattus_norvegicus/pep/Rattus_norvegicus.GRCr8.pep.all.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
+#    ex "$wget https://hgdownload.soe.ucsc.edu/goldenPath/rn8/database/rmsk.txt.gz -O RepeatMasker.UCSC.txt.gz"
     download_mappability Ensembl-GRCr8
     chrs="$(seq 1 20) X Y M"
 elif test $build = "GRCz11" -o $build = "danRer11"; then
@@ -184,6 +190,7 @@ elif test $build = "GRCz11" -o $build = "danRer11"; then
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/danio_rerio/ncrna/Danio_rerio.GRCz11.ncrna.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
     download_mappability Ensembl-GRCz11
+    ex "$wget https://hgdownload.soe.ucsc.edu/goldenPath/danRer11/database/rmsk.txt.gz -O RepeatMasker.UCSC.txt.gz"
     chrs="$(seq 1 25) M"
 elif test $build = "GRCg6a" -o $build = "galGal6"; then
     Ensembl_version=105
@@ -194,6 +201,7 @@ elif test $build = "GRCg6a" -o $build = "galGal6"; then
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/gallus_gallus/ncrna/Gallus_gallus.GRCg6a.ncrna.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
     download_mappability Ensembl-GRCg6a
+    ex "$wget https://hgdownload.soe.ucsc.edu/goldenPath/galGal6/database/rmsk.txt.gz -O RepeatMasker.UCSC.txt.gz"
     chrs="$(seq 1 28) $(seq 30 33) W Z M"
 elif test $build = "Xenopus_tropicalis" -o $build = "xenLae2"; then
     Ensembl_version=105
@@ -205,6 +213,7 @@ elif test $build = "Xenopus_tropicalis" -o $build = "xenLae2"; then
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/xenopus_tropicalis/ncrna/Xenopus_tropicalis.Xenopus_tropicalis_v9.1.ncrna.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
     download_mappability Ensembl-xenLae2
+    ex "$wget https://hgdownload.soe.ucsc.edu/goldenPath/xenLae2/database/rmsk.txt.gz -O RepeatMasker.UCSC.txt.gz"
     chrs="1L 1S 2L 2S 3L 3S 4L 4S 5L 5S 6L 6S 7L 7S 8L 8S 9_10L 9_10S M"
 elif test $build = "BDGP6" -o $build = "dm6"; then
     Ensembl_version=115
@@ -215,6 +224,7 @@ elif test $build = "BDGP6" -o $build = "dm6"; then
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/drosophila_melanogaster/ncrna/Drosophila_melanogaster.BDGP6.54.ncrna.fa.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/drosophila_melanogaster/pep/Drosophila_melanogaster.BDGP6.54.pep.all.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
+    ex "$wget https://hgdownload.soe.ucsc.edu/goldenPath/dm6/database/rmsk.txt.gz -O RepeatMasker.UCSC.txt.gz"
     download_mappability Ensembl-BDGP6
     chrs="2L 2R 3L 3R 4 X Y M"
 elif test $build = "WBcel235" -o $build = "ce11"; then
@@ -226,6 +236,7 @@ elif test $build = "WBcel235" -o $build = "ce11"; then
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/caenorhabditis_elegans/ncrna/Caenorhabditis_elegans.WBcel235.ncrna.fa.gz"
     ex "$wget http://ftp.ensembl.org/pub/release-$Ensembl_version/fasta/caenorhabditis_elegans/pep/Caenorhabditis_elegans.WBcel235.pep.all.fa.gz"
     ex "unpigz -f *gtf.gz *gff3.gz"
+    ex "$wget https://hgdownload.soe.ucsc.edu/goldenPath/ce11/database/rmsk.txt.gz -O RepeatMasker.UCSC.txt.gz"
     download_mappability Ensembl-WBcel235
     chrs="I II III IV V X M"
 elif test $build = "Medaka"; then

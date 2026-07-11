@@ -1,4 +1,4 @@
-for tag in 2026.06 latest
+for tag in 2026.07 latest
 do
     docker build -t rnakato/database:$tag --target normal . #--no-cache
 #    apptainer build -F /work3/SingularityImages/database.$tag.sif docker-daemon://rnakato/database:$tag

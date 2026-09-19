@@ -28,11 +28,6 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 - user:password
     - ubuntu:ubuntu
 
-- DockerHub:
-  - https://hub.docker.com/r/rnakato/database
-  - https://hub.docker.com/r/rnakato/database_gpu
-
-
 ## Changelog
 
 - 2026.09

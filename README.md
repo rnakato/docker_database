@@ -3,26 +3,27 @@
 Docker image to download reference data and make index files.
 This is the base image for [Churros](https://github.com/rnakato/Churros) and [RumBall](https://github.com/rnakato/RumBall).
 
-- Ubuntu 22.04
+- Ubuntu 24.04
 
-- GPU mode (cuda:11.8.0-cudnn8-runtime)
-   - CUDA 11.8
-   - cudnn 8
+- GPU mode (nvidia/cuda:12.9.2-cudnn-runtime-ubuntu24.04)
+   - CUDA 12.9
+   - cudnn 9
 
-- Perl 5.36.0 (with plenv)
-- Python 3.10 (with Miniconda)
+- Perl 5.42.3 (with plenv)
+- Python 3.10 (with micromamba)
     - MACS2-2.2.9.1
 
-- R 4.x
+- R 4.6.1
+    - Bioconductor 3.23
     - BiocManager
     - Rstudio Desktop
     - Rstudio Server
 
-- SAMtools 1.22.1
+- SAMtools 1.24
 - SRAtoolkit 3.4.1
-- BEDtools 2.31.0
+- BEDtools 2.31.1
 - OpenBLAS 0.3.24
-- edirect
+- edirect 26.2
 
 - user:password
     - ubuntu:ubuntu
@@ -33,6 +34,16 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 
 
 ## Changelog
+
+- 2026.09
+  - Changed the base image from Ubuntu 22.04 to Ubuntu 24.04 (``rnakato/r_python_24.04:2026.09``; ``rnakato/r_python_gpu_24.04:2026.09`` for the GPU image)
+  - Following the base image update:
+    - Updated R from 4.6.0 to 4.6.1
+    - Updated Perl from 5.36.0 to 5.42.3
+    - Updated SAMtools from 1.22.1 to 1.24
+    - Updated BEDtools from 2.31.0 to 2.31.1
+    - Updated edirect from 26.0 to 26.2
+  - Modified ``download_genomedata.sh`` to use ``parseGtftorefFlat.sh`` instead of ``gtf2refFlat`` also for T2T and T2T-mhaESC
 
 - 2026.07
   - Bug fix in ``parseGtftorefFlat.sh`` that did not create the refFlat file correctly when gene names contain spaces.

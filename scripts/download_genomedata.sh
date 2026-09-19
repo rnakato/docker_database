@@ -355,8 +355,7 @@ fi
 
 if test $build = "T2T" -o $build = "T2T-mhaESC"; then
     head=gtf_chrUCSC/chr
-    gtf2refFlat -g $head.gtf > $head.transcript.refFlat
-    gtf2refFlat -u -g $head.gtf > $head.gene.refFlat
+    ex "parseGtftorefFlat.sh $head.gtf $head"
     cat $head.gene.refFlat       | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $5, $5, $1}  else {print $3, $6, $6, $1} }'  | uniq | grep -v chrom > $head.gene.TSS.bed
     cat $head.transcript.refFlat | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $5, $5, $14} else {print $3, $6, $6, $14} }' | uniq | grep -v chrom > $head.transcript.TSS.bed
     cat $head.gene.refFlat       | awk 'BEGIN { OFS="\t" } {if($4=="+") {print $3, $6, $6, $1}  else {print $3, $5, $5, $1} }'  | uniq | grep -v chrom > $head.gene.TES.bed

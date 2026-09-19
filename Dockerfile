@@ -1,5 +1,5 @@
 ## Docker image for download databases
-FROM rnakato/r_python:2026.06 AS common
+FROM rnakato/r_python_24.04:2026.09 AS common
 
 WORKDIR /opt
 USER root
@@ -44,7 +44,7 @@ RUN tar zxvf gffread-0.12.7.Linux_x86_64.tar.gz \
 RUN sh -c "$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)" \
     && mv $HOME/edirect /opt/edirect
 
-FROM rnakato/r_python:2026.06 AS normal
+FROM rnakato/r_python_24.04:2026.09 AS normal
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV PATH=${PATH}:/opt/:/opt/scripts:/opt/UCSCbins:/opt/bin:/opt/ChIPseqTools/bin/:/opt/SSP/bin:/opt/SSP/scripts:/opt/edirect
 
@@ -55,7 +55,7 @@ ENTRYPOINT ["/entrypoint.sh"]
 CMD ["download_genomedata.sh"]
 
 
-FROM rnakato/r_python_gpu:2026.06 AS gpu
+FROM rnakato/r_python_gpu_24.04:2026.09 AS gpu
 LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 ENV PATH=${PATH}:/opt/:/opt/scripts:/opt/UCSCbins:/opt/bin:/opt/ChIPseqTools/bin/:/opt/SSP/bin:/opt/SSP/scripts:/opt/edirect
 

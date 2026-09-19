@@ -11,7 +11,7 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
 
 - Perl 5.42.3 (with plenv)
 - Python 3.10 (with micromamba)
-    - MACS2-2.2.9.1
+    - MACS3 v3.0.4
 
 - R 4.6.1
     - Bioconductor 3.23
@@ -42,6 +42,7 @@ This is the base image for [Churros](https://github.com/rnakato/Churros) and [Ru
     - Updated Perl from 5.36.0 to 5.42.3
     - Updated SAMtools from 1.22.1 to 1.24
     - Updated BEDtools from 2.31.0 to 2.31.1
+    - Updated MACS2 v2.2.9.1 to MACS3 v3.0.4
     - Updated edirect from 26.0 to 26.2
   - Modified ``download_genomedata.sh`` to use ``parseGtftorefFlat.sh`` instead of ``gtf2refFlat`` also for T2T and T2T-mhaESC
 
